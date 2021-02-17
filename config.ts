@@ -1,0 +1,3 @@
+const SAMPLE = '';
+
+export { SAMPLE };
