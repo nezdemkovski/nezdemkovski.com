@@ -1,3 +1,4 @@
+import Logo from 'Logo';
 import { NextPage } from 'next';
 
 interface Props {}
@@ -8,7 +9,8 @@ const IndexPage: NextPage<Props> = () => {
       <div className="px-4 bg-whisper dark:bg-woodsmoke">
         <div className="flex items-center justify-center h-screen">
           <div>
-            <h1 className="text-2xl font-bold leading-7 text-center text-mulled-wine dark:text-gray-400 sm:text-3xl sm:truncate">
+            <Logo width={175} height={175} className="block p-5 m-auto" />
+            <h1 className="text-4xl font-bold leading-7 text-center text-mulled-wine dark:text-gray-400 sm:text-5xl sm:truncate font-lionandhare-bold">
               yuri.works
             </h1>
             <p className="mt-6 text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">

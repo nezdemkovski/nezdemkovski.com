@@ -5,9 +5,8 @@ class MyDocument extends Document {
     return (
       <Html lang="en" className="bg-whisper dark:bg-woodsmoke">
         <Head>
-          <title>yuri.works</title>
-          <meta name="description" content="yuri.works website" />
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link rel="stylesheet" href="/fonts/LionandHare/index.css" />
         </Head>
         <body>
           <Main />

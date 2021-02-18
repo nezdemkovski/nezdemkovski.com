@@ -7,6 +7,12 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        'lionandhare-light': ['LionandHare-Light'],
+        'lionandhare-light-italic': ['LionandHare-LightItalic'],
+        'lionandhare-regular': ['LionandHare-Regular'],
+        'lionandhare-italic': ['LionandHare-Italic'],
+        'lionandhare-bold': ['LionandHare-Bold'],
+        'lionandhare-bold-italic': ['LionandHare-BoldItalic'],
       },
       colors: {
         woodsmoke: '#14161B',
