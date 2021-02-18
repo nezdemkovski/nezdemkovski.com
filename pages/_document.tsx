@@ -7,6 +7,7 @@ class MyDocument extends Document {
         <Head>
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
           <link rel="stylesheet" href="/fonts/LionandHare/index.css" />
+          <script async src="https://cdn.splitbee.io/sb.js"></script>
         </Head>
         <body>
           <Main />
