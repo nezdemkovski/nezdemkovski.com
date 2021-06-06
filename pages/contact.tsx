@@ -112,6 +112,7 @@ const BeautyBox = () => (
 );
 
 // @ts-ignore
+// eslint-disable-next-line react/prop-types
 const IndexPage: NextPage<Props> = ({ subscription }) => {
   const {
     data: { rule },
