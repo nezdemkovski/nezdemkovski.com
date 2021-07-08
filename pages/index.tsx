@@ -1,7 +1,20 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useClipboard } from 'use-clipboard-copy';
 
 import Logo from 'Logo';
+import Notification from '../components/Notification';
+
+const data = {
+  fullName: 'Yuri Yakovlev',
+  occupation: 'JavaScript developer',
+  company: {
+    regNumberTitle: 'Company registration number (IČO)',
+    regNumber: '07605901',
+    vatNumberTitle: 'VAT registration number (DIČ)',
+    vatNumber: 'CZ8911274350',
+  },
+};
 
 interface Props {}
 
@@ -23,29 +36,60 @@ const NavBar = () => (
   </nav>
 );
 
-const MainContent = () => (
-  <main>
-    <div className="mx-auto pt-28 sm:pt-60 max-w-7xl sm:px-6 lg:px-8">
-      <h1 className="text-5xl font-bold leading-10 text-center text-mulled-wine dark:text-white sm:text-7xl sm:truncate font-lionandhare-bold">
-        Yuri Yakovlev
-      </h1>
-      <p className="mt-2 mb-10 text-xl text-center sm:text-3xl text-mulled-wine dark:text-gray-400 font-lionandhare-bold-italic">
-        JavaScript developer
-      </p>
-      <p className="mt-6 mb-2 text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
-        Company registration number (IČO): <br />
-        <b>076 05 901</b>
-      </p>
-      <p className="mb-2 text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
-        VAT Reg &#8470; (DIČ): <br />
-        <b>CZ8911274350</b>
-      </p>
-      <p className="text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
-        Czechia, Prague
-      </p>
-    </div>
-  </main>
-);
+const MainContent = () => {
+  const companyRegNumberClipboard = useClipboard({ copiedTimeout: 1000 });
+  const companyVatNumberClipboard = useClipboard({ copiedTimeout: 1000 });
+
+  return (
+    <>
+      <main>
+        <div className="mx-auto pt-28 sm:pt-60 max-w-7xl sm:px-6 lg:px-8">
+          <h1 className="text-5xl font-bold leading-10 text-center text-mulled-wine dark:text-white sm:text-7xl sm:truncate font-lionandhare-bold">
+            {data.fullName}
+          </h1>
+          <p className="mt-2 mb-10 text-xl text-center sm:text-3xl text-mulled-wine dark:text-gray-400 font-lionandhare-bold-italic">
+            {data.occupation}
+          </p>
+
+          <div className="mt-6 mb-2 text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+            <p>{data.company.regNumberTitle}:</p>
+            <p
+              onClick={() =>
+                companyRegNumberClipboard.copy(data.company.regNumber)
+              }
+              className="cursor-pointer"
+            >
+              <b>{data.company.regNumber}</b>
+            </p>
+          </div>
+
+          <div className="mb-2 text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+            <p>{data.company.vatNumberTitle}:</p>
+            <p
+              onClick={() =>
+                companyVatNumberClipboard.copy(data.company.vatNumber)
+              }
+              className="cursor-pointer"
+            >
+              <b>{data.company.vatNumber}</b>
+            </p>
+          </div>
+
+          <p className="text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+            Czechia, Prague
+          </p>
+        </div>
+      </main>
+
+      <Notification
+        title="Successfully copied to clipboard!"
+        isShown={
+          companyRegNumberClipboard.copied || companyVatNumberClipboard.copied
+        }
+      />
+    </>
+  );
+};
 
 const Footer = () => (
   <footer className="bg-whisper dark:bg-woodsmoke">
@@ -114,11 +158,13 @@ const Footer = () => (
 );
 
 const IndexPage: NextPage<Props> = () => (
-  <div className="min-h-screen px-4 bg-whisper dark:bg-woodsmoke">
-    <NavBar />
-    <MainContent />
-    {/* <Footer /> */}
-  </div>
+  <>
+    <div className="min-h-screen px-4 bg-whisper dark:bg-woodsmoke">
+      <NavBar />
+      <MainContent />
+      {/* <Footer /> */}
+    </div>
+  </>
 );
 
 export default IndexPage;
