@@ -128,12 +128,12 @@ const IndexPage: NextPage<Props> = ({ subscription }) => {
             <span className="block text-base font-semibold tracking-wide text-center text-indigo-600 uppercase">
               {rule.subtitle}
             </span>
-            <span className="block mt-2 text-3xl font-extrabold leading-8 tracking-tight text-center text-gray-900 sm:text-4xl">
+            <span className="block mt-2 text-3xl font-extrabold leading-8 tracking-tight text-center text-gray-900 dark:text-gray-400 sm:text-4xl">
               {rule.title}
             </span>
           </h1>
         </div>
-        <div className="mx-auto mt-6 prose prose-lg text-gray-500 prose-indigo">
+        <div className="mx-auto mt-6 prose prose-lg text-gray-500 dark:text-gray-400 prose-indigo dark:prose-green">
           <StructuredText data={rule.content} />
         </div>
       </div>
