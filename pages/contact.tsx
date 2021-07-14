@@ -112,7 +112,6 @@ const BeautyBox = () => (
 );
 
 // @ts-ignore
-// eslint-disable-next-line react/prop-types
 const IndexPage: NextPage<Props> = ({ subscription }) => {
   const {
     data: { rule },
@@ -165,6 +164,7 @@ export async function getStaticProps() {
         initialData: await request(graphqlRequest),
       },
     },
+    revalidate: 10,
   };
 }
 
