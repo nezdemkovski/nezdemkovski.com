@@ -20,6 +20,13 @@ module.exports = {
         whisper: '#F1EDF7',
         'mulled-wine': '#4D3D57',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            strong: { color: 'unset' },
+          },
+        },
+      },
     },
   },
   variants: {},
