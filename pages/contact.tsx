@@ -133,7 +133,12 @@ const IndexPage: NextPage<Props> = ({ subscription }) => {
           </h1>
         </div>
         <div className="mx-auto mt-6 prose prose-lg text-gray-500 dark:text-gray-400 prose-indigo dark:prose-green">
-          <StructuredText data={rule.content} />
+          <StructuredText
+            data={rule.content}
+            metaTransformer={({ meta }) =>
+              meta.reduce((o, key) => ({ ...o, [key.id]: key.value }), {})
+            }
+          />
         </div>
       </div>
     </div>
