@@ -4,6 +4,7 @@ import { useClipboard } from 'use-clipboard-copy';
 
 import Logo from 'Logo';
 import Notification from '../components/Notification';
+import Alert from '@components/Alert';
 
 const data = {
   fullName: 'Yuri Yakovlev',
@@ -83,6 +84,7 @@ const MainContent = () => {
 
       <Notification
         title="Successfully copied to clipboard!"
+        location="bottom"
         isShown={
           companyRegNumberClipboard.copied || companyVatNumberClipboard.copied
         }
@@ -160,6 +162,26 @@ const Footer = () => (
 const IndexPage: NextPage<Props> = () => (
   <>
     <div className="min-h-screen px-4 bg-whisper dark:bg-woodsmoke">
+      <Alert
+        title="Available for hire!"
+        subtitle={
+          <>
+            <p>
+              I am actively looking for work and I am available for an immediate
+              start.{' '}
+              <Link href="/contact">
+                <a
+                  className="font-medium text-yellow-700 underline hover:text-yellow-600"
+                  data-splitbee-event="Contact page"
+                >
+                  More info you can find here
+                </a>
+              </Link>
+              .
+            </p>
+          </>
+        }
+      />
       <NavBar />
       <MainContent />
       {/* <Footer /> */}

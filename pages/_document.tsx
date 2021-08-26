@@ -6,7 +6,7 @@ class MyDocument extends Document {
       <Html lang="en" className="bg-whisper dark:bg-woodsmoke">
         <Head>
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-          <script async src="https://cdn.splitbee.io/sb.js"></script>
+          <script async data-api="/_hive" src="/bee.js"></script>
         </Head>
         <body>
           <Main />
