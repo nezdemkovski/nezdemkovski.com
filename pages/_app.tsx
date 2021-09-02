@@ -64,7 +64,7 @@ const FaviconMeta = () => (
       name="msapplication-TileImage"
       content="/favicons/ms-icon-144x144.png"
     />
-    <meta name="theme-color" content="#ffffff"></meta>
+    <meta name="theme-color" content="#ffffff" />
   </>
 );
 
