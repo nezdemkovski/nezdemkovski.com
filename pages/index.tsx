@@ -79,12 +79,12 @@ const IndexPage: NextPage<Props> = () => (
   <>
     <div className="min-h-screen px-4 bg-whisper dark:bg-woodsmoke">
       <Alert
-        title="Available for hire!"
+        title="Available for different kinds of cooperation!"
         subtitle={
           <>
             <p>
-              I am actively looking for work and I am available for an immediate
-              start.{' '}
+              {/* I am actively looking for work and I am available for an immediate
+              start.{' '} */}
               <Link href="/contact">
                 <a
                   className="font-medium text-yellow-700 underline hover:text-yellow-600"
