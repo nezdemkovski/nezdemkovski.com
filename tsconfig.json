@@ -18,7 +18,8 @@
       "@components/*": ["components/*"],
       "@styles": ["styles/index.css"],
       "@config": ["config.ts"]
-    }
+    },
+    "incremental": true
   },
   "exclude": ["node_modules", "og-image"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
