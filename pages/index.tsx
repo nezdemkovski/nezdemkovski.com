@@ -8,7 +8,7 @@ import NavBar from '@components/NavBar';
 
 const data = {
   fullName: 'Yuri Yakovlev',
-  occupation: 'JavaScript developer',
+  occupation: 'Webmaster',
   company: {
     regNumberTitle: 'Company registration number (IČO)',
     regNumber: '07605901',
