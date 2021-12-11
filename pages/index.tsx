@@ -34,7 +34,7 @@ const MainContent = () => {
             {data.occupation}
           </p>
 
-          <div className="mt-6 mb-2 text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+          <div className="mt-6 mb-2 font-mono text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
             <p>{data.company.regNumberTitle}:</p>
             <p
               onClick={() =>
@@ -46,7 +46,7 @@ const MainContent = () => {
             </p>
           </div>
 
-          <div className="mb-2 text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+          <div className="mb-2 font-mono text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
             <p>{data.company.vatNumberTitle}:</p>
             <p
               onClick={() =>
@@ -58,7 +58,7 @@ const MainContent = () => {
             </p>
           </div>
 
-          <p className="text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+          <p className="font-mono text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
             Czechia, Prague
           </p>
         </div>

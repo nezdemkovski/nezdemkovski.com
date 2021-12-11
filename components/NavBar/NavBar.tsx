@@ -9,7 +9,7 @@ const NavBar = () => (
         <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
           <div className="flex items-center flex-shrink-0">
             <Link href="/">
-              <a>
+              <a className="transition duration-300 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110">
                 <Logo width={75} height={75} />
               </a>
             </Link>

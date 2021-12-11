@@ -1,9 +1,10 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
-  mode: 'jit',
-  darkMode: 'media', // 'media' or 'class'
+  content: [
+    './components/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -20,15 +21,7 @@ module.exports = {
         whisper: '#F1EDF7',
         'mulled-wine': '#4D3D57',
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            strong: { color: 'unset' },
-          },
-        },
-      },
     },
   },
-  variants: {},
   plugins: [require('@tailwindcss/typography')],
 };
