@@ -71,17 +71,17 @@ const FaviconMeta = () => (
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
-      <title>Yuri Yakovlev — JavaScript Developer</title>
+      <title>Yuri Nezdemkovski — JavaScript Developer</title>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="title" content="Yuri Yakovlev — JavaScript Developer" />
+      <meta name="title" content="Yuri Nezdemkovski — JavaScript Developer" />
       <meta name="description" content="yuri.works website" />
 
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://yuri.works/" />
       <meta
         property="og:title"
-        content="Yuri Yakovlev — JavaScript Developer"
+        content="Yuri Nezdemkovski — JavaScript Developer"
       />
       <meta property="og:description" content="yuri.works website" />
       <meta property="og:image" content="https://yuri.works/og/og.png" />
@@ -90,7 +90,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       <meta property="twitter:url" content="https://yuri.works/" />
       <meta
         property="twitter:title"
-        content="Yuri Yakovlev — JavaScript Developer"
+        content="Yuri Nezdemkovski — JavaScript Developer"
       />
       <meta property="twitter:description" content="yuri.works website" />
       <meta property="twitter:image" content="https://yuri.works/og/og.png" />

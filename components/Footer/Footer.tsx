@@ -3,7 +3,7 @@ const Footer = () => (
     <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
       <div className="flex justify-center space-x-6 md:order-2">
         <a
-          href="https://github.com/yakovlevyuri"
+          href="https://github.com/nezdemkovski"
           className="text-mulled-wine dark:text-gray-400 hover:text-gray-500"
         >
           <span className="sr-only">GitHub</span>
@@ -22,7 +22,7 @@ const Footer = () => (
         </a>
 
         <a
-          href="https://twitter.com/yakovlevyuri"
+          href="https://twitter.com/nezdemkovski"
           className="text-mulled-wine dark:text-gray-400 hover:text-gray-500"
         >
           <span className="sr-only">Twitter</span>

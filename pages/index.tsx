@@ -7,7 +7,7 @@ import Alert from '@components/Alert';
 import NavBar from '@components/NavBar';
 
 const data = {
-  fullName: 'Yuri Yakovlev',
+  fullName: 'Yuri Nezdemkovski',
   occupation: 'Webmaster',
   company: {
     regNumberTitle: 'Company registration number (IČO)',
@@ -30,7 +30,7 @@ const MainContent = () => {
           <h1 className="text-5xl font-bold leading-10 text-center text-mulled-wine dark:text-white sm:text-7xl sm:truncate font-lionandhare-bold">
             {data.fullName}
           </h1>
-          <p className="mt-2 mb-10 text-xl text-center sm:text-3xl text-mulled-wine dark:text-gray-400 font-lionandhare-bold-italic">
+          <p className="mt-4 mb-10 text-3xl text-center sm:text-4xl text-mulled-wine dark:text-gray-400 font-lionandhare-bold-italic">
             {data.occupation}
           </p>
 
