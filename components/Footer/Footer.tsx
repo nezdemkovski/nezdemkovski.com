@@ -4,7 +4,7 @@ const Footer = () => (
       <div className="flex justify-center space-x-6 md:order-2">
         <a
           href="https://github.com/nezdemkovski"
-          className="text-mulled-wine dark:text-gray-400 hover:text-gray-500"
+          className="text-mulled-wine hover:text-gray-500 dark:text-gray-400"
         >
           <span className="sr-only">GitHub</span>
           <svg
@@ -23,7 +23,7 @@ const Footer = () => (
 
         <a
           href="https://twitter.com/nezdemkovski"
-          className="text-mulled-wine dark:text-gray-400 hover:text-gray-500"
+          className="text-mulled-wine hover:text-gray-500 dark:text-gray-400"
         >
           <span className="sr-only">Twitter</span>
           <svg
@@ -38,7 +38,7 @@ const Footer = () => (
 
         <a
           href="https://www.instagram.com/siskogram/"
-          className="text-mulled-wine dark:text-gray-400 hover:text-gray-500"
+          className="text-mulled-wine hover:text-gray-500 dark:text-gray-400"
         >
           <span className="sr-only">Instagram</span>
           <svg
@@ -55,7 +55,7 @@ const Footer = () => (
           </svg>
         </a>
       </div>
-      <div className="mt-8 md:mt-0 md:order-1">
+      <div className="mt-8 md:order-1 md:mt-0">
         <p className="text-base text-center text-mulled-wine dark:text-gray-400">
           &copy; {new Date().getFullYear()} yuri.works. All rights reserved.
         </p>

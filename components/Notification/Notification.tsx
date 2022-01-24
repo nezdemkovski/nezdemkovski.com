@@ -21,7 +21,7 @@ const Notification = ({
   <>
     <div
       aria-live="assertive"
-      className={`fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 ${
+      className={`pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:p-6 ${
         location === 'top' ? 'sm:items-start' : 'sm:items-end'
       }`}
     >
@@ -55,7 +55,7 @@ const Notification = ({
                 {onClose && (
                   <div className="flex flex-shrink-0 ml-4">
                     <button
-                      className="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       onClick={onClose}
                     >
                       <span className="sr-only">Close</span>

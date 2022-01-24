@@ -26,15 +26,15 @@ const MainContent = () => {
   return (
     <>
       <main>
-        <div className="mx-auto pt-28 sm:pt-60 max-w-7xl sm:px-6 lg:px-8">
-          <h1 className="text-5xl font-bold leading-10 text-center text-mulled-wine dark:text-white sm:text-7xl sm:truncate font-lionandhare-bold">
+        <div className="mx-auto max-w-7xl pt-28 sm:px-6 sm:pt-60 lg:px-8">
+          <h1 className="text-5xl font-bold leading-10 text-center font-lionandhare-bold text-mulled-wine dark:text-white sm:truncate sm:text-7xl">
             {data.fullName}
           </h1>
-          <p className="mt-4 mb-10 text-3xl text-center sm:text-4xl text-mulled-wine dark:text-gray-400 font-lionandhare-bold-italic">
+          <p className="mt-4 mb-10 text-3xl text-center font-lionandhare-bold-italic text-mulled-wine dark:text-gray-400 sm:text-4xl">
             {data.occupation}
           </p>
 
-          <div className="mt-6 mb-2 font-mono text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+          <div className="mt-6 mb-2 font-mono text-sm text-center text-mulled-wine dark:text-gray-400 sm:text-base">
             <p>{data.company.regNumberTitle}:</p>
             <p
               onClick={() =>
@@ -46,7 +46,7 @@ const MainContent = () => {
             </p>
           </div>
 
-          <div className="mb-2 font-mono text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+          <div className="mb-2 font-mono text-sm text-center text-mulled-wine dark:text-gray-400 sm:text-base">
             <p>{data.company.vatNumberTitle}:</p>
             <p
               onClick={() =>
@@ -58,7 +58,7 @@ const MainContent = () => {
             </p>
           </div>
 
-          <p className="font-mono text-sm text-center sm:text-base text-mulled-wine dark:text-gray-400">
+          <p className="font-mono text-sm text-center text-mulled-wine dark:text-gray-400 sm:text-base">
             Czechia, Prague
           </p>
         </div>

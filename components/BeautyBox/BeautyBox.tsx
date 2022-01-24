@@ -1,5 +1,5 @@
 const BeautyBox = () => (
-  <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
+  <div className="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full">
     <div
       className="relative h-full mx-auto text-lg max-w-prose"
       aria-hidden="true"
