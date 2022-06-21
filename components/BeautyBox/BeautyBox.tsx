@@ -1,11 +1,11 @@
 const BeautyBox = () => (
   <div className="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full">
     <div
-      className="relative h-full mx-auto text-lg max-w-prose"
+      className="relative mx-auto h-full max-w-prose text-lg"
       aria-hidden="true"
     >
       <svg
-        className="absolute transform translate-x-32 top-12 left-full"
+        className="absolute top-12 left-full translate-x-32 transform"
         width="404"
         height="384"
         fill="none"
@@ -37,7 +37,7 @@ const BeautyBox = () => (
         />
       </svg>
       <svg
-        className="absolute transform -translate-x-32 -translate-y-1/2 top-1/2 right-full"
+        className="absolute top-1/2 right-full -translate-x-32 -translate-y-1/2 transform"
         width="404"
         height="384"
         fill="none"
@@ -69,7 +69,7 @@ const BeautyBox = () => (
         />
       </svg>
       <svg
-        className="absolute transform translate-x-32 bottom-12 left-full"
+        className="absolute bottom-12 left-full translate-x-32 transform"
         width="404"
         height="384"
         fill="none"

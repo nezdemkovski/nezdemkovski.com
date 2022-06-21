@@ -8,7 +8,7 @@ import NavBar from '@components/NavBar';
 
 const data = {
   fullName: 'Yuri Nezdemkovski',
-  occupation: 'Webmaster',
+  occupation: 'Software Developer',
   company: {
     regNumberTitle: 'Company registration number (IČO)',
     regNumber: '07605901',
@@ -27,14 +27,14 @@ const MainContent = () => {
     <>
       <main>
         <div className="mx-auto max-w-7xl pt-28 sm:px-6 sm:pt-60 lg:px-8">
-          <h1 className="text-5xl font-bold leading-10 text-center font-lionandhare-bold text-mulled-wine dark:text-white sm:truncate sm:text-7xl">
+          <h1 className="text-center font-lionandhare-bold text-5xl font-bold leading-10 text-mulled-wine dark:text-white sm:truncate sm:text-7xl">
             {data.fullName}
           </h1>
-          <p className="mt-4 mb-10 text-3xl text-center font-lionandhare-bold-italic text-mulled-wine dark:text-gray-400 sm:text-4xl">
+          <p className="mt-4 mb-10 text-center font-lionandhare-bold-italic text-3xl text-mulled-wine dark:text-gray-400 sm:text-4xl">
             {data.occupation}
           </p>
 
-          <div className="mt-6 mb-2 font-mono text-sm text-center text-mulled-wine dark:text-gray-400 sm:text-base">
+          <div className="mt-6 mb-2 text-center font-mono text-sm text-mulled-wine dark:text-gray-400 sm:text-base">
             <p>{data.company.regNumberTitle}:</p>
             <p
               onClick={() =>
@@ -46,7 +46,7 @@ const MainContent = () => {
             </p>
           </div>
 
-          <div className="mb-2 font-mono text-sm text-center text-mulled-wine dark:text-gray-400 sm:text-base">
+          <div className="mb-2 text-center font-mono text-sm text-mulled-wine dark:text-gray-400 sm:text-base">
             <p>{data.company.vatNumberTitle}:</p>
             <p
               onClick={() =>
@@ -58,7 +58,7 @@ const MainContent = () => {
             </p>
           </div>
 
-          <p className="font-mono text-sm text-center text-mulled-wine dark:text-gray-400 sm:text-base">
+          <p className="text-center font-mono text-sm text-mulled-wine dark:text-gray-400 sm:text-base">
             Czechia, Prague
           </p>
         </div>
@@ -77,7 +77,7 @@ const MainContent = () => {
 
 const IndexPage: NextPage<Props> = () => (
   <>
-    <div className="min-h-screen px-4 bg-whisper dark:bg-woodsmoke">
+    <div className="min-h-screen bg-whisper px-4 dark:bg-woodsmoke">
       <Alert
         title="Available for different kinds of cooperation!"
         subtitle={

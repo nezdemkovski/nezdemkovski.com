@@ -1,6 +1,6 @@
 const Footer = () => (
   <footer className="bg-whisper dark:bg-woodsmoke">
-    <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
       <div className="flex justify-center space-x-6 md:order-2">
         <a
           href="https://github.com/nezdemkovski"
@@ -8,7 +8,7 @@ const Footer = () => (
         >
           <span className="sr-only">GitHub</span>
           <svg
-            className="w-6 h-6"
+            className="h-6 w-6"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -27,7 +27,7 @@ const Footer = () => (
         >
           <span className="sr-only">Twitter</span>
           <svg
-            className="w-6 h-6"
+            className="h-6 w-6"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -42,7 +42,7 @@ const Footer = () => (
         >
           <span className="sr-only">Instagram</span>
           <svg
-            className="w-6 h-6"
+            className="h-6 w-6"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -56,8 +56,9 @@ const Footer = () => (
         </a>
       </div>
       <div className="mt-8 md:order-1 md:mt-0">
-        <p className="text-base text-center text-mulled-wine dark:text-gray-400">
-          &copy; {new Date().getFullYear()} yuri.works. All rights reserved.
+        <p className="text-center text-base text-mulled-wine dark:text-gray-400">
+          &copy; {new Date().getFullYear()} nezdemkovski.com. All rights
+          reserved.
         </p>
       </div>
     </div>

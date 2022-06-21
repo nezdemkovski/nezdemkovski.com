@@ -15,21 +15,21 @@ const IndexPage: NextPage<Props> = ({ subscription }) => {
   } = useQuerySubscription(subscription);
 
   return (
-    <div className="relative py-16 overflow-hidden bg-whisper dark:bg-woodsmoke">
+    <div className="relative overflow-hidden bg-whisper py-16 dark:bg-woodsmoke">
       <BeautyBox />
       <NavBar />
       <div className="relative px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto text-lg max-w-prose">
+        <div className="mx-auto max-w-prose text-lg">
           <h1>
-            <span className="block text-base font-semibold tracking-wide text-center text-indigo-600 uppercase">
+            <span className="block text-center text-base font-semibold uppercase tracking-wide text-indigo-600">
               {rule.subtitle}
             </span>
-            <span className="block mt-2 text-3xl font-extrabold leading-8 tracking-tight text-center text-gray-900 dark:text-gray-400 sm:text-4xl">
+            <span className="mt-2 block text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-400 sm:text-4xl">
               {rule.title}
             </span>
           </h1>
         </div>
-        <div className="mx-auto mt-6 prose prose-lg text-gray-500 prose-indigo dark:prose-green dark:text-gray-400">
+        <div className="prose prose-lg prose-indigo mx-auto mt-6 text-gray-500 dark:prose-green dark:text-gray-400">
           <StructuredText
             data={rule.content}
             metaTransformer={({ meta }) =>
