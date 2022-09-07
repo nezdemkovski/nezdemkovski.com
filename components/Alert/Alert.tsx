@@ -1,4 +1,4 @@
-import { FireIcon } from '@heroicons/react/solid';
+import { FireIcon } from '@heroicons/react/24/solid';
 
 type Props = {
   title: string;

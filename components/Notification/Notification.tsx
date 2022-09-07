@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Transition } from '@headlessui/react';
-import { CheckCircleIcon } from '@heroicons/react/outline';
-import { XIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 type Props = {
   title: string;
@@ -59,7 +59,7 @@ const Notification = ({
                       onClick={onClose}
                     >
                       <span className="sr-only">Close</span>
-                      <XIcon className="h-5 w-5" aria-hidden="true" />
+                      <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                     </button>
                   </div>
                 )}
