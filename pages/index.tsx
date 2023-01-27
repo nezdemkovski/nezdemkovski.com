@@ -85,13 +85,12 @@ const IndexPage: NextPage<Props> = () => (
             <p>
               {/* I am actively looking for work and I am available for an immediate
               start.{' '} */}
-              <Link href="/contact">
-                <a
-                  className="font-medium text-yellow-700 underline hover:text-yellow-600"
-                  data-splitbee-event="Contact page"
-                >
-                  More info you can find here
-                </a>
+              <Link
+                href="/contact"
+                className="font-medium text-yellow-700 underline hover:text-yellow-600"
+                data-splitbee-event="Contact page"
+              >
+                More info you can find here
               </Link>
               .
             </p>
