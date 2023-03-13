@@ -5,7 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 import Alert from '@/components/Alert';
-import AnalyticsWrapper from '@/components/Analytics';
+import AnalyticsWrapper from '@/components/AnalyticsWrapper';
 import NavBar from '@/components/NavBar';
 import './tailwind.css';
 

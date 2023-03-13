@@ -8,7 +8,6 @@ specifiers:
   '@types/node': ^18.15.1
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
-  '@types/tiny-json-http': ^7.3.1
   '@vercel/analytics': ^0.1.11
   autoprefixer: ^10.4.14
   clsx: ^1.2.1
@@ -22,7 +21,6 @@ specifiers:
   react-datocms: ^4.0.9
   react-dom: ^18.2.0
   tailwindcss: ^3.2.7
-  tiny-json-http: ^7.5.0
   typescript: ^4.9.5
   use-clipboard-copy: ^0.2.0
 
@@ -35,7 +33,6 @@ dependencies:
   react: 18.2.0
   react-datocms: 4.0.9_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
-  tiny-json-http: 7.5.0
   use-clipboard-copy: 0.2.0_react@18.2.0
 
 devDependencies:
@@ -44,7 +41,6 @@ devDependencies:
   '@types/node': 18.15.1
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
-  '@types/tiny-json-http': 7.3.1
   autoprefixer: 10.4.14_postcss@8.4.21
   eslint: 8.36.0
   eslint-config-next: 13.2.4_vgl77cfdswitgr47lm5swmv43m
@@ -612,10 +608,6 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
-    dev: true
-
-  /@types/tiny-json-http/7.3.1:
-    resolution: {integrity: sha512-mJwIwN1W9VLVM7FrGPuWabuEH5FqcOGZByqV4qOSNiwMKtEKym5+6Dyhx2v7vbR/4rSjjUgngmYimaDHQbZQsw==}
     dev: true
 
   /@typescript-eslint/parser/5.54.1_vgl77cfdswitgr47lm5swmv43m:
@@ -2891,10 +2883,6 @@ packages:
       globalyzer: 0.1.0
       globrex: 0.1.2
     dev: true
-
-  /tiny-json-http/7.5.0:
-    resolution: {integrity: sha512-Cv42Xad9ZhI/vMMAqvykPC6eh38LyCxaVw6fR+0CWZnZsYUE3dEtdaIGQ0H22m/LgKcQZt5X/z1gKpsfLWgRUw==}
-    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
