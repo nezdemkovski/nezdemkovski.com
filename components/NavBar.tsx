@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import Logo from 'Logo';
+import Logo from '@/components/Logo';
 
 const NavBar = () => (
   <nav className="bg-whisper dark:bg-woodsmoke">

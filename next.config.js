@@ -1,14 +1,19 @@
-module.exports = {
-  async rewrites() {
-    return [
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    appDir: true,
+    typedRoutes: true,
+  },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
       {
-        source: '/bee.js',
-        destination: 'https://cdn.splitbee.io/sb.js',
+        protocol: 'https',
+        hostname: 'i.scdn.co',
+        pathname: '/**',
       },
-      {
-        source: '/_hive/:slug',
-        destination: 'https://hive.splitbee.io/:slug',
-      },
-    ];
+    ],
   },
 };
+
+module.exports = nextConfig;

@@ -1,32 +1,32 @@
-import tiny from 'tiny-json-http';
+const DATOCMS_API_TOKEN = process.env.DATOCMS_API_TOKEN ?? '';
 
-// @ts-ignore
-export async function request({ query, variables, preview }) {
-  let endpoint = 'https://graphql.datocms.com';
+const DATOCMS_URL = `https://graphql.datocms.com`;
 
-  if (process.env.NEXT_DATOCMS_ENVIRONMENT) {
-    endpoint += `/environments/${process.env.NEXT_DATOCMS_ENVIRONMENT}`;
-  }
+export const getData = async () => {
+  const graphqlRequest = {
+    query: `
+    {
+      rule {
+        id
+        subtitle
+        title
+        content {
+          value
+        }
+      }
+    }
+    `,
+  };
 
-  if (preview) {
-    endpoint += `/preview`;
-  }
-
-  const { body } = await tiny.post({
-    url: endpoint,
+  return fetch(DATOCMS_URL, {
+    method: 'POST',
     headers: {
-      authorization: `Bearer ${process.env.NEXT_EXAMPLE_CMS_DATOCMS_API_TOKEN}`,
+      authorization: `Bearer ${DATOCMS_API_TOKEN}`,
     },
-    data: {
-      query,
-      variables,
-    },
+    body: JSON.stringify({
+      ...graphqlRequest,
+      variables: {},
+    }),
+    next: { revalidate: 5 },
   });
-
-  if (body.errors) {
-    console.error('Ouch! The query has some errors!');
-    throw body.errors;
-  }
-
-  return body.data;
-}
+};

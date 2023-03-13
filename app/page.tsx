@@ -1,10 +1,4 @@
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { useClipboard } from 'use-clipboard-copy';
-
-import Notification from '../components/Notification';
-import Alert from '@components/Alert';
-import NavBar from '@components/NavBar';
+// import Notification from '@components/Notification';
 
 const data = {
   fullName: 'Yuri Nezdemkovski',
@@ -17,12 +11,7 @@ const data = {
   },
 };
 
-interface Props {}
-
-const MainContent = () => {
-  const companyRegNumberClipboard = useClipboard({ copiedTimeout: 1000 });
-  const companyVatNumberClipboard = useClipboard({ copiedTimeout: 1000 });
-
+const RootPage = () => {
   return (
     <>
       <main>
@@ -37,9 +26,9 @@ const MainContent = () => {
           <div className="mt-6 mb-2 text-center font-mono text-sm text-mulled-wine dark:text-gray-400 sm:text-base">
             <p>{data.company.regNumberTitle}:</p>
             <p
-              onClick={() =>
-                companyRegNumberClipboard.copy(data.company.regNumber)
-              }
+              // onClick={() =>
+              //   companyRegNumberClipboard.copy(data.company.regNumber)
+              // }
               className="cursor-pointer"
             >
               <b>{data.company.regNumber}</b>
@@ -49,9 +38,9 @@ const MainContent = () => {
           <div className="mb-2 text-center font-mono text-sm text-mulled-wine dark:text-gray-400 sm:text-base">
             <p>{data.company.vatNumberTitle}:</p>
             <p
-              onClick={() =>
-                companyVatNumberClipboard.copy(data.company.vatNumber)
-              }
+              // onClick={() =>
+              //   companyVatNumberClipboard.copy(data.company.vatNumber)
+              // }
               className="cursor-pointer"
             >
               <b>{data.company.vatNumber}</b>
@@ -64,43 +53,15 @@ const MainContent = () => {
         </div>
       </main>
 
-      <Notification
+      {/* <Notification
         title="Successfully copied to clipboard!"
         location="bottom"
         isShown={
           companyRegNumberClipboard.copied || companyVatNumberClipboard.copied
         }
-      />
+      /> */}
     </>
   );
 };
 
-const IndexPage: NextPage<Props> = () => (
-  <>
-    <div className="min-h-screen bg-whisper px-4 dark:bg-woodsmoke">
-      <Alert
-        title="Available for different kinds of cooperation!"
-        subtitle={
-          <>
-            <p>
-              {/* I am actively looking for work and I am available for an immediate
-              start.{' '} */}
-              <Link
-                href="/contact"
-                className="font-medium text-yellow-700 underline hover:text-yellow-600"
-                data-splitbee-event="Contact page"
-              >
-                More info you can find here
-              </Link>
-              .
-            </p>
-          </>
-        }
-      />
-      <NavBar />
-      <MainContent />
-    </div>
-  </>
-);
-
-export default IndexPage;
+export default RootPage;
