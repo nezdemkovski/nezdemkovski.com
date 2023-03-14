@@ -33,10 +33,10 @@ const Info = ({ title, subtitle, content }: DatoCMSData['data']['rule']) => {
 
 const ContactPage = async () => {
   const headersList = headers();
-  const referer = headersList.get('referer');
-  const url = new URL(referer ?? '');
+  const host = headersList.get('host');
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
 
-  const response = await fetch(`${url.origin}/api/contact-info`, {
+  const response = await fetch(`${protocol}://${host}/api/contact-info`, {
     next: { revalidate: 10 },
   });
   const {
