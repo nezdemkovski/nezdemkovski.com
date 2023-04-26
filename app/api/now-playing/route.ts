@@ -47,6 +47,8 @@ export async function GET(request: Request) {
 
   const song: SpotifyNowPlaying = await response.json();
 
+  console.log({ song });
+
   if (song.item === null) {
     return new Response(JSON.stringify({ isPlaying: false }), {
       status: 200,

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter, Unbounded } from 'next/font/google';
 import localFont from 'next/font/local';
+import { Analytics } from '@vercel/analytics/react';
 import clsx from 'clsx';
 
-import AnalyticsWrapper from '@/components/AnalyticsWrapper';
 import NavBar from '@/components/NavBar';
 import './tailwind.css';
 
@@ -157,7 +157,8 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
         <div className="min-h-screen bg-whisper px-4 dark:bg-woodsmoke">
           <NavBar />
           {children}
-          <AnalyticsWrapper />
+
+          <Analytics />
         </div>
       </body>
     </html>
