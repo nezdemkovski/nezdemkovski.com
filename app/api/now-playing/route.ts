@@ -1,10 +1,12 @@
+import { NextResponse } from 'next/server';
+
 import { getNowPlaying } from '@/lib/spotify';
 
 export const config = {
   runtime: 'edge',
 };
 
-export type SpotifyNowPlaying = {
+type SpotifyNowPlaying = {
   is_playing: boolean;
   item: {
     name: string;
@@ -19,16 +21,28 @@ export type SpotifyNowPlaying = {
   };
 };
 
+export type NowPlayingSong = {
+  album: string;
+  albumImageUrl: string;
+  artist: string;
+  isPlaying: boolean;
+  songUrl: string;
+  title: string;
+};
+
 export async function GET(request: Request) {
   const response = await getNowPlaying();
 
   if (response.status === 204 || response.status > 400) {
-    return new Response(JSON.stringify({ isPlaying: false }), {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
+    return NextResponse.json(
+      { isPlaying: false },
+      {
+        status: 200,
+        headers: {
+          'content-type': 'application/json',
+        },
       },
-    });
+    );
   }
 
   const song: SpotifyNowPlaying = await response.json();
@@ -49,15 +63,15 @@ export async function GET(request: Request) {
   const albumImageUrl = song.item.album.images[0].url;
   const songUrl = song.item.external_urls.spotify;
 
-  return new Response(
-    JSON.stringify({
+  return NextResponse.json(
+    {
       album,
       albumImageUrl,
       artist,
       isPlaying,
       songUrl,
       title,
-    }),
+    },
     {
       status: 200,
       headers: {

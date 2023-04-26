@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 import { getData } from '@/lib/datocms';
 
 export const config = {
@@ -19,17 +21,20 @@ export async function GET(request: Request) {
   const response = await getData();
 
   if (response.status > 400) {
-    return new Response(JSON.stringify({ error: 'Something happened!' }), {
-      status: response.status,
-      headers: {
-        'content-type': 'application/json',
+    return NextResponse.json(
+      { error: 'Something happened!' },
+      {
+        status: response.status,
+        headers: {
+          'content-type': 'application/json',
+        },
       },
-    });
+    );
   }
 
   const data: DatoCMSData = await response.json();
 
-  return new Response(JSON.stringify(data), {
+  return NextResponse.json(data, {
     status: 200,
     headers: {
       'content-type': 'application/json',

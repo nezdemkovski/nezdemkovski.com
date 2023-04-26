@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Unbounded } from 'next/font/google';
 import localFont from 'next/font/local';
-import Link from 'next/link';
 import clsx from 'clsx';
 
-import Alert from '@/components/Alert';
 import AnalyticsWrapper from '@/components/AnalyticsWrapper';
 import NavBar from '@/components/NavBar';
 import './tailwind.css';
@@ -14,14 +12,35 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 });
-const lionandHareBold = localFont({
-  src: '../public/fonts/LionandHare/LionandHareBold/font.woff2',
-  variable: '--font-lionandhare-bold',
-  display: 'swap',
+const iAWriterQuattro = localFont({
+  src: [
+    {
+      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-BoldItalic.woff2',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-iawriterquattro',
 });
-const lionandhareBoldItalic = localFont({
-  src: '../public/fonts/LionandHare/LionandHareBoldItalic/font.woff2',
-  variable: '--font-lionandhare-bold-italic',
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  weight: ['300', '400', '700'],
+  variable: '--font-unbounded',
   display: 'swap',
 });
 
@@ -31,11 +50,11 @@ export const metadata: Metadata = {
     template: '%s | Yuri Nezdemkovski',
   },
   description:
-    'Passionate and curious human being, with extensive technical knowledge and experience leading teams to success.',
+    'I am Yuri — a seasoned web developer with over 10 years of experience. Now, as a developer manager, I am passionate about leading teams and delivering top-notch results.',
   openGraph: {
     title: 'Yuri Nezdemkovski',
     description:
-      'Passionate and curious human being, with extensive technical knowledge and experience leading teams to success.',
+      'I am Yuri — a seasoned web developer with over 10 years of experience. Now, as a developer manager, I am passionate about leading teams and delivering top-notch results.',
     url: 'https://nezdemkovski.com',
     siteName: 'Yuri Nezdemkovski',
     images: [
@@ -129,31 +148,13 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
       className={clsx(
         'bg-whisper dark:bg-woodsmoke',
         inter.variable,
-        lionandHareBold.variable,
-        lionandhareBoldItalic.variable,
+        iAWriterQuattro.variable,
+        unbounded.variable,
       )}
     >
-      <head></head>
+      <head />
       <body>
         <div className="min-h-screen bg-whisper px-4 dark:bg-woodsmoke">
-          <Alert
-            title="Available for different kinds of cooperation!"
-            subtitle={
-              <>
-                <p>
-                  Open to opportunities from mid-March 2023.{' '}
-                  <Link
-                    href="/contact"
-                    className="font-medium text-yellow-700 underline hover:text-yellow-600"
-                  >
-                    More info you can find here
-                  </Link>
-                  .
-                </p>
-              </>
-            }
-          />
-
           <NavBar />
           {children}
           <AnalyticsWrapper />

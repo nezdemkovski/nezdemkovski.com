@@ -7,8 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-        'lionandhare-bold': ['var(--font-lionandhare-bold)'],
-        'lionandhare-bold-italic': ['var(--font-lionandhare-bold-italic)'],
+        iawriterquattro: ['var(--font-iawriterquattro)'],
+        unbounded: ['var(--font-unbounded)'],
       },
       colors: {
         woodsmoke: '#14161B',

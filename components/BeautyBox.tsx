@@ -5,7 +5,7 @@ const BeautyBox = () => (
       aria-hidden="true"
     >
       <svg
-        className="absolute top-12 left-full translate-x-32 transform"
+        className="absolute left-full top-12 translate-x-32 transform"
         width="404"
         height="384"
         fill="none"
@@ -37,7 +37,7 @@ const BeautyBox = () => (
         />
       </svg>
       <svg
-        className="absolute top-1/2 right-full -translate-x-32 -translate-y-1/2 transform"
+        className="absolute right-full top-1/2 -translate-x-32 -translate-y-1/2 transform"
         width="404"
         height="384"
         fill="none"
