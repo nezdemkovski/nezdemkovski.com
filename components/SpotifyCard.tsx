@@ -1,8 +1,9 @@
 'use client';
 
 // import { useEffect } from 'react';
-// import Image from 'next/image';
+import Image from 'next/image';
 // import { animate } from 'motion';
+
 import { NowPlayingSong } from '@/app/api/now-playing/route';
 import fetcher from '@/utils/fetcher';
 import useSWR from 'swr';
@@ -100,29 +101,28 @@ const SpotifyCard = () => {
               Spotify
             </h2>
 
-            <p className="font-iawriterquattro text-sm text-white sm:text-base">
-              I&apos;m currently playing{' '}
-              <span className="rounded-md bg-lime-800 px-2 py-1 font-bold">
-                {data.title}
-              </span>{' '}
-              by{' '}
-              <span className="rounded-md bg-lime-800 px-2 py-1 font-bold">
-                {data.artist}
-              </span>
-              , bringing you the hottest beats around.
-            </p>
+            <div className="flex flex-col justify-center gap-5">
+              <Image
+                src={data?.albumImageUrl}
+                alt="Picture of the author"
+                width={125}
+                height={125}
+                className="self-center rounded-2xl  ring-1 ring-stone-400"
+              />
+
+              <div
+                className="flex flex-col self-center truncate text-center font-iawriterquattro text-base text-white sm:text-base"
+                title={`${data.artist} — ${data.title}`}
+              >
+                <span className="text-xl font-bold">{data.artist}</span>
+                <span>{data.title}</span>
+              </div>
+            </div>
 
             {/* <div className="hidden self-center md:block">
               <AnimatedBars />
             </div>
-
-            <Image
-              src={data?.albumImageUrl}
-              alt="Picture of the author"
-              width={125}
-              height={125}
-              className="rounded-2xl"
-            /> */}
+            */}
           </div>
         )}
       </>

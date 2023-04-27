@@ -6,7 +6,7 @@ import { StructuredText } from 'react-datocms';
 const StructuredTextWrapper = ({
   content,
 }: DatoCMSData['data']['rule']['content']) => (
-  <div className="prose prose-lg prose-indigo mx-auto mt-6 text-gray-500 dark:prose-green dark:text-gray-400">
+  <div className="prose prose-lg prose-neutral prose-indigo mx-auto mt-6 font-iawriterquattro text-gray-900 dark:prose-green dark:text-white">
     <StructuredText
       // @ts-ignore
       data={content}
