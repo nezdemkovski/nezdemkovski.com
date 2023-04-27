@@ -1,6 +1,8 @@
 import AboutMeCard from '@/components/AboutMeCard';
 import BusinessInfoCard from '@/components/BusinessInfoCard';
-import SpotifyCard from '@/components/SpotifyCard';
+import CurrentLocation from '@/components/CurrentLocation';
+
+// import SpotifyCard from '@/components/SpotifyCard';
 
 const RootPage = () => {
   return (
@@ -8,7 +10,8 @@ const RootPage = () => {
       <div className="mb-5 flex flex-wrap justify-center gap-5 sm:justify-normal">
         <AboutMeCard />
         <BusinessInfoCard />
-        <SpotifyCard />
+        <CurrentLocation />
+        {/*<SpotifyCard />*/}
       </div>
     </main>
   );

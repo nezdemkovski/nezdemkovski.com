@@ -1,5 +1,5 @@
 const BusinessInfoCard = () => (
-  <div className="relative inline-block h-[295px] w-[335px] rounded-3xl bg-black px-7 py-5 transition duration-300">
+  <div className="relative inline-block h-[300px] w-[335px] rounded-3xl bg-black px-7 py-5 transition duration-300">
     <h2 className="flex flex-col pb-5 font-unbounded text-2xl font-bold text-white sm:text-3xl">
       <span>One-person</span>
       <span>business</span>
