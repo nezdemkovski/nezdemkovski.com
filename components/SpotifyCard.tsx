@@ -83,7 +83,7 @@ const SpotifyCard = () => {
   });
 
   return (
-    <div className="relative inline-block h-[295px] w-[335px] rounded-3xl bg-gradient-to-br from-[#1db954] to-[#0B4B22] px-7 py-5 transition duration-300">
+    <div className="relative inline-block h-[300px] w-[335px] rounded-3xl bg-gradient-to-br from-[#1db954] to-[#0B4B22] px-7 py-5">
       <>
         {!data || !data?.isPlaying ? (
           <>
@@ -101,20 +101,20 @@ const SpotifyCard = () => {
               Spotify
             </h2>
 
-            <div className="flex flex-col justify-center gap-5">
+            <div className="flex flex-row gap-4">
               <Image
                 src={data?.albumImageUrl}
                 alt="Picture of the author"
-                width={125}
-                height={125}
-                className="self-center rounded-2xl  ring-1 ring-stone-400"
+                width={75}
+                height={75}
+                className="rounded-xl"
               />
 
               <div
-                className="flex flex-col self-center truncate text-center font-iawriterquattro text-base text-white sm:text-base"
+                className="flex flex-col truncate font-iawriterquattro text-base text-white sm:text-base"
                 title={`${data.artist} — ${data.title}`}
               >
-                <span className="text-xl font-bold">{data.artist}</span>
+                <span className="text-base font-bold">{data.artist}</span>
                 <span>{data.title}</span>
               </div>
             </div>
