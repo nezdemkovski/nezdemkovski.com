@@ -2,10 +2,6 @@ import { NextResponse } from 'next/server';
 
 import { getNowPlaying } from '@/lib/spotify';
 
-export const config = {
-  runtime: 'edge',
-};
-
 type SpotifyNowPlaying = {
   is_playing: boolean;
   item: {

@@ -2,10 +2,6 @@ import { NextResponse } from 'next/server';
 
 import { getData } from '@/lib/datocms';
 
-export const config = {
-  runtime: 'edge',
-};
-
 export type DatoCMSData = {
   data: {
     rule: {
