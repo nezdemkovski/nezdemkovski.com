@@ -83,49 +83,51 @@ const SpotifyCard = () => {
   });
 
   return (
-    <div className="relative inline-block h-[300px] w-[335px] rounded-3xl bg-gradient-to-br from-[#1db954] to-[#0B4B22] px-7 py-5">
-      <>
-        {!data || !data?.isPlaying ? (
-          <>
-            <h2 className="pb-5 font-unbounded text-2xl font-bold text-white sm:text-3xl">
-              Spotify
-            </h2>
+    <div className="h-[300px] w-[335px] rounded-3xl bg-gradient-to-br from-[#DB954] to-[#B4B22]">
+      <div className="relative inline-block h-[300px] w-[335px] rounded-3xl bg-[url('/noise.svg')] bg-cover px-7 py-5">
+        <>
+          {!data || !data?.isPlaying ? (
+            <>
+              <h2 className="pb-5 font-unbounded text-2xl font-bold text-white sm:text-3xl">
+                Spotify
+              </h2>
 
-            <p className="font-iawriterquattro text-sm text-white sm:text-base">
-              The music is not currently playing. The beat is taking a break.
-            </p>
-          </>
-        ) : (
-          <div>
-            <h2 className="pb-5 font-unbounded text-2xl font-bold text-white sm:text-3xl">
-              Spotify
-            </h2>
+              <p className="font-iawriterquattro text-sm text-white sm:text-base">
+                The music is not currently playing. The beat is taking a break.
+              </p>
+            </>
+          ) : (
+            <div>
+              <h2 className="pb-5 font-unbounded text-2xl font-bold text-white sm:text-3xl">
+                Spotify
+              </h2>
 
-            <div className="flex flex-row gap-4">
-              <Image
-                src={data?.albumImageUrl}
-                alt="Picture of the author"
-                width={75}
-                height={75}
-                className="rounded-xl"
-              />
+              <div className="flex flex-row gap-4">
+                <Image
+                  src={data?.albumImageUrl}
+                  alt="Picture of the author"
+                  width={75}
+                  height={75}
+                  className="rounded-xl"
+                />
 
-              <div
-                className="flex flex-col truncate font-iawriterquattro text-base text-white sm:text-base"
-                title={`${data.artist} — ${data.title}`}
-              >
-                <span className="text-base font-bold">{data.artist}</span>
-                <span>{data.title}</span>
+                <div
+                  className="flex flex-col truncate font-iawriterquattro text-base text-white sm:text-base"
+                  title={`${data.artist} — ${data.title}`}
+                >
+                  <span className="text-base font-bold">{data.artist}</span>
+                  <span>{data.title}</span>
+                </div>
               </div>
-            </div>
 
-            {/* <div className="hidden self-center md:block">
+              {/* <div className="hidden self-center md:block">
               <AnimatedBars />
             </div>
             */}
-          </div>
-        )}
-      </>
+            </div>
+          )}
+        </>
+      </div>
     </div>
   );
 };

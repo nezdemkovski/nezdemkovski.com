@@ -1,9 +1,9 @@
 import AboutMeCard from '@/components/AboutMeCard';
 import BusinessInfoCard from '@/components/BusinessInfoCard';
+import CountriesWidget from '@/components/CountriesWidget';
 import CurrentLocation from '@/components/CurrentLocation';
+import SpotifyCard from '@/components/SpotifyCard';
 import WorkAvailability from '@/components/WorkAvailability';
-
-// import SpotifyCard from '@/components/SpotifyCard';
 
 const RootPage = () => {
   return (
@@ -13,7 +13,8 @@ const RootPage = () => {
         <WorkAvailability />
         <BusinessInfoCard />
         <CurrentLocation />
-        {/*<SpotifyCard />*/}
+        <SpotifyCard />
+        <CountriesWidget />
       </div>
     </main>
   );
