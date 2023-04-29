@@ -153,7 +153,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
       )}
     >
       <head />
-      <body className="font-iawriterquattro">
+      <body className="font-iawriterquattro text-black dark:text-white">
         <div className="min-h-screen bg-whisper px-4 dark:bg-woodsmoke">
           <NavBar />
           {children}
