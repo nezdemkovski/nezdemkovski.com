@@ -2,6 +2,7 @@ import AboutMeCard from '@/components/AboutMeCard';
 import BusinessInfoCard from '@/components/BusinessInfoCard';
 import CountriesWidget from '@/components/CountriesWidget';
 import CurrentLocation from '@/components/CurrentLocation';
+import GamesWidget from '@/components/GamesWidget';
 import SpotifyCard from '@/components/SpotifyCard';
 import WorkAvailability from '@/components/WorkAvailability';
 
@@ -14,6 +15,7 @@ const RootPage = () => {
         <BusinessInfoCard />
         <CurrentLocation />
         <SpotifyCard />
+        <GamesWidget />
         <CountriesWidget />
       </div>
     </main>
