@@ -72,7 +72,7 @@ const Flag = ({
 const CountriesWidget = () => (
   <Link href="/countries">
     <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] cursor-pointer rounded-3xl bg-black px-7 py-5 transition duration-300 hover:-translate-y-1">
-      <h2 className="pb-9 font-unbounded text-3xl font-bold text-white sm:text-3xl">
+      <h2 className="pb-8 font-unbounded text-3xl font-bold text-white sm:text-3xl">
         Countries I visited
       </h2>
 
