@@ -48,7 +48,7 @@ const CountriesPage = async () => {
       </h1>
 
       <div className="grid gap-2 md:grid-cols-2">
-        <div className="">
+        <div>
           {entries.map(([year, gamesList]) => {
             if (year === 'inProgress') return;
 
