@@ -5,7 +5,7 @@ import { NowPlayingSong } from '@/app/api/now-playing/route';
 import fetcher from '@/utils/fetcher';
 import useSWR from 'swr';
 
-const SpotifyCard = () => {
+const SpotifyWidget = () => {
   const { data } = useSWR<NowPlayingSong>('/api/now-playing', fetcher, {
     refreshInterval: 10000,
   });
@@ -55,4 +55,4 @@ const SpotifyCard = () => {
   );
 };
 
-export default SpotifyCard;
+export default SpotifyWidget;

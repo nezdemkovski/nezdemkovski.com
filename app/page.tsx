@@ -1,20 +1,20 @@
-import AboutMeCard from '@/components/AboutMeCard';
-import BusinessInfoCard from '@/components/BusinessInfoCard';
+import AboutMeWidget from '@/components/AboutMeWidget';
+import BusinessInfoWidget from '@/components/BusinessInfoWidget';
 import CountriesWidget from '@/components/CountriesWidget';
-import CurrentLocation from '@/components/CurrentLocation';
+import CurrentLocationWidget from '@/components/CurrentLocationWidget';
 import GamesWidget from '@/components/GamesWidget';
-import SpotifyCard from '@/components/SpotifyCard';
-import WorkAvailability from '@/components/WorkAvailability';
+import SpotifyWidget from '@/components/SpotifyWidget';
+import WorkAvailabilityWidget from '@/components/WorkAvailabilityWidget';
 
 const RootPage = () => {
   return (
     <main className="px-7 py-5">
       <div className="mb-5 flex flex-wrap justify-center gap-5 sm:justify-normal">
-        <AboutMeCard />
-        <WorkAvailability />
-        <BusinessInfoCard />
-        <CurrentLocation />
-        <SpotifyCard />
+        <AboutMeWidget />
+        <WorkAvailabilityWidget />
+        <BusinessInfoWidget />
+        <CurrentLocationWidget />
+        <SpotifyWidget />
         <GamesWidget />
         <CountriesWidget />
       </div>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const WorkAvailability = () => (
+const WorkAvailabilityWidget = () => (
   <Link href="/contact">
     <div className="h-[300px] w-[335px] rounded-3xl bg-gradient-to-l from-[#5C5C5C] to-[#0F1015] transition duration-300 hover:-translate-y-1">
       <div className="flex h-[300px] w-[335px] cursor-pointer justify-center rounded-3xl bg-[url('/noise.svg')] bg-cover px-7 py-5">
@@ -17,4 +17,4 @@ const WorkAvailability = () => (
   </Link>
 );
 
-export default WorkAvailability;
+export default WorkAvailabilityWidget;

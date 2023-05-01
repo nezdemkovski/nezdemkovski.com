@@ -28,7 +28,7 @@ const useCurrentTime = () => {
   return { hours, minutes, blink };
 };
 
-const CurrentLocation = () => {
+const CurrentLocationWidget = () => {
   const { hours, minutes, blink } = useCurrentTime();
 
   return (
@@ -71,14 +71,8 @@ const CurrentLocation = () => {
           </p>
         </div>
       </div>
-
-      {/*<div className="gap-4 rounded-2xl bg-stone-900 px-2 py-4">*/}
-      {/*  <p className="font-iawriterquattro text-sm text-white sm:text-base">*/}
-      {/*    <Clock />*/}
-      {/*  </p>*/}
-      {/*</div>*/}
     </div>
   );
 };
 
-export default CurrentLocation;
+export default CurrentLocationWidget;

@@ -1,4 +1,4 @@
-const AboutMeCard = () => (
+const AboutMeWidget = () => (
   <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
     <h2 className="pb-4 font-unbounded text-3xl font-bold text-white sm:text-3xl">
       About me
@@ -15,4 +15,4 @@ const AboutMeCard = () => (
   </div>
 );
 
-export default AboutMeCard;
+export default AboutMeWidget;
