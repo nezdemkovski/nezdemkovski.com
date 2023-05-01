@@ -127,9 +127,45 @@ export const games = {
       platform: Platform.PC,
     },
     {
+      name: 'Grim Dawn',
+      releaseYear: 2016,
+      developer: 'Crate Entertainment',
+      platform: Platform.STEAM_DECK,
+    },
+    {
+      name: 'Evil West',
+      releaseYear: 2022,
+      developer: 'Flying Wild Hog',
+      platform: Platform.STEAM_DECK,
+    },
+    {
+      name: 'Nobody Saves the World',
+      releaseYear: 2022,
+      developer: 'DrinkBox Studios',
+      platform: Platform.STEAM_DECK,
+    },
+    {
+      name: 'The Dark Pictures Anthology: The Devil in Me',
+      releaseYear: 2022,
+      developer: 'Supermassive Games',
+      platform: Platform.STEAM_DECK,
+    },
+    {
+      name: 'DOOM Eternal',
+      releaseYear: 2020,
+      developer: 'id Software',
+      platform: Platform.STEAM_DECK,
+    },
+    {
       name: 'Stray',
       releaseYear: 2022,
       developer: 'Tribute Games',
+      platform: Platform.STEAM_DECK,
+    },
+    {
+      name: 'Ori and the Will of the Wisps',
+      releaseYear: 2020,
+      developer: 'Moon Studios GmbH',
       platform: Platform.STEAM_DECK,
     },
     {
@@ -143,6 +179,26 @@ export const games = {
       releaseYear: 2022,
       developer: 'Guerrilla Games',
       platform: Platform.PLAYSTATION,
+    },
+  ],
+  2021: [
+    {
+      name: 'Resident Evil Village',
+      releaseYear: 2021,
+      developer: 'CAPCOM Co., Ltd.',
+      platform: Platform.PC,
+    },
+    {
+      name: 'Disco Elysium - The Final Cut',
+      releaseYear: 2019,
+      developer: 'ZA/UM',
+      platform: Platform.MACOS,
+    },
+    {
+      name: 'Hades',
+      releaseYear: 2020,
+      developer: 'Supergiant Games',
+      platform: Platform.MACOS,
     },
   ],
 };

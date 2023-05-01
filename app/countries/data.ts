@@ -27,7 +27,6 @@ export const countries = {
       flag: '🇹🇷',
     },
     { city: 'Burgas', country: 'Bulgaria', month: 'October', flag: '🇧🇬' },
-    { city: 'Janské Lázně', country: 'Czechia', month: 'August', flag: '🇨🇿' },
     { city: 'Hannover', country: 'Germany', month: 'August', flag: '🇩🇪' },
     { city: 'Most', country: 'Czechia', month: 'August', flag: '🇨🇿' },
     { city: 'Brno', country: 'Czechia', month: 'July', flag: '🇨🇿' },
@@ -36,11 +35,18 @@ export const countries = {
     { city: 'Burgas', country: 'Bulgaria', month: 'April', flag: '🇧🇬' },
     { city: 'Špindlerův Mlýn', country: 'Czechia', month: 'March', flag: '🇨🇿' },
   ],
-  '2020': [
+  2021: [
+    { city: 'Budapest', country: 'Hungary', month: 'September', flag: '🇭🇺' },
+    { city: 'Janské Lázně', country: 'Czechia', month: 'August', flag: '🇨🇿' },
+    { city: 'Mělník', country: 'Czechia', month: 'July', flag: '🇨🇿' },
+    { city: 'Burgas', country: 'Bulgaria', month: 'March...April', flag: '🇧🇬' },
+    { city: 'Sofia', country: 'Bulgaria', month: 'March', flag: '🇧🇬' },
+  ],
+  2020: [
     { city: 'Korfu', country: 'Greece', month: 'August', flag: '🇬🇷' },
     { city: 'Berlin', country: 'Germany', month: 'February', flag: '🇩🇪' },
   ],
-  '2019': [
+  2019: [
     { city: 'Mellieha', country: 'Malta', month: 'December', flag: '🇲🇹' },
     { city: 'Budapest', country: 'Hungary', month: 'November', flag: '🇭🇺' },
     { city: 'Berlin', country: 'Germany', month: 'October', flag: '🇩🇪' },
@@ -51,7 +57,7 @@ export const countries = {
     { city: 'Linz', country: 'Austria', month: 'April', flag: '🇦🇹' },
     { city: 'Munich', country: 'Germany', month: 'February', flag: '🇩🇪' },
   ],
-  '2018': [
+  2018: [
     { city: 'Rome', country: 'Italy', month: 'November', flag: '🇮🇹' },
     { city: 'Budapest', country: 'Hungary', month: 'September', flag: '🇭🇺' },
     { city: 'Barcelona', country: 'Spain', month: 'August', flag: '🇪🇸' },
@@ -63,12 +69,12 @@ export const countries = {
     { city: 'Amsterdam', country: 'Netherlands', month: 'January', flag: '🇳🇱' },
     { city: 'Eindhoven', country: 'Netherlands', month: 'January', flag: '🇳🇱' },
   ],
-  '2017': [
+  2017: [
     { city: 'Neapol', country: 'Italy', month: 'November', flag: '🇮🇹' },
     { city: 'Berlin', country: 'Germany', month: 'October', flag: '🇩🇪' },
     { city: 'Wrocław', country: 'Poland', month: 'July', flag: '🇵🇱' },
   ],
-  '2016': [
+  2016: [
     { city: 'Berlin', country: 'Germany', month: 'December', flag: '🇩🇪' },
     { city: 'Berlin', country: 'Germany', month: 'July', flag: '🇩🇪' },
     { city: 'Frankfurt', country: 'Germany', month: 'May', flag: '🇩🇪' },
