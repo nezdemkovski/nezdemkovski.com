@@ -10,7 +10,7 @@ const BusinessInfoWidget = () => (
       <span className="rounded-md bg-white bg-opacity-30 px-2 py-0.5">
         07605901
       </span>{' '}
-      and VAT (DIČ) id{' '}
+      and VAT (DIČ) ID{' '}
       <span className="rounded-md bg-white bg-opacity-30 px-2 py-0.5">
         CZ8911274350
       </span>

@@ -20,10 +20,12 @@ export default async function CountriesOG() {
   ).then((res) => res.arrayBuffer());
 
   const findLatestGames = (): Game[] => {
-    const latestYear = Object.keys(games).sort().reverse()[0];
+    const years = Object.keys(games).sort((a, b) => Number(b) - Number(a));
+    const latestYear = years.find((year) => year !== 'inProgress');
+    if (!latestYear) return [];
+
     // @ts-ignore
-    const latestYearGames = games[latestYear];
-    return latestYearGames.slice(-3);
+    return games[latestYear].slice(0, 3);
   };
 
   return new ImageResponse(

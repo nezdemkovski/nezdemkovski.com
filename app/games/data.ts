@@ -118,7 +118,7 @@ export const games = {
       name: "Teenage Mutant Ninja Turtles: Shredder's Revenge",
       releaseYear: 2022,
       developer: 'BlueTwelve Studio',
-      platform: Platform.PC,
+      platform: Platform.STEAM_DECK,
     },
     {
       name: 'The Quarry',
