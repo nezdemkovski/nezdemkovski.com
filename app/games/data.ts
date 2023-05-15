@@ -10,15 +10,16 @@ export enum Platform {
   MACOS = 'Macbook',
   PLAYSTATION = 'PlayStation 5',
   STEAM_DECK = 'Steam Deck',
+  YUZU_EMULATOR = 'Yuzu Nintendo Switch Emulator',
 }
 
 export const games = {
   inProgress: [
     {
-      name: 'STAR WARS Jedi: Survivor',
+      name: 'The Legend of Zelda: Tears of the Kingdom',
       releaseYear: 2023,
-      developer: 'Respawn',
-      platform: Platform.PC,
+      developer: 'Nintendo EPD',
+      platform: Platform.YUZU_EMULATOR,
     },
     {
       name: 'Horizon Forbidden West: Burning Shores DLC',
@@ -58,6 +59,12 @@ export const games = {
     },
   ],
   2023: [
+    {
+      name: 'STAR WARS Jedi: Survivor',
+      releaseYear: 2023,
+      developer: 'Respawn',
+      platform: Platform.PC,
+    },
     {
       name: 'Resident Evil 4',
       releaseYear: 2023,
