@@ -8,6 +8,7 @@ export type Trip = {
 export const countries = {
   2023: [
     { city: 'Szklarska Poręba', country: 'Poland', month: 'April', flag: '🇵🇱' },
+    { city: 'Leipzig', country: 'Germany', month: 'February', flag: '🇩🇪' },
     { city: 'Burgas', country: 'Bulgaria', month: 'January', flag: '🇧🇬' },
     { city: 'Cappadocia', country: 'Turkey', month: 'January', flag: '🇹🇷' },
   ],

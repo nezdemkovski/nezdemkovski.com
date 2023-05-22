@@ -60,6 +60,12 @@ export const games = {
   ],
   2023: [
     {
+      name: 'Shantae and the Seven Sirens',
+      releaseYear: 2019,
+      developer: 'WayForward',
+      platform: Platform.STEAM_DECK,
+    },
+    {
       name: 'STAR WARS Jedi: Survivor',
       releaseYear: 2023,
       developer: 'Respawn',
