@@ -1,4 +1,4 @@
-import { Game, PCBuildData, games } from './data';
+import { Game, games, PCBuildData } from './data';
 
 const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   <div className="mb-6">
@@ -67,7 +67,6 @@ const GamesPage = async () => {
     ([year1], [year2]) => Number(year2) - Number(year1),
   );
   const totalGames = Object.keys(games)
-    .filter((year) => year !== 'inProgress')
     // @ts-ignore
     .reduce((total, year) => total + games[year].length, 0);
 
@@ -79,23 +78,12 @@ const GamesPage = async () => {
 
       <div className="grid gap-2 md:grid-cols-2">
         <div className="">
-          {entries.map(([year, gamesList]) => {
-            if (year === 'inProgress') return;
-
-            return (
-              <GamesByYear key={year} title={year} gamesList={gamesList} />
-            );
-          })}
+          {entries.map(([year, gamesList]) => (
+            <GamesByYear key={year} title={year} gamesList={gamesList} />
+          ))}
         </div>
 
         <div>
-          {games['inProgress']?.length > 0 && (
-            <GamesByYear
-              title="Currently in progress"
-              gamesList={games['inProgress']}
-            />
-          )}
-
           <PCInfo data={PCBuildData} />
         </div>
       </div>

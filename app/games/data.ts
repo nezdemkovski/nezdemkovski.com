@@ -13,52 +13,65 @@ export enum Platform {
   YUZU_EMULATOR = 'Yuzu Nintendo Switch Emulator',
 }
 
+export const inProgress = [
+  {
+    name: "Marvel's Guardians of the Galaxy",
+    releaseYear: 2021,
+    developer: 'Eidos-Montréal',
+    platform: Platform.PLAYSTATION,
+  },
+  {
+    name: 'The Legend of Zelda: Tears of the Kingdom',
+    releaseYear: 2023,
+    developer: 'Nintendo EPD',
+    platform: Platform.YUZU_EMULATOR,
+  },
+  {
+    name: 'Horizon Forbidden West: Burning Shores DLC',
+    releaseYear: 2023,
+    developer: 'Guerrilla Games',
+    platform: Platform.PLAYSTATION,
+  },
+  {
+    name: 'Kingdom Come: Deliverance',
+    releaseYear: 2018,
+    developer: 'Warhorse Studios',
+    platform: Platform.PC,
+  },
+  {
+    name: 'Mass Effect 2',
+    releaseYear: 2010,
+    developer: 'BioWare',
+    platform: Platform.STEAM_DECK,
+  },
+  {
+    name: 'Hi-Fi RUSH',
+    releaseYear: 2023,
+    developer: 'Tango Gameworks',
+    platform: Platform.STEAM_DECK,
+  },
+  {
+    name: 'OUTRIDERS',
+    releaseYear: 2021,
+    developer: 'People Can Fly',
+    platform: Platform.PC,
+  },
+  {
+    name: 'Hogwarts Legacy',
+    releaseYear: 2023,
+    developer: 'Avalanche Software',
+    platform: Platform.PC,
+  },
+];
+
 export const games = {
-  inProgress: [
-    {
-      name: 'The Legend of Zelda: Tears of the Kingdom',
-      releaseYear: 2023,
-      developer: 'Nintendo EPD',
-      platform: Platform.YUZU_EMULATOR,
-    },
-    {
-      name: 'Horizon Forbidden West: Burning Shores DLC',
-      releaseYear: 2023,
-      developer: 'Guerrilla Games',
-      platform: Platform.PLAYSTATION,
-    },
-    {
-      name: 'Kingdom Come: Deliverance',
-      releaseYear: 2018,
-      developer: 'Warhorse Studios',
-      platform: Platform.PC,
-    },
-    {
-      name: 'Mass Effect 2',
-      releaseYear: 2010,
-      developer: 'BioWare',
-      platform: Platform.STEAM_DECK,
-    },
-    {
-      name: 'Hi-Fi RUSH',
-      releaseYear: 2023,
-      developer: 'Tango Gameworks',
-      platform: Platform.STEAM_DECK,
-    },
-    {
-      name: 'OUTRIDERS',
-      releaseYear: 2021,
-      developer: 'People Can Fly',
-      platform: Platform.PC,
-    },
-    {
-      name: 'Hogwarts Legacy',
-      releaseYear: 2023,
-      developer: 'Avalanche Software',
-      platform: Platform.PC,
-    },
-  ],
   2023: [
+    {
+      name: 'Trine 4: The Nightmare Prince',
+      releaseYear: 2019,
+      developer: 'Frozenbyte',
+      platform: Platform.PC,
+    },
     {
       name: 'Shantae and the Seven Sirens',
       releaseYear: 2019,
