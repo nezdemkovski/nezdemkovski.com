@@ -15,12 +15,6 @@ export enum Platform {
 
 export const inProgress = [
   {
-    name: "Marvel's Guardians of the Galaxy",
-    releaseYear: 2021,
-    developer: 'Eidos-Montréal',
-    platform: Platform.PLAYSTATION,
-  },
-  {
     name: 'The Legend of Zelda: Tears of the Kingdom',
     releaseYear: 2023,
     developer: 'Nintendo EPD',
@@ -66,6 +60,12 @@ export const inProgress = [
 
 export const games = {
   2023: [
+    {
+      name: "Marvel's Guardians of the Galaxy",
+      releaseYear: 2021,
+      developer: 'Eidos-Montréal',
+      platform: Platform.PLAYSTATION,
+    },
     {
       name: 'Trine 4: The Nightmare Prince',
       releaseYear: 2019,
