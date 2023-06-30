@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import clsx from 'clsx';
 
 import NavBar from '@/components/NavBar';
+
 import './tailwind.css';
 
 const inter = Inter({
@@ -45,6 +46,7 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nezdemkovski.com'),
   title: {
     default: 'Yuri Nezdemkovski',
     template: '%s | Yuri Nezdemkovski',
