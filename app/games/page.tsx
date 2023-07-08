@@ -1,8 +1,8 @@
-import { getGames } from '@/app/games/helpers';
+import { Game, getGames } from '@/app/games/helpers';
 
-import { Game, PCBuildData } from './data';
+import { PCBuildData } from './data';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 10;
 
 const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   <div className="mb-6">

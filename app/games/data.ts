@@ -1,7 +1,3 @@
-import { Database } from '@/database.types';
-
-export type Game = Database['public']['Tables']['games']['Row'];
-
 export const inProgress = [
   {
     name: 'The Legend of Zelda: Tears of the Kingdom',

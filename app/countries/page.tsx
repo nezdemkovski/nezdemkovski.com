@@ -1,6 +1,6 @@
 import { getTravels, Travel } from '@/app/countries/helpers';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 10;
 
 const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
   <div key={title} className="mb-10">
@@ -23,7 +23,7 @@ const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
 );
 
 const CountriesPage = async () => {
-  const { data, total } = await getTravels();
+  const { data, totalCountries } = await getTravels();
 
   if (!data) {
     return (
@@ -38,19 +38,12 @@ const CountriesPage = async () => {
   const entries = Object.entries(data).sort(
     ([year1], [year2]) => Number(year2) - Number(year1),
   );
-  const visited = new Set();
-
-  Object.values(data).forEach((trips) => {
-    // @ts-ignore
-    trips.forEach((trip) => {
-      visited.add(trip.country);
-    });
-  });
 
   return (
     <main className="m-6 mx-auto max-w-3xl">
       <h1 className="mb-10 font-unbounded text-3xl font-bold">
-        Countries I visited: <span className="text-gray-400">{total}</span>
+        Countries I visited:{' '}
+        <span className="text-gray-400">{totalCountries}</span>
       </h1>
 
       <div className="grid gap-2 md:grid-cols-2">

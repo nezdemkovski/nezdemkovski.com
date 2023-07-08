@@ -1,15 +1,17 @@
+'use server';
+
 import { cookies } from 'next/headers';
 import { Database } from '@/database.types';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 
-type Game = Database['public']['Tables']['games']['Row'];
+export type Game = Database['public']['Tables']['games']['Row'];
 
 interface GamesByYear {
   [year: number]: Game[];
 }
 
 export const getGames = async () => {
-  const supabase = createRouteHandlerClient<Database>({ cookies });
+  const supabase = createServerComponentClient<Database>({ cookies });
   const { data, error } = await supabase
     .from('games')
     .select()
