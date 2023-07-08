@@ -1,23 +1,19 @@
-import { Trip, countries } from './data';
+import { getTravels, Travel } from '@/app/countries/helpers';
 
-const TripsByYear = ({
-  title,
-  gamesList,
-}: {
-  title: string;
-  gamesList: Trip[];
-}) => (
+export const dynamic = 'force-dynamic';
+
+const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
   <div key={title} className="mb-10">
     <h2 className="mb-3 font-unbounded text-2xl font-bold">{title}</h2>
     <ul>
-      {gamesList.map((trip, index) => (
+      {trips.map((trip, index) => (
         <li key={index} className="mb-3">
           <div className="inline-flex items-end gap-2">
             <h3>
-              {trip.flag} {trip.city}, {trip.country}
+              {trip.country_flag} {trip.city}, {trip.country}
             </h3>
             <div className="text-xs leading-relaxed text-gray-400">
-              {trip.month}
+              {trip.range_text}
             </div>
           </div>
         </li>
@@ -27,34 +23,42 @@ const TripsByYear = ({
 );
 
 const CountriesPage = async () => {
-  const entries = Object.entries(countries).sort(
+  const { data, total } = await getTravels();
+
+  if (!data) {
+    return (
+      <main className="m-6 mx-auto max-w-3xl">
+        <h1 className="mb-10 font-unbounded text-3xl font-bold">
+          Something bad happened. Refresh the page.
+        </h1>
+      </main>
+    );
+  }
+
+  const entries = Object.entries(data).sort(
     ([year1], [year2]) => Number(year2) - Number(year1),
   );
   const visited = new Set();
 
-  Object.values(countries).forEach((trips) => {
+  Object.values(data).forEach((trips) => {
+    // @ts-ignore
     trips.forEach((trip) => {
       visited.add(trip.country);
     });
   });
 
-  const totalCountries = visited.size;
-
   return (
     <main className="m-6 mx-auto max-w-3xl">
       <h1 className="mb-10 font-unbounded text-3xl font-bold">
-        Countries I visited:{' '}
-        <span className="text-gray-400">{totalCountries}</span>
+        Countries I visited: <span className="text-gray-400">{total}</span>
       </h1>
 
       <div className="grid gap-2 md:grid-cols-2">
         <div>
-          {entries.map(([year, gamesList]) => {
+          {entries.map(([year, trips]) => {
             if (year === 'inProgress') return;
 
-            return (
-              <TripsByYear key={year} title={year} gamesList={gamesList} />
-            );
+            return <TripsByYear key={year} title={year} trips={trips} />;
           })}
         </div>
       </div>

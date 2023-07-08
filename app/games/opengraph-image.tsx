@@ -1,11 +1,12 @@
 import { ImageResponse } from 'next/server';
-
-import { Game, games } from './data';
+import { getLatestGames } from '@/app/games/helpers-client';
 
 export const runtime = 'edge';
 export const revalidate = 60;
 
 export default async function CountriesOG() {
+  const games = await getLatestGames();
+
   const unbounded400 = fetch(
     new URL(
       `../../node_modules/@fontsource/unbounded/files/unbounded-latin-ext-400-normal.woff`,
@@ -18,15 +19,6 @@ export default async function CountriesOG() {
       import.meta.url,
     ),
   ).then((res) => res.arrayBuffer());
-
-  const findLatestGames = (): Game[] => {
-    const years = Object.keys(games).sort((a, b) => Number(b) - Number(a));
-    const latestYear = years.find((year) => year !== 'inProgress');
-    if (!latestYear) return [];
-
-    // @ts-ignore
-    return games[latestYear].slice(0, 3);
-  };
 
   return new ImageResponse(
     (
@@ -48,7 +40,7 @@ export default async function CountriesOG() {
                 Last 3 games I beat
               </div>
 
-              {findLatestGames().map((game, index) => (
+              {games.data.map((game, index) => (
                 <div
                   key={index}
                   tw="flex flex-col mb-5 text-white mb-6 text-3xl"
@@ -56,7 +48,7 @@ export default async function CountriesOG() {
                 >
                   <div tw="flex">{game.name}</div>
                   <div tw="flex text-xl leading-2 text-gray-400">
-                    {game.releaseYear} · {game.developer} · {game.platform}
+                    {game.release_year} · {game.developer} · {game.platform}
                   </div>
                 </div>
               ))}

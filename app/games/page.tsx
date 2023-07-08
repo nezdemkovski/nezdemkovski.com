@@ -1,4 +1,8 @@
-import { Game, games, PCBuildData } from './data';
+import { getGames } from '@/app/games/helpers';
+
+import { Game, PCBuildData } from './data';
+
+export const dynamic = 'force-dynamic';
 
 const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   <div className="mb-6">
@@ -54,7 +58,7 @@ const GamesByYear = ({
         <li key={index} className="mb-3">
           <h3>{game.name}</h3>
           <div className="text-xs text-gray-400">
-            {game.releaseYear} · {game.developer} · {game.platform}
+            {game.release_year} · {game.developer} · {game.platform}
           </div>
         </li>
       ))}
@@ -63,17 +67,26 @@ const GamesByYear = ({
 );
 
 const GamesPage = async () => {
-  const entries = Object.entries(games).sort(
+  const { data, total } = await getGames();
+
+  if (!data) {
+    return (
+      <main className="m-6 mx-auto max-w-3xl">
+        <h1 className="mb-10 font-unbounded text-3xl font-bold">
+          Something bad happened. Refresh the page.
+        </h1>
+      </main>
+    );
+  }
+
+  const entries = Object.entries(data).sort(
     ([year1], [year2]) => Number(year2) - Number(year1),
   );
-  const totalGames = Object.keys(games)
-    // @ts-ignore
-    .reduce((total, year) => total + games[year].length, 0);
 
   return (
     <main className="m-6 mx-auto max-w-3xl">
       <h1 className="mb-10 font-unbounded text-3xl font-bold">
-        Games I beat: <span className="text-gray-400">{totalGames}</span>
+        Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
       <div className="grid gap-2 md:grid-cols-2">

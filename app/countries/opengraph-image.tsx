@@ -1,11 +1,12 @@
 import { ImageResponse } from 'next/server';
-
-import { Trip, countries } from './data';
+import { getLatestTravels } from '@/app/countries/helpers-client';
 
 export const runtime = 'edge';
 export const revalidate = 60;
 
 export default async function CountriesOG() {
+  const travels = await getLatestTravels();
+
   const unbounded400 = fetch(
     new URL(
       `../../node_modules/@fontsource/unbounded/files/unbounded-latin-ext-400-normal.woff`,
@@ -18,13 +19,6 @@ export default async function CountriesOG() {
       import.meta.url,
     ),
   ).then((res) => res.arrayBuffer());
-
-  const findLatestCountries = (): Trip[] => {
-    const latestYear = Object.keys(countries).sort().reverse()[0];
-    // @ts-ignore
-    const latestYearCountries = countries[latestYear];
-    return latestYearCountries.slice(-3);
-  };
 
   return new ImageResponse(
     (
@@ -46,15 +40,15 @@ export default async function CountriesOG() {
                 Last 3 countries I visited
               </div>
 
-              {findLatestCountries().map((trip, index) => (
+              {travels.data.map((trip, index) => (
                 <div
                   key={index}
                   tw="flex mb-5 text-white mb-6 text-3xl"
                   style={font('Unbounded 400')}
                 >
-                  {trip.flag} {trip.city}, {trip.country}{' '}
+                  {trip.country_flag} {trip.city}, {trip.country}{' '}
                   <span tw="ml-6 text-xl leading-2 text-gray-400">
-                    {trip.month}
+                    {trip.range_text}
                   </span>
                 </div>
               ))}
