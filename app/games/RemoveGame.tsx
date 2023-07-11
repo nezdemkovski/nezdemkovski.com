@@ -1,13 +1,10 @@
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
-import { Database } from '@/database.types';
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
+import { removeGameItem } from '@/utils/supabaseServer';
 
 const RemoveGame = async ({ id }: { id: string }) => {
   const removeGame = async () => {
     'use server';
-    const supabase = createServerActionClient<Database>({ cookies });
-    await supabase.from('games').delete().eq('id', id);
+    await removeGameItem(id);
     revalidatePath('/games');
   };
 

@@ -1,9 +1,7 @@
-import { cookies } from 'next/headers';
 import AddGame from '@/app/games/AddGame';
 import { Game, getGames } from '@/app/games/helpers';
 import RemoveGame from '@/app/games/RemoveGame';
-import { Database } from '@/database.types';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { getUserRights } from '@/utils/supabaseServer';
 
 import { PCBuildData } from './data';
 
@@ -56,17 +54,7 @@ const GamesByYear = async ({
   title: string;
   gamesList: Game[];
 }) => {
-  const supabase = createServerComponentClient<Database>({ cookies });
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data: userRights } = await supabase
-    .from('users')
-    .select('user_rights')
-    .eq('id', user?.id)
-    .limit(1)
-    .maybeSingle();
+  const userRights = await getUserRights();
 
   return (
     <div key={title} className="mb-10">
@@ -80,9 +68,7 @@ const GamesByYear = async ({
               {game.release_year} · {game.developer} · {game.platform}
             </div>
 
-            {user && userRights?.user_rights === 'ADMIN' && (
-              <RemoveGame id={game.id} />
-            )}
+            {userRights === 'ADMIN' && <RemoveGame id={game.id} />}
           </li>
         ))}
       </ul>
@@ -92,18 +78,7 @@ const GamesByYear = async ({
 
 const GamesPage = async () => {
   const { data, total } = await getGames();
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data: userRights } = await supabase
-    .from('users')
-    .select('user_rights')
-    .eq('id', user?.id)
-    .limit(1)
-    .maybeSingle();
+  const userRights = await getUserRights();
 
   if (!data) {
     return (
@@ -125,7 +100,7 @@ const GamesPage = async () => {
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
-      {userRights?.user_rights === 'ADMIN' && <AddGame />}
+      {userRights === 'ADMIN' && <AddGame />}
 
       <div className="grid gap-2 md:grid-cols-2">
         <div className="">

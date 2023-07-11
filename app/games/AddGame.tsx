@@ -1,17 +1,8 @@
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
-import { Database } from '@/database.types';
-import {
-  createServerActionClient,
-  createServerComponentClient,
-} from '@supabase/auth-helpers-nextjs';
+import { createGameItem, getUserInfo } from '@/utils/supabaseServer';
 
 const AddGame = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUserInfo();
 
   const addGame = async (formData: FormData) => {
     'use server';
@@ -21,14 +12,12 @@ const AddGame = async () => {
     const finishedDate = formData.get('finished_date');
 
     if (name && developer && releaseYear && finishedDate) {
-      const supabase = createServerActionClient<Database>({ cookies });
-
-      await supabase.from('games').insert({
+      await createGameItem({
         name: name.toString(),
         developer: developer.toString(),
-        release_year: Number(releaseYear),
+        releaseYear: Number(releaseYear),
         platform: 'PC',
-        finished_date: finishedDate.toString(),
+        finishedDate: finishedDate.toString(),
       });
       revalidatePath('/games');
     }

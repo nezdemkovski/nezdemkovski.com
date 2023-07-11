@@ -1,8 +1,7 @@
 'use server';
 
-import { cookies } from 'next/headers';
 import { Database } from '@/database.types';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createServerSupabaseClient } from '@/utils/supabaseServer';
 
 export type Game = Database['public']['Tables']['games']['Row'];
 
@@ -11,7 +10,7 @@ interface GamesByYear {
 }
 
 export const getGames = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = createServerSupabaseClient();
   const { data, error } = await supabase
     .from('games')
     .select()
