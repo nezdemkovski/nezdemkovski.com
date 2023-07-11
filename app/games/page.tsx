@@ -1,5 +1,12 @@
+import { cookies } from 'next/headers';
+import AddGame from '@/app/games/AddGame';
 import { Game, getGames } from '@/app/games/helpers';
+import RemoveGame from '@/app/games/RemoveGame';
+import { Database } from '@/database.types';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 
+import GithubLogin from '@/components/GithubLogin';
+import LogoutButton from '@/components/LogoutButton';
 import { PCBuildData } from './data';
 
 export const revalidate = 10;
@@ -44,30 +51,45 @@ const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   </div>
 );
 
-const GamesByYear = ({
+const GamesByYear = async ({
   title,
   gamesList,
 }: {
   title: string;
   gamesList: Game[];
-}) => (
-  <div key={title} className="mb-10">
-    <h2 className="mb-3 font-unbounded text-2xl font-bold">{title}</h2>
-    <ul>
-      {gamesList.map((game, index) => (
-        <li key={index} className="mb-3">
-          <h3>{game.name}</h3>
-          <div className="text-xs text-gray-400">
-            {game.release_year} · {game.developer} · {game.platform}
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+}) => {
+  const supabase = createServerComponentClient<Database>({ cookies });
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  return (
+    <div key={title} className="mb-10">
+      <h2 className="mb-3 font-unbounded text-2xl font-bold">{title}</h2>
+      <ul>
+        {gamesList.map((game, index) => (
+          <li key={index} className="mb-3">
+            <h3>{game.name}</h3>
+            <div className="text-xs text-gray-400">
+              {game.release_year} · {game.developer} · {game.platform}
+            </div>
+
+            {user && <RemoveGame id={game.id} />}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const GamesPage = async () => {
   const { data, total } = await getGames();
+  const supabase = createServerComponentClient<Database>({ cookies });
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!data) {
     return (
@@ -88,6 +110,19 @@ const GamesPage = async () => {
       <h1 className="mb-10 font-unbounded text-3xl font-bold">
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
+
+      <div>
+        {user ? (
+          <div className="flex items-center gap-4">
+            Hey, {user.email}!
+            <LogoutButton />
+          </div>
+        ) : (
+          <GithubLogin />
+        )}
+      </div>
+
+      <AddGame />
 
       <div className="grid gap-2 md:grid-cols-2">
         <div className="">
