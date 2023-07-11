@@ -34,15 +34,31 @@ const AddGame = async () => {
     }
   };
 
-  console.log({ user });
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const currentDate = date.toISOString().slice(0, 10);
 
   return (
     <form action={addGame} className="text-black">
       <fieldset disabled={!user}>
-        <input name="name" defaultValue="askdjaslkjdjaksd" />
-        <input name="developer" defaultValue="akshdjasdhkjasdhkajsd" />
-        <input name="release-year" type="number" defaultValue={2025} />
-        <input name="finished_date" type="date" defaultValue="2087-01-04" />
+        <input name="name" placeholder="Game's name" defaultValue="" />
+        <input
+          name="developer"
+          placeholder="Developer's name"
+          defaultValue=""
+        />
+        <input
+          name="release-year"
+          type="number"
+          placeholder="Year of the release"
+          defaultValue={currentYear}
+        />
+        <input
+          name="finished_date"
+          type="date"
+          placeholder="Date when I finished the game"
+          defaultValue={currentDate}
+        />
 
         <button type="submit" className="bg-amber-400">
           add new game

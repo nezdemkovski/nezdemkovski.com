@@ -21,12 +21,12 @@ const GithubLogin = () => {
   };
 
   return (
-    <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md">
+    <div className="flex w-full flex-1 flex-col justify-center gap-2 sm:max-w-md">
       <form
-        className="flex w-full flex-1 flex-col justify-center gap-2 text-foreground"
+        className="text-foreground flex w-full flex-1 flex-col justify-center gap-2"
         onSubmit={handleGithubSignIn}
       >
-        <button className="ml-1 underline">Login with Github</button>
+        <button className="border-dotted text-xs text-gray-400">Login</button>
       </form>
     </div>
   );

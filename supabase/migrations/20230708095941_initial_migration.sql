@@ -26,7 +26,7 @@ as
 $$
 begin
     insert into users (id, full_name, email, user_rights)
-    values (new.id, COALESCE(new.raw_user_meta_data ->> 'full_name', ''), new.email, 'ADMIN');
+    values (new.id, COALESCE(new.raw_user_meta_data ->> 'full_name', ''), new.email, 'USER');
     return new;
 end;
 $$;

@@ -13,10 +13,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <button
-      className="bg-btn-background hover:bg-btn-background-hover rounded-md px-4 py-2 no-underline"
-      onClick={signOut}
-    >
+    <button className="border-dotted text-xs text-gray-400" onClick={signOut}>
       Logout
     </button>
   );

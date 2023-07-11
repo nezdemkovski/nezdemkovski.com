@@ -5,8 +5,6 @@ import RemoveGame from '@/app/games/RemoveGame';
 import { Database } from '@/database.types';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 
-import GithubLogin from '@/components/GithubLogin';
-import LogoutButton from '@/components/LogoutButton';
 import { PCBuildData } from './data';
 
 export const revalidate = 10;
@@ -59,10 +57,16 @@ const GamesByYear = async ({
   gamesList: Game[];
 }) => {
   const supabase = createServerComponentClient<Database>({ cookies });
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const { data: userRights } = await supabase
+    .from('users')
+    .select('user_rights')
+    .eq('id', user?.id)
+    .limit(1)
+    .maybeSingle();
 
   return (
     <div key={title} className="mb-10">
@@ -71,11 +75,14 @@ const GamesByYear = async ({
         {gamesList.map((game, index) => (
           <li key={index} className="mb-3">
             <h3>{game.name}</h3>
+
             <div className="text-xs text-gray-400">
               {game.release_year} · {game.developer} · {game.platform}
             </div>
 
-            {user && <RemoveGame id={game.id} />}
+            {user && userRights?.user_rights === 'ADMIN' && (
+              <RemoveGame id={game.id} />
+            )}
           </li>
         ))}
       </ul>
@@ -90,6 +97,13 @@ const GamesPage = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const { data: userRights } = await supabase
+    .from('users')
+    .select('user_rights')
+    .eq('id', user?.id)
+    .limit(1)
+    .maybeSingle();
 
   if (!data) {
     return (
@@ -111,18 +125,7 @@ const GamesPage = async () => {
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
-      <div>
-        {user ? (
-          <div className="flex items-center gap-4">
-            Hey, {user.email}!
-            <LogoutButton />
-          </div>
-        ) : (
-          <GithubLogin />
-        )}
-      </div>
-
-      <AddGame />
+      {userRights?.user_rights === 'ADMIN' && <AddGame />}
 
       <div className="grid gap-2 md:grid-cols-2">
         <div className="">
