@@ -108,7 +108,7 @@ export interface Database {
           email: string
           full_name: string
           id: string
-          user_rights: Database["public"]["Enums"]["user_rights"]
+          user_rights?: Database["public"]["Enums"]["user_rights"]
         }
         Update: {
           email?: string

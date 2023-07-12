@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
-const LogoutButton = () => {
+const SignOutButton = () => {
   const router = useRouter();
   const supabase = createClientComponentClient();
 
@@ -14,9 +14,9 @@ const LogoutButton = () => {
 
   return (
     <button className="border-dotted text-xs text-gray-400" onClick={signOut}>
-      Logout
+      Sign out
     </button>
   );
 };
 
-export default LogoutButton;
+export default SignOutButton;

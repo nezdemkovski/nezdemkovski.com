@@ -2,10 +2,10 @@ create type user_rights as enum ('ADMIN', 'USER');
 
 create table users
 (
-    id          uuid        not null,
-    full_name   text        not null,
-    email       text        not null,
-    user_rights user_rights not null,
+    id          uuid                       not null,
+    full_name   text                       not null,
+    email       text                       not null,
+    user_rights user_rights default 'USER' not null,
 
     primary key (id),
     foreign key (id) references auth.users (id) on update cascade on delete cascade
@@ -25,8 +25,8 @@ create or replace function handle_new_user()
 as
 $$
 begin
-    insert into users (id, full_name, email, user_rights)
-    values (new.id, COALESCE(new.raw_user_meta_data ->> 'full_name', ''), new.email, 'USER');
+    insert into users (id, full_name, email)
+    values (new.id, COALESCE(new.raw_user_meta_data ->> 'full_name', ''), new.email);
     return new;
 end;
 $$;

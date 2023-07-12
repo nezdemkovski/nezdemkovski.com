@@ -1,6 +1,14 @@
 import { revalidatePath } from 'next/cache';
 import { createGameItem, getUserInfo } from '@/utils/supabaseServer';
 
+const platformTypes = [
+  'PC',
+  'Macbook',
+  'PlayStation 5',
+  'Steam Deck',
+  'Yuzu Nintendo Switch Emulator',
+];
+
 const AddGame = async () => {
   const user = await getUserInfo();
 
@@ -10,13 +18,14 @@ const AddGame = async () => {
     const developer = formData.get('developer');
     const releaseYear = formData.get('release-year');
     const finishedDate = formData.get('finished_date');
+    const platform = formData.get('platform') as any;
 
     if (name && developer && releaseYear && finishedDate) {
       await createGameItem({
         name: name.toString(),
         developer: developer.toString(),
         releaseYear: Number(releaseYear),
-        platform: 'PC',
+        platform,
         finishedDate: finishedDate.toString(),
       });
       revalidatePath('/games');
@@ -42,6 +51,13 @@ const AddGame = async () => {
           placeholder="Year of the release"
           defaultValue={currentYear}
         />
+        <select name="platform" id="platform">
+          {platformTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
         <input
           name="finished_date"
           type="date"

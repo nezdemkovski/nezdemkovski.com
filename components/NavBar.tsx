@@ -1,17 +1,12 @@
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { Database } from '@/database.types';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { getUserInfo } from '@/utils/supabaseServer';
 
 import GithubLogin from '@/components/GithubLogin';
 import Logo from '@/components/Logo';
-import LogoutButton from '@/components/LogoutButton';
+import SignOutButton from '@/components/SignOutButton';
 
 const NavBar = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUserInfo();
 
   return (
     <nav className="flex items-center justify-between px-7 py-5">
@@ -31,7 +26,7 @@ const NavBar = async () => {
       <div>
         {user ? (
           <div className="flex flex-col items-center gap-1 border-dotted text-xs text-gray-300">
-            <LogoutButton />
+            <SignOutButton />
           </div>
         ) : (
           <GithubLogin />
