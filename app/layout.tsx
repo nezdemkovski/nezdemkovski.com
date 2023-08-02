@@ -141,7 +141,11 @@ export const metadata: Metadata = {
       url: '/favicons/apple-touch-icon-precomposed.png',
     },
   },
-  verification: {},
+  verification: {
+    other: {
+      me: ['https://mastodon.social/@nezdemkovski'],
+    },
+  },
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => {

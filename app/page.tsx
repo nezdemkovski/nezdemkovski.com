@@ -18,6 +18,14 @@ const RootPage = () => {
         {/*<SpotifyWidget />*/}
         <GamesWidget />
         <CountriesWidget />
+
+        <a
+          className="hidden"
+          rel="me"
+          href="https://mastodon.social/@nezdemkovski"
+        >
+          Mastodon
+        </a>
       </div>
     </main>
   );
