@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Inter, Unbounded } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -143,7 +144,7 @@ export const metadata: Metadata = {
   verification: {},
 };
 
-const RootLayout = ({ children }: React.PropsWithChildren) => {
+const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html
       lang="en"
