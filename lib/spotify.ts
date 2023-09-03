@@ -29,6 +29,9 @@ export const getNowPlaying = async () => {
   const { access_token } = await getAccessToken();
 
   return fetch(NOW_PLAYING_ENDPOINT, {
+    next: {
+      revalidate: 0,
+    },
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
