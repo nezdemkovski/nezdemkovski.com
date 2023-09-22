@@ -1,6 +1,7 @@
 import { getTravels, Travel } from '@/app/countries/helpers';
 
 export const revalidate = 10;
+export const dynamic = 'force-dynamic';
 
 const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
   <div key={title} className="mb-10">

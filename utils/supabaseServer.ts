@@ -6,13 +6,15 @@ import {
   createServerComponentClient,
 } from '@supabase/auth-helpers-nextjs';
 
-export const createServerSupabaseClient = cache(() =>
-  createServerComponentClient<Database>({ cookies }),
-);
+export const createServerSupabaseClient = cache(() => {
+  const cookieStore = cookies();
+  return createServerComponentClient<Database>({ cookies: () => cookieStore });
+});
 
-export const createServerActionSupabaseClient = cache(() =>
-  createServerActionClient<Database>({ cookies }),
-);
+export const createServerActionSupabaseClient = cache(() => {
+  const cookieStore = cookies();
+  return createServerActionClient<Database>({ cookies: () => cookieStore });
+});
 
 export const getUserInfo = async () => {
   const supabase = createServerSupabaseClient();
@@ -34,7 +36,7 @@ export const getUserRights = async () => {
     const { data: userRights } = await supabase
       .from('users')
       .select('user_rights')
-      .eq('id', user?.id)
+      .eq('id', user?.id ?? '')
       .limit(1)
       .maybeSingle();
 

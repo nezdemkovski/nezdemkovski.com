@@ -6,6 +6,7 @@ import { getUserRights } from '@/utils/supabaseServer';
 import { PCBuildData } from './data';
 
 export const revalidate = 10;
+export const dynamic = 'force-dynamic';
 
 const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   <div className="mb-6">

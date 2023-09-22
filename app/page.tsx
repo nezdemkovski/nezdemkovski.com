@@ -4,7 +4,7 @@ import CountriesWidget from '@/components/CountriesWidget';
 import CurrentLocationWidget from '@/components/CurrentLocationWidget';
 import GamesWidget from '@/components/GamesWidget';
 
-import SpotifyWidget from '@/components/SpotifyWidget';
+// import SpotifyWidget from '@/components/SpotifyWidget';
 // import WorkAvailabilityWidget from '@/components/WorkAvailabilityWidget';
 
 const RootPage = () => {
@@ -15,17 +15,9 @@ const RootPage = () => {
         {/*<WorkAvailabilityWidget />*/}
         <BusinessInfoWidget />
         <CurrentLocationWidget />
-        <SpotifyWidget />
+        {/*<SpotifyWidget />*/}
         <GamesWidget />
         <CountriesWidget />
-
-        <a
-          className="hidden"
-          rel="me"
-          href="https://mastodon.social/@nezdemkovski"
-        >
-          Mastodon
-        </a>
       </div>
     </main>
   );
