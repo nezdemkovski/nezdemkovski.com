@@ -1,5 +1,6 @@
 import { revalidatePath } from 'next/cache';
-import { removeGameItem } from '@/utils/supabaseServer';
+
+import { removeGameItem } from '@/app/games/utils';
 
 const RemoveGame = async ({ id }: { id: string }) => {
   const removeGame = async () => {

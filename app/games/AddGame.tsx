@@ -1,5 +1,5 @@
 import { revalidatePath } from 'next/cache';
-import { createGameItem, getUserInfo } from '@/utils/supabaseServer';
+import { createGameItem, getUserInfo } from '@/app/games/utils';
 
 const platformTypes = [
   'PC',

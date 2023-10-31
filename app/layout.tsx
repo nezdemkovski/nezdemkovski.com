@@ -7,7 +7,7 @@ import clsx from 'clsx';
 
 import NavBar from '@/components/NavBar';
 
-import './tailwind.css';
+import './globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -161,7 +161,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     >
       <head />
       <body className="font-iawriterquattro text-black dark:text-white">
-        <div className="min-h-screen bg-whisper px-4 dark:bg-woodsmoke">
+        <div className="bg-whisper dark:bg-woodsmoke min-h-screen px-4">
           <NavBar />
           {children}
 

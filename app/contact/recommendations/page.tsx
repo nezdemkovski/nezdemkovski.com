@@ -1,6 +1,8 @@
+'use client';
+
 import Info from './info.mdx';
 
-const RecommendationsPage = async () => {
+const RecommendationsPage = () => {
   return (
     <main className="prose prose-lg m-6 mx-auto max-w-3xl">
       <Info />

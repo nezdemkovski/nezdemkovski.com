@@ -1,21 +1,8 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-
 const SignOutButton = () => {
-  const router = useRouter();
-  const supabase = createClientComponentClient();
-
-  const signOut = async () => {
-    await supabase.auth.signOut();
-    router.refresh();
-  };
-
   return (
-    <button className="border-dotted text-xs text-gray-400" onClick={signOut}>
-      Sign out
-    </button>
+    <form action="/api/auth/sign-out" method="post">
+      <button className="border-dotted text-xs text-gray-400">Sign out</button>
+    </form>
   );
 };
 

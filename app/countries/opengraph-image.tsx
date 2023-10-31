@@ -1,5 +1,6 @@
-import { ImageResponse } from 'next/server';
-import { getLatestTravels } from '@/app/countries/helpers-client';
+import { ImageResponse } from 'next/og';
+
+import { getLatestTravels } from '@/app/countries/utils';
 
 export const runtime = 'edge';
 export const revalidate = 60;

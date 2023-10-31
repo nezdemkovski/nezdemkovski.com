@@ -1,5 +1,6 @@
-import { ImageResponse } from 'next/server';
-import { getLatestGames } from '@/app/games/helpers-client';
+import { ImageResponse } from 'next/og';
+
+import { getLatestGames } from '@/app/games/utils';
 
 export const runtime = 'edge';
 export const revalidate = 60;
@@ -40,7 +41,7 @@ export default async function CountriesOG() {
                 Last 3 games I beat
               </div>
 
-              {games.data.map((game, index) => (
+              {games?.data?.map((game, index) => (
                 <div
                   key={index}
                   tw="flex flex-col mb-5 text-white mb-6 text-3xl"

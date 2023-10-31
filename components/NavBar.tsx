@@ -1,12 +1,18 @@
 import Link from 'next/link';
-import { getUserInfo } from '@/utils/supabaseServer';
+import { cookies } from 'next/headers';
 
 import GithubLogin from '@/components/GithubLogin';
 import Logo from '@/components/Logo';
 import SignOutButton from '@/components/SignOutButton';
+import { createClient } from '@/utils/supabase/server';
 
 const NavBar = async () => {
-  const user = await getUserInfo();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <nav className="flex items-center justify-between px-7 py-5">
@@ -17,7 +23,7 @@ const NavBar = async () => {
           </Link>
         </div>
 
-        <h1 className="flex flex-col font-iawriterquattro text-xl font-bold leading-tight text-gray-900 dark:text-white">
+        <h1 className="font-iawriterquattro flex flex-col text-xl font-bold leading-tight text-gray-900 dark:text-white">
           <span>Yuri</span>
           <span>Nezdemkovski</span>
         </h1>

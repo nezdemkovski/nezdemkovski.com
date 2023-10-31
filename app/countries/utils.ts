@@ -1,8 +1,12 @@
-'use server';
-
 import { cookies } from 'next/headers';
+
 import { Database } from '@/database.types';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/utils/supabase/server';
+
+export const getSupabaseServerClient = () => {
+  const cookieStore = cookies();
+  return createClient(cookieStore);
+};
 
 export type Travel = Database['public']['Tables']['travels']['Row'];
 
@@ -23,7 +27,7 @@ const getUniqueCountries = (trips: TripsByYear) => {
 };
 
 export const getTravels = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = getSupabaseServerClient();
   const { data, error } = await supabase
     .from('travels')
     .select()
@@ -50,4 +54,19 @@ export const getTravels = async () => {
     total: data?.length,
     totalCountries: getUniqueCountries(trips),
   };
+};
+
+export const getLatestTravels = async () => {
+  const supabase = getSupabaseServerClient();
+  const { data, error } = await supabase
+    .from('travels')
+    .select()
+    .order('start_date', { ascending: false })
+    .limit(3);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return { data };
 };

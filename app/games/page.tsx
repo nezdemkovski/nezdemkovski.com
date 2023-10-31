@@ -1,16 +1,24 @@
 import AddGame from '@/app/games/AddGame';
-import { Game, getGames } from '@/app/games/helpers';
 import RemoveGame from '@/app/games/RemoveGame';
-import { getUserRights } from '@/utils/supabaseServer';
-
-import { PCBuildData } from './data';
+import { type Game, getGames, getUserRights } from '@/app/games/utils';
 
 export const revalidate = 10;
 export const dynamic = 'force-dynamic';
 
+const PCBuildData = {
+  cpu: 'AMD Ryzen 9 7900X',
+  gpu: 'AMD Radeon RX 6800 XT',
+  motherBoard: 'ASUS ROG STRIX B650E-I GAMING WIFI',
+  ram: 'Kingston 32GB KIT DDR5 5600MHz CL36 FURY Beast Black EXPO',
+  ssd: 'Samsung 980 PRO 1TB',
+  powerSupply: 'Corsair SF750 750W',
+  waterCooling: 'ASUS ROG STRIX LC II 240',
+  case: 'LIAN-LI DAN A4-H2O X4, black',
+};
+
 const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   <div className="mb-6">
-    <h2 className="mb-3 font-unbounded text-2xl font-bold">My PC Build</h2>
+    <h2 className="font-unbounded mb-3 text-2xl font-bold">My PC Build</h2>
     <ul>
       <li className="mb-3">
         <h3>{data.cpu}</h3>
@@ -59,7 +67,7 @@ const GamesByYear = async ({
 
   return (
     <div key={title} className="mb-10">
-      <h2 className="mb-3 font-unbounded text-2xl font-bold">{title}</h2>
+      <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
       <ul>
         {gamesList.map((game, index) => (
           <li key={index} className="mb-3">
@@ -84,7 +92,7 @@ const GamesPage = async () => {
   if (!data) {
     return (
       <main className="m-6 mx-auto max-w-3xl">
-        <h1 className="mb-10 font-unbounded text-3xl font-bold">
+        <h1 className="font-unbounded mb-10 text-3xl font-bold">
           Something bad happened. Refresh the page.
         </h1>
       </main>
@@ -97,7 +105,7 @@ const GamesPage = async () => {
 
   return (
     <main className="m-6 mx-auto max-w-3xl">
-      <h1 className="mb-10 font-unbounded text-3xl font-bold">
+      <h1 className="font-unbounded mb-10 text-3xl font-bold">
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
