@@ -9,8 +9,8 @@ dependencies:
     specifier: ^5.0.17
     version: 5.0.17
   '@supabase/ssr':
-    specifier: ^0.0.5
-    version: 0.0.5(@supabase/supabase-js@2.38.4)
+    specifier: ^0.0.6
+    version: 0.0.6(@supabase/supabase-js@2.38.4)
   '@supabase/supabase-js':
     specifier: latest
     version: 2.38.4
@@ -51,7 +51,7 @@ devDependencies:
     version: 3.0.0(webpack@5.89.0)
   '@mdx-js/react':
     specifier: ^3.0.0
-    version: 3.0.0(@types/react@18.2.33)(react@18.2.0)
+    version: 3.0.0(@types/react@18.2.34)(react@18.2.0)
   '@next/mdx':
     specifier: ^14.0.1
     version: 14.0.1(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0)
@@ -65,8 +65,8 @@ devDependencies:
     specifier: 20.8.10
     version: 20.8.10
   '@types/react':
-    specifier: 18.2.33
-    version: 18.2.33
+    specifier: 18.2.34
+    version: 18.2.34
   '@types/react-dom':
     specifier: 18.2.14
     version: 18.2.14
@@ -239,14 +239,14 @@ packages:
       - supports-color
     dev: true
 
-  /@mdx-js/react@3.0.0(@types/react@18.2.33)(react@18.2.0):
+  /@mdx-js/react@3.0.0(@types/react@18.2.34)(react@18.2.0):
     resolution: {integrity: sha512-nDctevR9KyYFyV+m+/+S4cpzCWHqj+iHDHq3QrsWezcC+B17uZdIWgCguESUkwFhM3n/56KxWVE3V6EokrmONQ==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.9
-      '@types/react': 18.2.33
+      '@types/react': 18.2.34
       react: 18.2.0
     dev: true
 
@@ -272,7 +272,7 @@ packages:
         optional: true
     dependencies:
       '@mdx-js/loader': 3.0.0(webpack@5.89.0)
-      '@mdx-js/react': 3.0.0(@types/react@18.2.33)(react@18.2.0)
+      '@mdx-js/react': 3.0.0(@types/react@18.2.34)(react@18.2.0)
       source-map: 0.7.4
     dev: true
 
@@ -415,8 +415,8 @@ packages:
       - supports-color
     dev: false
 
-  /@supabase/ssr@0.0.5(@supabase/supabase-js@2.38.4):
-    resolution: {integrity: sha512-D7kfzODHzmSxdIVfJ0mzsX/9HjwrGbGyUQAdLss2tTVas2ry+g7KDZJC2kTURa5H+OJ3HEL7xz27S26kQ7li9g==}
+  /@supabase/ssr@0.0.6(@supabase/supabase-js@2.38.4):
+    resolution: {integrity: sha512-9AGdy4p1Q9nQ95ydCh9la/km4JzgYLOsNoK/crfgI5xKjn4aBgXKLDzBEnHIQu6zF/VTQaNgKgWpSII8lQ0RbQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.33.1
     dependencies:
@@ -542,11 +542,11 @@ packages:
   /@types/react-dom@18.2.14:
     resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
     dependencies:
-      '@types/react': 18.2.33
+      '@types/react': 18.2.34
     dev: true
 
-  /@types/react@18.2.33:
-    resolution: {integrity: sha512-v+I7S+hu3PIBoVkKGpSYYpiBT1ijqEzWpzQD62/jm4K74hPpSP7FF9BnKG6+fg2+62weJYkkBWDJlZt5JO/9hg==}
+  /@types/react@18.2.34:
+    resolution: {integrity: sha512-U6eW/alrRk37FU/MS2RYMjx0Va2JGIVXELTODaTIYgvWGCV4Y4TfTUzG8DdmpDNIT0Xpj/R7GfyHOJJrDttcvg==}
     dependencies:
       '@types/prop-types': 15.7.9
       '@types/scheduler': 0.16.5
