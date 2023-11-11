@@ -1,5 +1,5 @@
-INSERT INTO games (name, release_year, developer, platform, finished_date)
-VALUES ('Marvel''s Guardians of the Galaxy', 2021, 'Eidos-Montréal', 'PlayStation 5', '2023-06-24'),
+insert into games (name, release_year, developer, platform, finished_date)
+values ('Marvel''s Guardians of the Galaxy', 2021, 'Eidos-Montréal', 'PlayStation 5', '2023-06-24'),
        ('Trine 4: The Nightmare Prince', 2019, 'Frozenbyte', 'PC', '2023-06-10'),
        ('Shantae and the Seven Sirens', 2019, 'WayForward', 'Steam Deck', '2023-06-01'),
        ('STAR WARS Jedi: Survivor', 2023, 'Respawn', 'PC', '2023-01-08'),
@@ -7,11 +7,8 @@ VALUES ('Marvel''s Guardians of the Galaxy', 2021, 'Eidos-Montréal', 'PlayStati
        ('Atomic Heart', 2023, 'Mundfish', 'PC', '2023-01-06'),
        ('God of War Ragnarök', 2022, 'Santa Monica Studio', 'PlayStation 5', '2022-01-05'),
        ('Dying Light 2 Stay Human', 2022, 'Techland', 'PC', '2022-01-04'),
-       ('Valheim', 2021, 'Iron Gate AB', 'PC', '2021-01-03'),
        ('South Park: The Fractured But Whole', 2017, 'Ubisoft San Francisco', 'Steam Deck', '2023-01-02'),
        ('TUNIC', 2022, 'TUNIC Team', 'Steam Deck', '2023-01-01'),
-       ('Vampire Survivors', 2022, 'poncle', 'Steam Deck', '2022-01-13'),
-       ('Return to Monkey Island', 2022, 'Ron Gilbert, Terrible Toybox', 'Macbook', '2022-01-12'),
        ('Teenage Mutant Ninja Turtles: Shredder''s Revenge', 2022, 'BlueTwelve Studio', 'Steam Deck', '2022-01-11'),
        ('The Quarry', 2022, 'Supermassive Games', 'PC', '2022-01-10'),
        ('Grim Dawn', 2016, 'Crate Entertainment', 'Steam Deck', '2022-01-09'),
@@ -25,10 +22,33 @@ VALUES ('Marvel''s Guardians of the Galaxy', 2021, 'Eidos-Montréal', 'PlayStati
        ('Horizon Forbidden West', 2022, 'Guerrilla Games', 'PlayStation 5', '2022-01-01'),
        ('Resident Evil Village', 2021, 'CAPCOM Co., Ltd.', 'PC', '2021-01-03'),
        ('Disco Elysium - The Final Cut', 2019, 'ZA/UM', 'Macbook', '2021-01-02'),
-       ('Hades', 2020, 'Supergiant Games', 'Macbook', '2021-01-01');
+       ('Hades', 2020, 'Supergiant Games', 'Macbook', '2021-01-01'),
+       ('Punch Club 2: Fast Forward', 2023, 'Lazy Bear Games', 'PC', '2023-07-26'),
+       ('Remnant II', 2023, 'Gunfire Games', 'PC', '2023-09-01'),
+       ('Dead Space', 2023, 'Motive Studio', 'PC', '2023-10-02'),
+       ('Cyberpunk 2077: Phantom Liberty', 2023, 'CD Projekt', 'PC', '2023-10-02'),
+       ('Cyberpunk 2077', 2020, 'CD Projekt', 'PC', '2020-12-31'),
+       ('The Lords of the Fallen', 2023, 'Hexworks', 'PC', '2023-10-29'),
+       ('Outriders', 2021, 'People Can Fly', 'PC', '2023-07-25'),
+       ('Diablo IV', 2023, 'Blizzard Entertainment', 'PC', '2023-11-05'),
+       ('Alan Wake 2', 2023, 'Remedy Entertainment', 'PC', '2023-11-11'),
+       ('Horizon Zero Dawn', 2017, 'Guerrilla Games', 'PlayStation 4', '2019-04-26'),
+       ('The Witcher 3: Wild Hunt', 2016, 'CD Projekt', 'PlayStation 4', '2019-03-13'),
+       ('Valheim', 2021, 'Iron Gate AB', 'PC', '2023-03-08'),
+       ('Mafia: Definitive Edition', 2020, 'Hangar 13', 'PlayStation 4', '2020-10-11'),
+       ('Diablo II: Resurrected', 2021, 'Blizzard Entertainment', 'PlayStation 4', '2021-11-04'),
+       ('Far Cry 6', 2021, 'Ubisoft Toronto', 'PlayStation 5', '2022-02-11'),
+       ('Vampire Survivors', 2022, 'poncle', 'Steam Deck', '2022-12-13'),
+       ('Return to Monkey Island', 2022, 'Ron Gilbert, Terrible Toybox', 'Macbook', '2022-11-12'),
+       ('Death Stranding', 2019, 'Kojima Productions', 'PlayStation 4', '2019-12-01'),
+       ('It Takes Two', 2021, 'Hazelight Studios', 'PlayStation 5', '2021-05-01');
 
-INSERT INTO travels (city, country, country_flag, start_date, end_date)
-VALUES ('Paris', 'France', '🇫🇷', '2023-07-03', '2023-07-06'),
+
+insert into travels (city, country, country_flag, start_date, end_date)
+values ('Mahmutlar', 'Turkey', '🇹🇷', '2023-10-05', '2024-01-05'),
+       ('Berlin', 'Germany', '🇩🇪', '2023-09-19', '2023-09-23'),
+       ('Puerto de la Cruz, Tenerife', 'Spain', '🇪🇸', '2023-08-24', '2023-08-31'),
+       ('Paris', 'France', '🇫🇷', '2023-07-03', '2023-07-06'),
        ('Szklarska Poręba', 'Poland', '🇵🇱', '2023-04-07', '2023-04-10'),
        ('Leipzig', 'Germany', '🇩🇪', '2023-02-20', '2023-02-20'),
        ('Burgas', 'Bulgaria', '🇧🇬', '2023-01-08', '2023-01-28'),
@@ -84,4 +104,3 @@ VALUES ('Paris', 'France', '🇫🇷', '2023-07-03', '2023-07-06'),
        ('Berlin', 'Germany', '🇩🇪', '2014-02-01', '2014-02-28'),
        ('Samarkand', 'Uzbekistan', '🇺🇿', '2011-08-01', '2011-08-02'),
        ('Tashkent', 'Uzbekistan', '🇺🇿', '2011-06-01', '2011-08-31');
-

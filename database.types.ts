@@ -139,6 +139,7 @@ export interface Database {
       platform_type:
         | "PC"
         | "Macbook"
+        | "PlayStation 4"
         | "PlayStation 5"
         | "Steam Deck"
         | "Yuzu Nintendo Switch Emulator"

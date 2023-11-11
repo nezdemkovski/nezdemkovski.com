@@ -1,6 +1,7 @@
 import AddGame from '@/app/games/AddGame';
 import RemoveGame from '@/app/games/RemoveGame';
 import { type Game, getGames, getUserRights } from '@/app/games/utils';
+import formatDate from '@/utils/formatDate';
 
 export const revalidate = 10;
 export const dynamic = 'force-dynamic';
@@ -18,7 +19,7 @@ const PCBuildData = {
 
 const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   <div className="mb-6">
-    <h2 className="font-unbounded mb-3 text-2xl font-bold">My PC Build</h2>
+    <h2 className="mb-3 font-unbounded text-2xl font-bold">My PC Build</h2>
     <ul>
       <li className="mb-3">
         <h3>{data.cpu}</h3>
@@ -67,16 +68,19 @@ const GamesByYear = async ({
 
   return (
     <div key={title} className="mb-10">
-      <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
+      <h2 className="mb-3 font-unbounded text-2xl font-bold">{title}</h2>
       <ul>
         {gamesList.map((game, index) => (
-          <li key={index} className="mb-3">
+          <li key={index} className="mb-3 flex flex-col gap-1">
             <h3>{game.name}</h3>
 
             <div className="text-xs text-gray-400">
               {game.release_year} · {game.developer} · {game.platform}
             </div>
 
+            <span className="text-xs text-gray-400">
+              {formatDate(new Date(game.finished_date))}
+            </span>
             {userRights === 'ADMIN' && <RemoveGame id={game.id} />}
           </li>
         ))}
@@ -92,7 +96,7 @@ const GamesPage = async () => {
   if (!data) {
     return (
       <main className="m-6 mx-auto max-w-3xl">
-        <h1 className="font-unbounded mb-10 text-3xl font-bold">
+        <h1 className="mb-10 font-unbounded text-3xl font-bold">
           Something bad happened. Refresh the page.
         </h1>
       </main>
@@ -105,7 +109,7 @@ const GamesPage = async () => {
 
   return (
     <main className="m-6 mx-auto max-w-3xl">
-      <h1 className="font-unbounded mb-10 text-3xl font-bold">
+      <h1 className="mb-10 font-unbounded text-3xl font-bold">
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
