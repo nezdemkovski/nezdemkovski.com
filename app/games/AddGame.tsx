@@ -4,6 +4,7 @@ import { createGameItem, getUserInfo } from '@/app/games/utils';
 const platformTypes = [
   'PC',
   'Macbook',
+  'PlayStation 4',
   'PlayStation 5',
   'Steam Deck',
   'Yuzu Nintendo Switch Emulator',
