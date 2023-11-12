@@ -1,6 +1,4 @@
 const formatDate = (date: Date) => {
-  console.log({ date });
-  console.log('asdasds');
   return new Intl.DateTimeFormat('en-GB', {
     day: '2-digit',
     month: 'long',
