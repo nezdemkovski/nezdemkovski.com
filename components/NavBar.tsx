@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { cookies } from 'next/headers';
 
-import GithubLogin from '@/components/GithubLogin';
 import Logo from '@/components/Logo';
 import SignOutButton from '@/components/SignOutButton';
 import { createClient } from '@/utils/supabase/server';
@@ -23,19 +22,17 @@ const NavBar = async () => {
           </Link>
         </div>
 
-        <h1 className="font-iawriterquattro flex flex-col text-xl font-bold leading-tight text-gray-900 dark:text-white">
+        <h1 className="flex flex-col font-iawriterquattro text-xl font-bold leading-tight text-gray-900 dark:text-white">
           <span>Yuri</span>
           <span>Nezdemkovski</span>
         </h1>
       </div>
 
       <div>
-        {user ? (
+        {user && (
           <div className="flex flex-col items-center gap-1 border-dotted text-xs text-gray-300">
             <SignOutButton />
           </div>
-        ) : (
-          <GithubLogin />
         )}
       </div>
     </nav>
