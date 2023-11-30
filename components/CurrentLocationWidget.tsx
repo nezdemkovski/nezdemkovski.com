@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Card from './ui/Card';
 
 const useCurrentTime = () => {
   const [hours, setHours] = useState('');
@@ -32,7 +33,7 @@ const CurrentLocationWidget = () => {
   const { hours, minutes, blink } = useCurrentTime();
 
   return (
-    <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
+    <Card>
       <h2 className="pb-4 font-unbounded text-2xl font-bold text-white sm:text-3xl">
         Current Location & Time
       </h2>
@@ -71,7 +72,7 @@ const CurrentLocationWidget = () => {
           </p>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

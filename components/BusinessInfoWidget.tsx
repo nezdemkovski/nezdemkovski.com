@@ -1,5 +1,7 @@
+import Card from './ui/Card';
+
 const BusinessInfoWidget = () => (
-  <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
+  <Card>
     <h2 className="flex flex-col pb-4 font-unbounded text-2xl font-bold text-white sm:text-3xl">
       <span>Business</span>
       <span>details</span>
@@ -16,7 +18,7 @@ const BusinessInfoWidget = () => (
       </span>
       .
     </p>
-  </div>
+  </Card>
 );
 
 export default BusinessInfoWidget;
