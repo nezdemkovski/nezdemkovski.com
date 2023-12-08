@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import Card from './ui/Card';
 
 const countryList = [
@@ -71,19 +70,17 @@ const Flag = ({
 );
 
 const CountriesWidget = () => (
-  <Link href="/countries">
-    <Card cardClass="cursor-pointer rounded-3xl transition duration-300 hover:-translate-y-1">
-      <h2 className="pb-8 font-unbounded text-3xl font-bold text-white sm:text-3xl">
-        Countries I visited
-      </h2>
+  <Card link="/countries">
+    <h2 className="pb-8 font-unbounded text-3xl font-bold text-white sm:text-3xl">
+      Countries I visited
+    </h2>
 
-      <ul className="inline-flex flex-wrap gap-7">
-        {countryList.map((country) => (
-          <Flag {...country} key={country.countryCode} />
-        ))}
-      </ul>
-    </Card>
-  </Link>
+    <ul className="inline-flex flex-wrap gap-7">
+      {countryList.map((country) => (
+        <Flag {...country} key={country.countryCode} />
+      ))}
+    </ul>
+  </Card>
 );
 
 export default CountriesWidget;
