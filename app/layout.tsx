@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter, Unbounded } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
@@ -166,6 +167,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
           {children}
 
           <Analytics />
+          <SpeedInsights />
         </div>
       </body>
     </html>
