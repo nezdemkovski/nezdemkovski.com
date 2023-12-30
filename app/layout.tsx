@@ -161,7 +161,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     >
       <head />
       <body className="font-iawriterquattro text-black dark:text-white">
-        <div className="flex justify-center px-5">
+        <div className="flex justify-center px-4 md:px-5">
           <div className="w-full max-w-[83.75rem]">
             <NavBar />
             {children}

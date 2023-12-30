@@ -11,7 +11,7 @@ const useCurrentTime = () => {
   const [blink, setBlink] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const updateClock = () => {
       const now = new Date();
       const formattedTime = now.toLocaleTimeString('en-US', {
         timeZone: 'Europe/Prague',
@@ -21,11 +21,17 @@ const useCurrentTime = () => {
       const [currentHours, currentMinutes] = formattedTime.split(':');
       setHours(currentHours);
       setMinutes(currentMinutes);
-      setBlink(!blink);
+    };
+
+    const interval = setInterval(() => {
+      updateClock();
+      setBlink(b => !b); 
     }, 1000);
 
+    updateClock(); 
+
     return () => clearInterval(interval);
-  }, [blink]);
+  }, []); 
 
   return { hours, minutes, blink };
 };
@@ -51,9 +57,7 @@ const CurrentLocationWidget = () => {
             ) : (
               <>
                 <span>{hours}</span>
-                <span className={`mx-1 ${blink ? 'opacity-0' : 'opacity-100'}`}>
-                  :
-                </span>
+                <span className={`mx-1 ${blink ? 'opacity-0' : 'opacity-100'}`}>:</span>
                 <span>{minutes}</span>
               </>
             )}
