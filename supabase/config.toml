@@ -62,7 +62,7 @@ enable_confirmations = false
 # `discord`, `facebook`, `github`, `gitlab`, `google`, `keycloak`, `linkedin`, `notion`, `twitch`,
 # `twitter`, `slack`, `spotify`, `workos`, `zoom`.
 [auth.external.twitter]
-enabled = true
+enabled = false
 client_id = "env(TWITTER_CLIENT_ID)"
 secret = "env(TWITTER_SECRET)"
 # Overrides the default auth redirectUrl.
@@ -71,7 +71,7 @@ redirect_uri = "http://localhost:54321/auth/v1/callback"
 # or any other third-party OIDC providers.
 url = ""
 [auth.external.github]
-enabled = true
+enabled = false
 client_id = "env(GITHUB_CLIENT_ID)"
 secret = "env(GITHUB_SECRET)"
 # Overrides the default auth redirectUrl.
