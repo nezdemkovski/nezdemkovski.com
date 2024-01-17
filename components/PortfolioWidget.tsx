@@ -1,11 +1,11 @@
 import Card from './ui/Card';
 
-const GamesWidget = () => (
+const PortfolioWidget = () => (
   <Card
-    link="/games"
+    link="/portfolio"
     className={`h-80 bg-[url('/gow.webp')] bg-cover`}
-    title="Games I beat"
+    title="Portfolio"
   ></Card>
 );
 
-export default GamesWidget;
+export default PortfolioWidget;
