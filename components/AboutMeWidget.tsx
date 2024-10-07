@@ -8,9 +8,8 @@ const AboutMeWidget = () => (
       <span className="rounded-md bg-white bg-opacity-30 px-2 py-0.5 font-bold">
         Yuri
       </span>{' '}
-      — a seasoned web developer with over 10 years of experience. Now, as a
-      developer manager, I&apos;m passionate about leading teams and delivering
-      top-notch results.
+      — a seasoned Web Developer with over 10 years of experience. I&apos;m
+      passionate about delivering top-notch results and leading teams.
     </p>
   </div>
 );
