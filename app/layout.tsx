@@ -54,11 +54,11 @@ export const metadata: Metadata = {
     template: '%s | Yuri Nezdemkovski',
   },
   description:
-    'I am Yuri — a seasoned web developer with over 10 years of experience. Now, as a developer manager, I am passionate about leading teams and delivering top-notch results.',
+    'I am Yuri — a seasoned Web Developer with over 10 years of experience. I am passionate about delivering top-notch results and leading teams.',
   openGraph: {
     title: 'Yuri Nezdemkovski',
     description:
-      'I am Yuri — a seasoned web developer with over 10 years of experience. Now, as a developer manager, I am passionate about leading teams and delivering top-notch results.',
+      'I am Yuri — a seasoned Web Developer with over 10 years of experience. I am passionate about delivering top-notch results and leading teams.',
     url: 'https://nezdemkovski.com',
     siteName: 'Yuri Nezdemkovski',
     images: [

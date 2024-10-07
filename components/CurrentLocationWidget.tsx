@@ -4,32 +4,33 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const useCurrentTime = () => {
-  const [hours, setHours] = useState('');
-  const [minutes, setMinutes] = useState('');
-  const [blink, setBlink] = useState(true);
+  const [time, setTime] = useState({ hours: '', minutes: '' });
+  const [showSeparator, setShowSeparator] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const updateTime = () => {
       const now = new Date();
       const formattedTime = now.toLocaleTimeString('en-US', {
         timeZone: 'Europe/Prague',
         hour: '2-digit',
         minute: '2-digit',
       });
-      const [currentHours, currentMinutes] = formattedTime.split(':');
-      setHours(currentHours);
-      setMinutes(currentMinutes);
-      setBlink(!blink);
-    }, 1000);
+      const [hours, minutes] = formattedTime.split(':');
+      setTime({ hours, minutes });
+      setShowSeparator((prev) => !prev);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
-  }, [blink]);
+  }, []);
 
-  return { hours, minutes, blink };
+  return { ...time, showSeparator };
 };
 
 const CurrentLocationWidget = () => {
-  const { hours, minutes, blink } = useCurrentTime();
+  const { hours, minutes, showSeparator } = useCurrentTime();
 
   return (
     <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
@@ -38,35 +39,34 @@ const CurrentLocationWidget = () => {
       </h2>
       <div className="flex flex-row gap-4 rounded-2xl bg-black bg-opacity-40 px-2 py-4">
         <div className="self-center">
-          <p className="justify-center text-center text-5xl">
-            <Image
-              width={47}
-              height={47}
-              src="/flags/cz.svg"
-              alt="Czechia flag"
-              title="Czechia"
-            />
-          </p>
+          <Image
+            width={47}
+            height={47}
+            src="/flags/cz.svg"
+            alt="Czechia flag"
+            title="Czechia"
+          />
         </div>
         <div>
           <p className="font-iawriterquattro text-base text-white">
             Prague, Czechia
           </p>
           <p className="font-iawriterquattro text-base text-white">
-            {!hours && !minutes ? (
-              <span>...</span>
-            ) : (
-              <>
-                <span className="inline-block text-right">{hours}</span>
+            {hours && minutes ? (
+              <span className="inline-flex items-center font-mono">
+                {hours}
                 <span
-                  className={`mx-1 inline-block ${
-                    blink ? 'opacity-0' : 'opacity-100'
+                  className={`inline-flex w-4 items-center justify-center transition-opacity duration-300 ${
+                    showSeparator ? 'opacity-100' : 'opacity-0'
                   }`}
+                  aria-hidden="true"
                 >
                   :
                 </span>
-                <span className="inline-block text-left">{minutes}</span>
-              </>
+                {minutes}
+              </span>
+            ) : (
+              <span>...</span>
             )}
           </p>
         </div>

@@ -2,7 +2,7 @@
 
 import Info from './info.mdx';
 
-const ContactPage = () => {
+const HireMePage = () => {
   return (
     <main className="prose prose-lg m-6 mx-auto max-w-3xl">
       <Info />
@@ -10,4 +10,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default HireMePage;
