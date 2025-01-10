@@ -1,11 +1,9 @@
-import { cookies } from 'next/headers';
 
 import { createClient } from '@/utils/supabase/server';
 import { Database } from '@/database.types';
 
-export const getSupabaseServerClient = () => {
-  const cookieStore = cookies();
-  return createClient(cookieStore);
+export const getSupabaseServerClient = async () => {
+  return await createClient();
 };
 
 export const handleError = (error: any, message: string) => {
@@ -17,7 +15,7 @@ export const handleError = (error: any, message: string) => {
 };
 
 export const getUserInfo = async () => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -26,7 +24,7 @@ export const getUserInfo = async () => {
 };
 
 export const getUserRights = async () => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -52,7 +50,7 @@ interface GamesByYear {
 }
 
 export const getGames = async () => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
   const { data, error } = await supabase
     .from('games')
     .select()
@@ -78,7 +76,7 @@ export const getGames = async () => {
 };
 
 export const getLatestGames = async () => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
 
   try {
     const { data } = await supabase
@@ -106,7 +104,7 @@ export const createGameItem = async ({
   platform: Database['public']['Enums']['platform_type'];
   finishedDate: string;
 }) => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
 
   try {
     await supabase.from('games').insert({
@@ -122,7 +120,7 @@ export const createGameItem = async ({
 };
 
 export const removeGameItem = async (id: string) => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
 
   try {
     await supabase.from('games').delete().eq('id', id);

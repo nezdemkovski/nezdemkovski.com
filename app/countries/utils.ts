@@ -1,11 +1,8 @@
-import { cookies } from 'next/headers';
-
 import { Database } from '@/database.types';
 import { createClient } from '@/utils/supabase/server';
 
-export const getSupabaseServerClient = () => {
-  const cookieStore = cookies();
-  return createClient(cookieStore);
+export const getSupabaseServerClient = async () => {
+  return await createClient();
 };
 
 export type Travel = Database['public']['Tables']['travels']['Row'];
@@ -27,7 +24,7 @@ const getUniqueCountries = (trips: TripsByYear) => {
 };
 
 export const getTravels = async () => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
   const { data, error } = await supabase
     .from('travels')
     .select()
@@ -57,7 +54,7 @@ export const getTravels = async () => {
 };
 
 export const getLatestTravels = async () => {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
   const { data, error } = await supabase
     .from('travels')
     .select()

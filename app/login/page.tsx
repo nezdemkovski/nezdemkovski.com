@@ -6,8 +6,7 @@ import { createClient } from '@/utils/supabase/server';
 import Messages from '@/app/login/messages';
 
 const Login = async () => {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = await createClient();
 
   const {
     data: { user },

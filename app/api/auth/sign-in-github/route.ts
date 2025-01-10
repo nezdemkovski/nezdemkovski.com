@@ -1,12 +1,10 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
 import { createClient } from '@/utils/supabase/server';
 
 export async function POST(request: Request) {
   const requestUrl = new URL(request.url);
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = await createClient();
 
   const { error, data } = await supabase.auth.signInWithOAuth({
     provider: 'github',

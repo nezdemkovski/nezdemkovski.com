@@ -6,8 +6,7 @@ import SignOutButton from '@/components/SignOutButton';
 import { createClient } from '@/utils/supabase/server';
 
 const NavBar = async () => {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = await createClient();
 
   const {
     data: { user },
