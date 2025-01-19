@@ -122,9 +122,9 @@ const GamesPage = async () => {
           ))}
         </div>
 
-        <div>
+        {/* <div>
           <PCInfo data={PCBuildData} />
-        </div>
+        </div> */}
       </div>
     </main>
   );
