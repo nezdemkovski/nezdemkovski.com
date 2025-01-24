@@ -34,10 +34,10 @@ const CurrentLocationWidget = () => {
 
   return (
     <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
-      <h2 className="pb-4 font-unbounded text-2xl font-bold text-white sm:text-3xl">
+      <h2 className="font-unbounded pb-4 text-2xl font-bold text-white sm:text-3xl">
         Current Location & Time
       </h2>
-      <div className="flex flex-row gap-4 rounded-2xl bg-black bg-opacity-40 px-2 py-4">
+      <div className="flex flex-row gap-4 rounded-2xl bg-black/40 px-2 py-4">
         <div className="self-center">
           <Image
             width={47}

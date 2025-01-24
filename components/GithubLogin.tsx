@@ -9,7 +9,7 @@ const GithubLogin = () => {
         <button className="flex w-full flex-row justify-center gap-3 border-dotted bg-gray-600/20 p-4 text-xs text-gray-400 hover:bg-gray-600/30">
           <span>
             <svg
-              className=" ml-2 h-4 w-4"
+              className="ml-2 h-4 w-4"
               fill="none"
               height="24"
               stroke="currentColor"

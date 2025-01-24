@@ -11,12 +11,12 @@ const SpotifyWidget = () => {
   });
 
   return (
-    <div className="h-[300px] w-[335px] rounded-3xl bg-gradient-to-bl from-[#1ed760] to-[#0b341a]">
+    <div className="h-[300px] w-[335px] rounded-3xl bg-linear-to-bl from-[#1ed760] to-[#0b341a]">
       <div className="relative inline-block h-[300px] w-[335px] rounded-3xl bg-[url('/noise.svg')] bg-cover px-7 py-5">
         <>
           {!data || !data?.isPlaying ? (
             <>
-              <h2 className="pb-5 font-unbounded text-2xl font-bold text-white sm:text-3xl">
+              <h2 className="font-unbounded pb-5 text-2xl font-bold text-white sm:text-3xl">
                 Spotify
               </h2>
 
@@ -26,7 +26,7 @@ const SpotifyWidget = () => {
             </>
           ) : (
             <div>
-              <h2 className="pb-9 font-unbounded text-2xl font-bold text-white sm:text-3xl">
+              <h2 className="font-unbounded pb-9 text-2xl font-bold text-white sm:text-3xl">
                 Spotify
               </h2>
 

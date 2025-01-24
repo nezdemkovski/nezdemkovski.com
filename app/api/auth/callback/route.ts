@@ -21,4 +21,3 @@ export async function GET(request: Request) {
 // To redirect to the same page after sign in process completes, use this:
 // const xurl = request.headers.get('x-url');
 // return NextResponse.redirect(`${requestUrl.origin}/${pathname}`);
-

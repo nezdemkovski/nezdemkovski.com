@@ -40,19 +40,26 @@ const AddGame = async () => {
   return (
     <form action={addGame} className="text-black">
       <fieldset disabled={!user}>
-        <input name="name" placeholder="Game's name" defaultValue="" />
+        <input
+          name="name"
+          placeholder="Game's name"
+          defaultValue=""
+          className="bg-white"
+        />
         <input
           name="developer"
           placeholder="Developer's name"
           defaultValue=""
+          className="bg-white"
         />
         <input
           name="release-year"
           type="number"
           placeholder="Year of the release"
           defaultValue={currentYear}
+          className="bg-white"
         />
-        <select name="platform" id="platform">
+        <select name="platform" id="platform" className="bg-white">
           {platformTypes.map((type) => (
             <option key={type} value={type}>
               {type}
@@ -64,6 +71,7 @@ const AddGame = async () => {
           type="date"
           placeholder="Date when I finished the game"
           defaultValue={currentDate}
+          className="bg-white"
         />
 
         <button type="submit" className="bg-amber-400">

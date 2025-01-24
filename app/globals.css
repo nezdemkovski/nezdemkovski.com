@@ -1,3 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-woodsmoke: oklch(20.03% 0.0105 268.16);
+  --color-whisper: oklch(95.21% 0.0139 304.14);
+  --color-mulled-wine: oklch(38.76% 0.0477 312.09);
+
+  --font-iawriterquattro: var(--font-iawriterquattro);
+  --font-unbounded: var(--font-unbounded);
+}

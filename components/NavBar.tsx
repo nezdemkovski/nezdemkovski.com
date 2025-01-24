@@ -21,7 +21,7 @@ const NavBar = async () => {
           </Link>
         </div>
 
-        <h1 className="flex flex-col font-iawriterquattro text-xl font-bold leading-tight text-gray-900 dark:text-white">
+        <h1 className="font-iawriterquattro flex flex-col text-xl leading-tight font-bold text-gray-900 dark:text-white">
           <span>Yuri</span>
           <span>Nezdemkovski</span>
         </h1>
