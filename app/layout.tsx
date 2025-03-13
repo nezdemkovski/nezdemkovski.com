@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter, Unbounded } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
+import Script from 'next/script';
 import clsx from 'clsx';
 
 import NavBar from '@/components/NavBar';
@@ -168,6 +169,12 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 
           <Analytics />
           <SpeedInsights />
+
+          <Script
+            src="/stats/script.js"
+            data-website-id="b2ce31ba-8f10-4955-b7b3-d1bf8d7f448d"
+            strategy="afterInteractive"
+          />
         </div>
       </body>
     </html>
