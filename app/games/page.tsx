@@ -57,41 +57,41 @@ const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
   </div>
 );
 
-const GamesByYear = async ({
+const GamesByYear = ({
   title,
   gamesList,
+  isAdmin,
 }: {
   title: string;
   gamesList: Game[];
-}) => {
-  const userRights = await getUserRights();
+  isAdmin: boolean;
+}) => (
+  <div key={title} className="mb-10">
+    <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
+    <ul>
+      {gamesList.map((game) => (
+        <li key={game.id} className="mb-3 flex flex-col gap-1">
+          <h3>{game.name}</h3>
 
-  return (
-    <div key={title} className="mb-10">
-      <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
-      <ul>
-        {gamesList.map((game) => (
-          <li key={game.id} className="mb-3 flex flex-col gap-1">
-            <h3>{game.name}</h3>
+          <div className="text-xs text-gray-400">
+            {game.release_year} · {game.developer} · {game.platform}
+          </div>
 
-            <div className="text-xs text-gray-400">
-              {game.release_year} · {game.developer} · {game.platform}
-            </div>
-
-            <span className="text-xs text-gray-400">
-              {formatDate(new Date(game.finished_date))}
-            </span>
-            {userRights === UserRights.ADMIN && <RemoveGame id={game.id} />}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+          <span className="text-xs text-gray-400">
+            {formatDate(new Date(game.finished_date))}
+          </span>
+          {isAdmin && <RemoveGame id={game.id} />}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 const GamesPage = async () => {
-  const { data, total } = await getGames();
-  const userRights = await getUserRights();
+  const [{ data, total }, userRights] = await Promise.all([
+    getGames(),
+    getUserRights(),
+  ]);
 
   if (!data) {
     return (
@@ -103,6 +103,8 @@ const GamesPage = async () => {
     );
   }
 
+  const isAdmin = userRights === UserRights.ADMIN;
+
   const entries = Object.entries(data).sort(
     ([year1], [year2]) => Number(year2) - Number(year1),
   );
@@ -113,12 +115,17 @@ const GamesPage = async () => {
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
-      {userRights === UserRights.ADMIN && <AddGame />}
+      {isAdmin && <AddGame />}
 
       <div className="grid gap-2 md:grid-cols-2">
         <div className="">
           {entries.map(([year, gamesList]) => (
-            <GamesByYear key={year} title={year} gamesList={gamesList} />
+            <GamesByYear
+              key={year}
+              title={year}
+              gamesList={gamesList}
+              isAdmin={isAdmin}
+            />
           ))}
         </div>
 

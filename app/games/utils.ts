@@ -7,7 +7,6 @@ export enum UserRights {
   USER = 'USER',
 }
 
-export { handleError };
 
 export const getSupabaseServerClient = async () => {
   return await createClient();
@@ -104,26 +103,18 @@ export const createGameItem = async ({
   finishedDate: string;
 }) => {
   const supabase = await getSupabaseServerClient();
-
-  try {
-    await supabase.from('games').insert({
-      name: name.toString(),
-      developer: developer.toString(),
-      release_year: Number(releaseYear),
-      platform,
-      finished_date: finishedDate.toString(),
-    });
-  } catch (error) {
-    handleError(error, 'Error from createGameItem');
-  }
+  const { error } = await supabase.from('games').insert({
+    name: name.toString(),
+    developer: developer.toString(),
+    release_year: Number(releaseYear),
+    platform,
+    finished_date: finishedDate.toString(),
+  });
+  if (error) handleError(error, 'Error from createGameItem');
 };
 
 export const removeGameItem = async (id: string) => {
   const supabase = await getSupabaseServerClient();
-
-  try {
-    await supabase.from('games').delete().eq('id', id);
-  } catch (error) {
-    handleError(error, 'Error from removeGameItem');
-  }
+  const { error } = await supabase.from('games').delete().eq('id', id);
+  if (error) handleError(error, 'Error from removeGameItem');
 };

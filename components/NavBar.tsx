@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { cookies } from 'next/headers';
 
 import Logo from '@/components/Logo';
 import SignOutButton from '@/components/SignOutButton';
 import { createClient } from '@/utils/supabase/server';
+import { Button } from '@/components/ui/button';
 
 const NavBar = async () => {
   const supabase = await createClient();
@@ -28,10 +28,19 @@ const NavBar = async () => {
       </div>
 
       <div>
-        {user && (
-          <div className="flex flex-col items-center gap-1 border-dotted text-xs text-gray-300">
-            <SignOutButton />
-          </div>
+        {user ? (
+          <SignOutButton />
+        ) : (
+          <form action="/api/auth/sign-in-github" method="post">
+            <Button
+              type="submit"
+              variant="ghost"
+              size="sm"
+              className="border border-dotted border-white/10 text-xs text-gray-400 hover:text-gray-300"
+            >
+              Sign in
+            </Button>
+          </form>
         )}
       </div>
     </nav>

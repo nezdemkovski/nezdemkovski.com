@@ -1,6 +1,17 @@
 import { revalidatePath } from 'next/cache';
 import { createGameItem, getUserInfo } from '@/app/games/utils';
 
+import DatePickerInput from '@/components/DatePickerInput';
+import SubmitButton from '@/components/SubmitButton';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
 const platformTypes = [
   'PC',
   'Macbook',
@@ -15,6 +26,9 @@ const AddGame = async () => {
 
   const addGame = async (formData: FormData) => {
     'use server';
+    const user = await getUserInfo();
+    if (!user) return;
+
     const name = formData.get('name');
     const developer = formData.get('developer');
     const releaseYear = formData.get('release-year');
@@ -43,7 +57,7 @@ const AddGame = async () => {
         disabled={!user}
         className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6"
       >
-        <legend className="font-unbounded mb-5 text-xl font-bold text-white">
+        <legend className="font-unbounded text-xl font-bold text-white">
           Add new game
         </legend>
 
@@ -51,95 +65,85 @@ const AddGame = async () => {
           <div className="flex flex-col gap-1">
             <label
               htmlFor="name"
-              className="text-xs font-bold uppercase tracking-wider text-gray-400"
+              className="text-xs font-bold tracking-wider text-gray-400 uppercase"
             >
               Game name
             </label>
-            <input
+            <Input
               id="name"
               name="name"
               placeholder="Game's name"
               defaultValue=""
-              className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-white/30 focus:outline-none transition"
+              required
             />
           </div>
 
           <div className="flex flex-col gap-1">
             <label
               htmlFor="developer"
-              className="text-xs font-bold uppercase tracking-wider text-gray-400"
+              className="text-xs font-bold tracking-wider text-gray-400 uppercase"
             >
               Developer
             </label>
-            <input
+            <Input
               id="developer"
               name="developer"
               placeholder="Developer's name"
               defaultValue=""
-              className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-white/30 focus:outline-none transition"
+              required
             />
           </div>
 
           <div className="flex flex-col gap-1">
             <label
               htmlFor="release-year"
-              className="text-xs font-bold uppercase tracking-wider text-gray-400"
+              className="text-xs font-bold tracking-wider text-gray-400 uppercase"
             >
               Release year
             </label>
-            <input
+            <Input
               id="release-year"
               name="release-year"
               type="number"
               placeholder="Year of the release"
               defaultValue={currentYear}
-              className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-white/30 focus:outline-none transition"
             />
           </div>
 
           <div className="flex flex-col gap-1">
             <label
               htmlFor="platform"
-              className="text-xs font-bold uppercase tracking-wider text-gray-400"
+              className="text-xs font-bold tracking-wider text-gray-400 uppercase"
             >
               Platform
             </label>
-            <select
-              name="platform"
-              id="platform"
-              className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white focus:border-white/30 focus:outline-none transition"
-            >
-              {platformTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
+            <Select name="platform" defaultValue={platformTypes[0]}>
+              <SelectTrigger id="platform" className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {platformTypes.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="flex flex-col gap-1 sm:col-span-2">
-            <label
-              htmlFor="finished_date"
-              className="text-xs font-bold uppercase tracking-wider text-gray-400"
-            >
+            <span className="text-xs font-bold tracking-wider text-gray-400 uppercase">
               Finished date
-            </label>
-            <input
-              id="finished_date"
+            </span>
+            <DatePickerInput
               name="finished_date"
-              type="date"
               defaultValue={currentDate}
-              className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white focus:border-white/30 focus:outline-none transition"
+              placeholder="Pick finish date"
             />
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="mt-4 rounded-lg bg-white px-6 py-2 font-unbounded text-sm font-bold text-black hover:bg-gray-200 transition disabled:opacity-40"
-        >
-          Add new game
-        </button>
+        <SubmitButton label="Add new game" />
       </fieldset>
     </form>
   );

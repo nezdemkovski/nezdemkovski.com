@@ -1,10 +1,16 @@
 import { revalidatePath } from 'next/cache';
 
-import { removeGameItem } from '@/app/games/utils';
+import {
+  getUserRights,
+  removeGameItem,
+  UserRights,
+} from '@/app/games/utils';
 
 const RemoveGame = async ({ id }: { id: string }) => {
   const removeGame = async () => {
     'use server';
+    const rights = await getUserRights();
+    if (rights !== UserRights.ADMIN) return;
     await removeGameItem(id);
     revalidatePath('/games');
   };
