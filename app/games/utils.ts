@@ -1,16 +1,11 @@
 import { createClient } from '@/utils/supabase/server';
 import { Database } from '@/database.types';
+import { handleError } from '@/utils/handleError';
+
+export { handleError };
 
 export const getSupabaseServerClient = async () => {
   return await createClient();
-};
-
-export const handleError = (error: any, message: string) => {
-  console.error(message, error);
-  if (error instanceof Error) {
-    throw new Error(`${message}: ${error.message}`);
-  }
-  throw new Error(message);
 };
 
 export const getUserInfo = async () => {

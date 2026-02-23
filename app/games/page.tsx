@@ -70,8 +70,8 @@ const GamesByYear = async ({
     <div key={title} className="mb-10">
       <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
       <ul>
-        {gamesList.map((game, index) => (
-          <li key={index} className="mb-3 flex flex-col gap-1">
+        {gamesList.map((game) => (
+          <li key={game.id} className="mb-3 flex flex-col gap-1">
             <h3>{game.name}</h3>
 
             <div className="text-xs text-gray-400">

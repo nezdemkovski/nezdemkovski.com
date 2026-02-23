@@ -1,5 +1,6 @@
 import { Database } from '@/database.types';
 import { createClient } from '@/utils/supabase/server';
+import { handleError } from '@/utils/handleError';
 
 export const getSupabaseServerClient = async () => {
   return await createClient();
@@ -31,12 +32,12 @@ export const getTravels = async () => {
     .order('start_date', { ascending: false });
 
   if (error) {
-    throw new Error(error.message);
+    handleError(error, 'Error from getTravels');
   }
 
   const trips: TripsByYear = {};
 
-  data.forEach((game) => {
+  data?.forEach((game) => {
     const visitedYear = new Date(game.start_date).getFullYear();
 
     if (!trips[visitedYear]) {
@@ -62,7 +63,7 @@ export const getLatestTravels = async () => {
     .limit(3);
 
   if (error) {
-    throw new Error(error.message);
+    handleError(error, 'Error from getLatestTravels');
   }
 
   return { data };

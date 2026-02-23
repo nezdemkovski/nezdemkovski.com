@@ -1,5 +1,7 @@
+import WidgetCard from '@/components/WidgetCard';
+
 const AboutMeWidget = () => (
-  <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
+  <WidgetCard>
     <h2 className="font-unbounded pb-4 text-3xl font-bold text-white sm:text-3xl">
       About me
     </h2>
@@ -9,7 +11,7 @@ const AboutMeWidget = () => (
       — a seasoned Web Developer with over 10 years of experience. I&apos;m
       passionate about delivering top-notch results and leading teams.
     </p>
-  </div>
+  </WidgetCard>
 );
 
 export default AboutMeWidget;

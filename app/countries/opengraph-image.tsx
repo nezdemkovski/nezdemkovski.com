@@ -41,7 +41,7 @@ export default async function CountriesOG() {
                 Last 3 countries I visited
               </div>
 
-              {travels.data.map((trip, index) => (
+              {travels.data?.map((trip, index) => (
                 <div
                   key={index}
                   tw="flex mb-5 text-white mb-6 text-3xl"

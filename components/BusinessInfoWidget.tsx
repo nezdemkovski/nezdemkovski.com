@@ -1,5 +1,7 @@
+import WidgetCard from '@/components/WidgetCard';
+
 const BusinessInfoWidget = () => (
-  <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
+  <WidgetCard>
     <h2 className="font-unbounded flex flex-col pb-4 text-2xl font-bold text-white sm:text-3xl">
       <span>Business</span>
       <span>details</span>
@@ -11,7 +13,7 @@ const BusinessInfoWidget = () => (
       VAT (DIČ) ID{' '}
       <span className="rounded-md bg-white/30 px-2 py-0.5">CZ8911274350</span>.
     </p>
-  </div>
+  </WidgetCard>
 );
 
 export default BusinessInfoWidget;

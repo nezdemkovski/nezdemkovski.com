@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import WidgetCard from '@/components/WidgetCard';
 
 const formatter = new Intl.DateTimeFormat('en-US', {
   timeZone: 'Europe/Prague',
@@ -23,7 +24,7 @@ const CurrentLocationWidget = () => {
   const [hours, minutes] = hoursMinutes?.split(':') ?? [];
 
   return (
-    <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
+    <WidgetCard>
       <h2 className="font-unbounded pb-4 text-2xl font-bold text-white sm:text-3xl">
         Current Location & Time
       </h2>
@@ -61,7 +62,7 @@ const CurrentLocationWidget = () => {
           </p>
         </div>
       </div>
-    </div>
+    </WidgetCard>
   );
 };
 

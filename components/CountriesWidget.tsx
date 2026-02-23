@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import WidgetCard from '@/components/WidgetCard';
 
 const countryList = [
   {
@@ -71,7 +72,7 @@ const Flag = ({
 
 const CountriesWidget = () => (
   <Link href="/countries">
-    <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] cursor-pointer rounded-3xl bg-black px-7 py-5 transition duration-300 hover:-translate-y-1">
+    <WidgetCard className="cursor-pointer transition duration-300 hover:-translate-y-1">
       <h2 className="font-unbounded pb-8 text-3xl font-bold text-white sm:text-3xl">
         Countries I visited
       </h2>
@@ -81,7 +82,7 @@ const CountriesWidget = () => (
           <Flag {...country} key={country.countryCode} />
         ))}
       </ul>
-    </div>
+    </WidgetCard>
   </Link>
 );
 

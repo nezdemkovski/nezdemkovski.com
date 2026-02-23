@@ -7,8 +7,8 @@ const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
   <div key={title} className="mb-10">
     <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
     <ul>
-      {trips.map((trip, index) => (
-        <li key={index} className="mb-3">
+      {trips.map((trip) => (
+        <li key={trip.id} className="mb-3">
           <div className="inline-flex items-end gap-2">
             <h3>
               {trip.country_flag} {trip.city}, {trip.country}
