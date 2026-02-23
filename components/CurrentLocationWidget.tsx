@@ -1,36 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-const useCurrentTime = () => {
-  const [time, setTime] = useState({ hours: '', minutes: '' });
-  const [showSeparator, setShowSeparator] = useState(true);
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const formattedTime = now.toLocaleTimeString('en-US', {
-        timeZone: 'Europe/Prague',
-        hour: '2-digit',
-        minute: '2-digit',
-      });
-      const [hours, minutes] = formattedTime.split(':');
-      setTime({ hours, minutes });
-      setShowSeparator((prev) => !prev);
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return { ...time, showSeparator };
-};
+const formatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Europe/Prague',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: true,
+});
 
 const CurrentLocationWidget = () => {
-  const { hours, minutes, showSeparator } = useCurrentTime();
+  const [time, setTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    setTime(formatter.format(new Date()));
+    const id = setInterval(() => setTime(formatter.format(new Date())), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const [hoursMinutes, period] = time?.split(' ') ?? [];
+  const [hours, minutes] = hoursMinutes?.split(':') ?? [];
 
   return (
     <div className="h-[300px] min-h-[300px] w-[335px] min-w-[335px] rounded-3xl bg-black px-7 py-5">
@@ -52,18 +42,18 @@ const CurrentLocationWidget = () => {
             Prague, Czechia
           </p>
           <p className="font-iawriterquattro text-base text-white">
-            {hours && minutes ? (
+            {hours && minutes && period ? (
               <span className="inline-flex items-center font-mono">
                 {hours}
                 <span
-                  className={`inline-flex w-4 items-center justify-center transition-opacity duration-300 ${
-                    showSeparator ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className="inline-flex w-4 items-center justify-center"
+                  style={{ animation: 'blink 1s step-start infinite' }}
                   aria-hidden="true"
                 >
                   :
                 </span>
                 {minutes}
+                <span className="ml-1">{period}</span>
               </span>
             ) : (
               <span>...</span>
