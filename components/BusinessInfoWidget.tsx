@@ -9,9 +9,7 @@ const BusinessInfoWidget = () => (
     <p className="font-iawriterquattro pb-5 text-base leading-relaxed text-white">
       I am a Prague-based (Czechia) solopreneur registered with the company
       registration number (IČO){' '}
-      <span className="rounded-md bg-white/30 px-2 py-0.5">07605901</span> and
-      VAT (DIČ) ID{' '}
-      <span className="rounded-md bg-white/30 px-2 py-0.5">CZ8911274350</span>.
+      <span className="rounded-md bg-white/30 px-2 py-0.5">07605901</span>.
     </p>
   </WidgetCard>
 );

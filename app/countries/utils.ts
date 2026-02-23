@@ -54,6 +54,43 @@ export const getTravels = async () => {
   };
 };
 
+export const createTravelItem = async ({
+  city,
+  country,
+  countryFlag,
+  startDate,
+  endDate,
+}: {
+  city: string;
+  country: string;
+  countryFlag: string;
+  startDate: string;
+  endDate: string;
+}) => {
+  const supabase = await getSupabaseServerClient();
+  try {
+    await supabase.from('travels').insert({
+      city,
+      country,
+      country_flag: countryFlag,
+      start_date: startDate,
+      end_date: endDate,
+      range_text: '',
+    });
+  } catch (error) {
+    handleError(error, 'Error from createTravelItem');
+  }
+};
+
+export const removeTravelItem = async (id: string) => {
+  const supabase = await getSupabaseServerClient();
+  try {
+    await supabase.from('travels').delete().eq('id', id);
+  } catch (error) {
+    handleError(error, 'Error from removeTravelItem');
+  }
+};
+
 export const getLatestTravels = async () => {
   const supabase = await getSupabaseServerClient();
   const { data, error } = await supabase

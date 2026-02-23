@@ -143,11 +143,6 @@ export const metadata: Metadata = {
       url: '/favicons/apple-touch-icon-precomposed.png',
     },
   },
-  verification: {
-    other: {
-      me: ['https://mastodon.social/@nezdemkovski'],
-    },
-  },
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => {
@@ -161,23 +156,6 @@ const RootLayout = ({ children }: PropsWithChildren) => {
         unbounded.variable,
       )}
     >
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: 'Yuri Nezdemkovski',
-              url: 'https://nezdemkovski.com',
-              jobTitle: 'Web Developer',
-              description:
-                'Seasoned Web Developer with over 10 years of experience, passionate about delivering top-notch results and leading teams.',
-              sameAs: ['https://mastodon.social/@nezdemkovski'],
-            }),
-          }}
-        />
-      </head>
       <body className="font-iawriterquattro text-black dark:text-white">
         <div className="bg-whisper dark:bg-woodsmoke min-h-screen px-4">
           <NavBar />

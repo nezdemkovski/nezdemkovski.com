@@ -1,64 +1,57 @@
 import { revalidatePath } from 'next/cache';
-import { createGameItem, getUserInfo } from '@/app/games/utils';
+import { createClient } from '@/utils/supabase/server';
+import { createTravelItem } from '@/app/countries/utils';
 
-const platformTypes = [
-  'PC',
-  'Macbook',
-  'PlayStation 4',
-  'PlayStation 5',
-  'Steam Deck',
-  'Yuzu Nintendo Switch Emulator',
-];
+const AddTravel = async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-const AddGame = async () => {
-  const user = await getUserInfo();
-
-  const addGame = async (formData: FormData) => {
+  const addTravel = async (formData: FormData) => {
     'use server';
-    const name = formData.get('name');
-    const developer = formData.get('developer');
-    const releaseYear = formData.get('release-year');
-    const finishedDate = formData.get('finished_date');
-    const platform = formData.get('platform') as any;
+    const city = formData.get('city');
+    const country = formData.get('country');
+    const countryFlag = formData.get('country_flag');
+    const startDate = formData.get('start_date');
+    const endDate = formData.get('end_date');
 
-    if (name && developer && releaseYear && finishedDate) {
-      await createGameItem({
-        name: name.toString(),
-        developer: developer.toString(),
-        releaseYear: Number(releaseYear),
-        platform,
-        finishedDate: finishedDate.toString(),
+    if (city && country && countryFlag && startDate && endDate) {
+      await createTravelItem({
+        city: city.toString(),
+        country: country.toString(),
+        countryFlag: countryFlag.toString(),
+        startDate: startDate.toString(),
+        endDate: endDate.toString(),
       });
-      revalidatePath('/games');
+      revalidatePath('/countries');
     }
   };
 
-  const date = new Date();
-  const currentYear = date.getFullYear();
-  const currentDate = date.toISOString().slice(0, 10);
+  const today = new Date().toISOString().slice(0, 10);
 
   return (
-    <form action={addGame}>
+    <form action={addTravel}>
       <fieldset
         disabled={!user}
         className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6"
       >
         <legend className="font-unbounded mb-5 text-xl font-bold text-white">
-          Add new game
+          Add new trip
         </legend>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="name"
+              htmlFor="city"
               className="text-xs font-bold uppercase tracking-wider text-gray-400"
             >
-              Game name
+              City
             </label>
             <input
-              id="name"
-              name="name"
-              placeholder="Game's name"
+              id="city"
+              name="city"
+              placeholder="e.g. Prague"
               defaultValue=""
               className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-white/30 focus:outline-none transition"
             />
@@ -66,15 +59,15 @@ const AddGame = async () => {
 
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="developer"
+              htmlFor="country"
               className="text-xs font-bold uppercase tracking-wider text-gray-400"
             >
-              Developer
+              Country
             </label>
             <input
-              id="developer"
-              name="developer"
-              placeholder="Developer's name"
+              id="country"
+              name="country"
+              placeholder="e.g. Czech Republic"
               defaultValue=""
               className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-white/30 focus:outline-none transition"
             />
@@ -82,53 +75,48 @@ const AddGame = async () => {
 
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="release-year"
+              htmlFor="country_flag"
               className="text-xs font-bold uppercase tracking-wider text-gray-400"
             >
-              Release year
+              Country flag
             </label>
             <input
-              id="release-year"
-              name="release-year"
-              type="number"
-              placeholder="Year of the release"
-              defaultValue={currentYear}
+              id="country_flag"
+              name="country_flag"
+              placeholder="🇨🇿"
+              defaultValue=""
               className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-white/30 focus:outline-none transition"
             />
           </div>
 
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="platform"
+              htmlFor="start_date"
               className="text-xs font-bold uppercase tracking-wider text-gray-400"
             >
-              Platform
+              Start date
             </label>
-            <select
-              name="platform"
-              id="platform"
+            <input
+              id="start_date"
+              name="start_date"
+              type="date"
+              defaultValue={today}
               className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white focus:border-white/30 focus:outline-none transition"
-            >
-              {platformTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
+            />
           </div>
 
           <div className="flex flex-col gap-1 sm:col-span-2">
             <label
-              htmlFor="finished_date"
+              htmlFor="end_date"
               className="text-xs font-bold uppercase tracking-wider text-gray-400"
             >
-              Finished date
+              End date
             </label>
             <input
-              id="finished_date"
-              name="finished_date"
+              id="end_date"
+              name="end_date"
               type="date"
-              defaultValue={currentDate}
+              defaultValue={today}
               className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white focus:border-white/30 focus:outline-none transition"
             />
           </div>
@@ -138,11 +126,11 @@ const AddGame = async () => {
           type="submit"
           className="mt-4 rounded-lg bg-white px-6 py-2 font-unbounded text-sm font-bold text-black hover:bg-gray-200 transition disabled:opacity-40"
         >
-          Add new game
+          Add new trip
         </button>
       </fieldset>
     </form>
   );
 };
 
-export default AddGame;
+export default AddTravel;

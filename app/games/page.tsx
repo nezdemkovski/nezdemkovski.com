@@ -1,6 +1,6 @@
 import AddGame from '@/app/games/AddGame';
 import RemoveGame from '@/app/games/RemoveGame';
-import { type Game, getGames, getUserRights } from '@/app/games/utils';
+import { type Game, getGames, getUserRights, UserRights } from '@/app/games/utils';
 import formatDate from '@/utils/formatDate';
 
 export const revalidate = 10;
@@ -81,7 +81,7 @@ const GamesByYear = async ({
             <span className="text-xs text-gray-400">
               {formatDate(new Date(game.finished_date))}
             </span>
-            {userRights === 'ADMIN' && <RemoveGame id={game.id} />}
+            {userRights === UserRights.ADMIN && <RemoveGame id={game.id} />}
           </li>
         ))}
       </ul>
@@ -113,7 +113,7 @@ const GamesPage = async () => {
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
-      {userRights === 'ADMIN' && <AddGame />}
+      {userRights === UserRights.ADMIN && <AddGame />}
 
       <div className="grid gap-2 md:grid-cols-2">
         <div className="">

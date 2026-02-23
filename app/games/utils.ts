@@ -2,6 +2,11 @@ import { createClient } from '@/utils/supabase/server';
 import { Database } from '@/database.types';
 import { handleError } from '@/utils/handleError';
 
+export enum UserRights {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
+
 export { handleError };
 
 export const getSupabaseServerClient = async () => {
@@ -31,7 +36,7 @@ export const getUserRights = async () => {
       .limit(1)
       .maybeSingle();
 
-    return userRights?.user_rights ?? 'USER';
+    return (userRights?.user_rights as UserRights) ?? UserRights.USER;
   } catch (error) {
     handleError(error, 'Error from getUserRights');
   }
