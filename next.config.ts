@@ -1,8 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    webpackBuildWorker: true,
-  },
+import type { NextConfig } from 'next';
+import createMDX from '@next/mdx';
+
+const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
@@ -17,15 +16,9 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'i.scdn.co',
-        pathname: '/**',
-      },
-    ],
   },
 };
 
-const withMDX = require('@next/mdx')();
-module.exports = withMDX(nextConfig);
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);
