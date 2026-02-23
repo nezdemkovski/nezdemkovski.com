@@ -1,67 +1,38 @@
-'use client';
+import { revalidatePath } from 'next/cache';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import WidgetCard from '@/components/WidgetCard';
+import LocationClock from '@/components/LocationClock';
+import { getLocation, updateLocationInDB } from '@/utils/location.server';
+import { LOCATIONS } from '@/utils/location';
+import { getUserRights, UserRights } from '@/app/games/utils';
 
-const formatter = new Intl.DateTimeFormat('en-US', {
-  timeZone: 'Europe/Prague',
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: true,
-});
+const CurrentLocationWidget = async () => {
+  const [location, userRights] = await Promise.all([
+    getLocation(),
+    getUserRights(),
+  ]);
 
-const CurrentLocationWidget = () => {
-  const [time, setTime] = useState<string | null>(null);
+  const isAdmin = userRights === UserRights.ADMIN;
 
-  useEffect(() => {
-    setTime(formatter.format(new Date()));
-    const id = setInterval(() => setTime(formatter.format(new Date())), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const [hoursMinutes, period] = time?.split(' ') ?? [];
-  const [hours, minutes] = hoursMinutes?.split(':') ?? [];
+  const updateLocation = async (code: string) => {
+    'use server';
+    const rights = await getUserRights();
+    if (rights !== UserRights.ADMIN) return;
+    if (!LOCATIONS.find((l) => l.code === code)) return;
+    await updateLocationInDB(code);
+    revalidatePath('/');
+  };
 
   return (
-    <WidgetCard>
+    <WidgetCard className="relative overflow-hidden">
       <h2 className="font-unbounded pb-4 text-2xl font-bold text-white sm:text-3xl">
         Current Location & Time
       </h2>
-      <div className="flex flex-row gap-4 rounded-2xl bg-black/40 px-2 py-4">
-        <div className="self-center">
-          <Image
-            width={47}
-            height={47}
-            src="/flags/cz.svg"
-            alt="Czechia flag"
-            title="Czechia"
-          />
-        </div>
-        <div>
-          <p className="font-iawriterquattro text-base text-white">
-            Prague, Czechia
-          </p>
-          <p className="font-iawriterquattro text-base text-white">
-            {hours && minutes && period ? (
-              <span className="inline-flex items-center font-mono">
-                {hours}
-                <span
-                  className="inline-flex w-4 items-center justify-center"
-                  style={{ animation: 'blink 1s step-start infinite' }}
-                  aria-hidden="true"
-                >
-                  :
-                </span>
-                {minutes}
-                <span className="ml-1">{period}</span>
-              </span>
-            ) : (
-              <span>...</span>
-            )}
-          </p>
-        </div>
-      </div>
+      <LocationClock
+        location={location}
+        isAdmin={isAdmin}
+        updateLocation={updateLocation}
+      />
     </WidgetCard>
   );
 };
