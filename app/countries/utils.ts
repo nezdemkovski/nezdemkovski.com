@@ -17,7 +17,7 @@ const getUniqueCountries = (trips: TripsByYear) => {
 
   Object.values(trips).forEach((trips: Travel[]) => {
     trips.forEach((trip) => {
-      visited.add(trip.country);
+      visited.add(trip.country_code);
     });
   });
 
@@ -56,27 +56,42 @@ export const getTravels = async () => {
 
 export const createTravelItem = async ({
   city,
-  country,
-  countryFlag,
+  countryCode,
   startDate,
   endDate,
 }: {
   city: string;
-  country: string;
-  countryFlag: string;
+  countryCode: string;
   startDate: string;
   endDate: string;
 }) => {
   const supabase = await getSupabaseServerClient();
   const { error } = await supabase.from('travels').insert({
     city,
-    country,
-    country_flag: countryFlag,
+    country_code: countryCode,
     start_date: startDate,
     end_date: endDate,
     range_text: '',
   });
   if (error) handleError(error, 'Error from createTravelItem');
+};
+
+export const getVisitedCountryCodes = async (): Promise<string[]> => {
+  const supabase = await getSupabaseServerClient();
+  const { data, error } = await supabase
+    .from('travels')
+    .select('country_code')
+    .order('start_date', { ascending: false });
+  if (error) {
+    handleError(error, 'Error from getVisitedCountryCodes');
+    return [];
+  }
+  const seen = new Set<string>();
+  for (const { country_code } of data ?? []) {
+    seen.add(country_code);
+    if (seen.size === 12) break;
+  }
+  return Array.from(seen);
 };
 
 export const removeTravelItem = async (id: string) => {

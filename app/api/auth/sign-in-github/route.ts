@@ -22,19 +22,15 @@ export async function POST(request: NextRequest) {
   }
 
   const response = NextResponse.redirect(data.url, {
-    // a 301 status is required to redirect from a POST to a GET route
     status: 301,
   });
 
-  // Store the originating page so the callback can redirect back to it.
-  // Using a cookie avoids putting the URL in the OAuth redirectTo, which
-  // requires an exact match in Supabase's allowed redirect URL list.
   response.cookies.set('post_auth_redirect', referer, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    maxAge: 60 * 5, // 5 minutes — enough to complete the OAuth flow
+    maxAge: 60 * 5, // 5 minutes
   });
 
   return response;

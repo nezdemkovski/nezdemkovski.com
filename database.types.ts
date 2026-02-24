@@ -65,8 +65,7 @@ export type Database = {
       travels: {
         Row: {
           city: string
-          country: string
-          country_flag: string
+          country_code: string
           created_at: string
           end_date: string
           id: string
@@ -75,8 +74,7 @@ export type Database = {
         }
         Insert: {
           city: string
-          country: string
-          country_flag: string
+          country_code: string
           created_at?: string
           end_date?: string
           id?: string
@@ -85,8 +83,7 @@ export type Database = {
         }
         Update: {
           city?: string
-          country?: string
-          country_flag?: string
+          country_code?: string
           created_at?: string
           end_date?: string
           id?: string

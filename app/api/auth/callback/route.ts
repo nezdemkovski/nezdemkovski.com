@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code);
   }
 
-  // Read the page the user was on before sign-in (set as a cookie in sign-in-github/route.ts)
   const redirectCookie = request.cookies.get('post_auth_redirect');
   const redirectTo = redirectCookie?.value ?? requestUrl.origin;
 

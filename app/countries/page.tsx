@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { getUserRights, UserRights } from '@/app/games/utils';
 import { getTravels, type Travel } from '@/app/countries/utils';
 import AddTravel from '@/app/countries/AddTravel';
@@ -5,6 +7,8 @@ import RemoveTravel from '@/app/countries/RemoveTravel';
 
 export const revalidate = 10;
 export const dynamic = 'force-dynamic';
+
+const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
 const TripsByYear = ({
   title,
@@ -20,9 +24,16 @@ const TripsByYear = ({
     <ul>
       {trips.map((trip) => (
         <li key={trip.id} className="mb-3">
-          <div className="inline-flex items-end gap-2">
+          <div className="inline-flex items-center gap-2">
+            <Image
+              src={`https://flagcdn.com/w40/${trip.country_code.toLowerCase()}.png`}
+              width={20}
+              height={15}
+              alt={`${countryNames.of(trip.country_code)} flag`}
+              className="rounded-sm"
+            />
             <h3>
-              {trip.country_flag} {trip.city}, {trip.country}
+              {trip.city}, {countryNames.of(trip.country_code) ?? trip.country_code}
             </h3>
             <div className="text-xs leading-relaxed text-gray-400">
               {trip.range_text}

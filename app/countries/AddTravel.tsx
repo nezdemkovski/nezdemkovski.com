@@ -1,9 +1,9 @@
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/utils/supabase/server';
 import { createTravelItem } from '@/app/countries/utils';
+import CitySearchInput from '@/components/CitySearchInput';
 import DateRangePickerInput from '@/components/DateRangePickerInput';
 import SubmitButton from '@/components/SubmitButton';
-import { Input } from '@/components/ui/input';
 
 const AddTravel = async () => {
   const supabase = await createClient();
@@ -20,16 +20,14 @@ const AddTravel = async () => {
     if (!actionUser) return;
 
     const city = formData.get('city');
-    const country = formData.get('country');
-    const countryFlag = formData.get('country_flag');
+    const countryCode = formData.get('country_code');
     const startDate = formData.get('start_date');
     const endDate = formData.get('end_date');
 
-    if (city && country && countryFlag && startDate && endDate) {
+    if (city && countryCode && startDate && endDate) {
       await createTravelItem({
         city: city.toString(),
-        country: country.toString(),
-        countryFlag: countryFlag.toString(),
+        countryCode: countryCode.toString().toUpperCase().slice(0, 2),
         startDate: startDate.toString(),
         endDate: endDate.toString(),
       });
@@ -50,53 +48,7 @@ const AddTravel = async () => {
         </legend>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="city"
-              className="text-xs font-bold tracking-wider text-gray-400 uppercase"
-            >
-              City
-            </label>
-            <Input
-              id="city"
-              name="city"
-              placeholder="e.g. Prague"
-              defaultValue=""
-              required
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="country"
-              className="text-xs font-bold tracking-wider text-gray-400 uppercase"
-            >
-              Country
-            </label>
-            <Input
-              id="country"
-              name="country"
-              placeholder="e.g. Czech Republic"
-              defaultValue=""
-              required
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="country_flag"
-              className="text-xs font-bold tracking-wider text-gray-400 uppercase"
-            >
-              Country flag
-            </label>
-            <Input
-              id="country_flag"
-              name="country_flag"
-              placeholder="🇨🇿"
-              defaultValue=""
-              required
-            />
-          </div>
+          <CitySearchInput />
 
           <div className="flex flex-col gap-1 sm:col-span-2">
             <span className="text-xs font-bold tracking-wider text-gray-400 uppercase">

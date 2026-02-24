@@ -5,6 +5,8 @@ import { getLatestTravels } from '@/app/countries/utils';
 export const runtime = 'edge';
 export const revalidate = 60;
 
+const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
+
 export default async function CountriesOG() {
   const travels = await getLatestTravels();
 
@@ -44,13 +46,20 @@ export default async function CountriesOG() {
               {travels.data?.map((trip, index) => (
                 <div
                   key={index}
-                  tw="flex mb-5 text-white mb-6 text-3xl"
+                  tw="flex items-center mb-6 text-3xl text-white"
                   style={font('Unbounded 400')}
                 >
-                  {trip.country_flag} {trip.city}, {trip.country}{' '}
-                  <span tw="ml-6 text-xl leading-2 text-gray-400">
-                    {trip.range_text}
-                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`https://flagcdn.com/w40/${trip.country_code.toLowerCase()}.png`}
+                    width={36}
+                    height={27}
+                    alt=""
+                    style={{ borderRadius: 3, marginRight: 16 }}
+                  />
+                  {trip.city},{' '}
+                  {countryNames.of(trip.country_code) ?? trip.country_code}
+                  <span tw="ml-6 text-xl text-gray-400">{trip.range_text}</span>
                 </div>
               ))}
             </div>
