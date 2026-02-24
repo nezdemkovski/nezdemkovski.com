@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useTransition } from 'react';
-import Image from 'next/image';
 import { PencilIcon, XIcon } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
@@ -14,12 +13,36 @@ interface LocationClockProps {
   updateLocation: (location: Location) => Promise<void>;
 }
 
+
+function relativeTimeLabel(locationTz: string): string | null {
+  try {
+    const visitorTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const now = new Date();
+    const offsetOf = (tz: string) => {
+      const a = new Date(now.toLocaleString('en-US', { timeZone: tz }));
+      const b = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
+      return (a.getTime() - b.getTime()) / 3_600_000;
+    };
+    const diff =
+      Math.round((offsetOf(locationTz) - offsetOf(visitorTz)) * 2) / 2;
+    if (Math.abs(diff) < 0.25) return 'same timezone as you';
+    const abs = Math.abs(diff);
+    const h = Math.floor(abs);
+    const m = abs % 1 !== 0 ? ' 30m' : '';
+    const label = `${h}h${m}`;
+    return diff > 0 ? `${label} ahead of you` : `${label} behind you`;
+  } catch {
+    return null;
+  }
+}
+
 const LocationClock = ({
   location,
   isAdmin,
   updateLocation,
 }: LocationClockProps) => {
   const [time, setTime] = useState<string | null>(null);
+  const [relTime, setRelTime] = useState<string | null>(null);
   const [currentLocation, setCurrentLocation] = useState(location);
   const [isPending, startTransition] = useTransition();
   const [isEditing, setIsEditing] = useState(false);
@@ -27,16 +50,23 @@ const LocationClock = ({
     useLocationSearch();
 
   useEffect(() => {
-    const formatter = new Intl.DateTimeFormat('en-US', {
+    const timeFmt = new Intl.DateTimeFormat('en-US', {
       timeZone: currentLocation.timezone,
       hour: '2-digit',
       minute: '2-digit',
       hour12: true,
     });
 
-    setTime(formatter.format(new Date()));
-    const id = setInterval(() => setTime(formatter.format(new Date())), 1000);
+    const tick = () => {
+      setTime(timeFmt.format(new Date()));
+    };
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
+  }, [currentLocation.timezone]);
+
+  useEffect(() => {
+    setRelTime(relativeTimeLabel(currentLocation.timezone));
   }, [currentLocation.timezone]);
 
   const selectResult = (result: GeoResult) => {
@@ -65,45 +95,36 @@ const LocationClock = ({
   const showDropdown = isEditing && (results.length > 0 || isSearching);
 
   return (
-    <>
-      <div className="flex flex-row gap-4 rounded-2xl bg-black/40 px-2 py-4">
-        <div className="self-center">
-          <Image
-            src={`https://flagcdn.com/w80/${currentLocation.countryCode.toLowerCase()}.png`}
-            width={47}
-            height={35}
-            alt={`${currentLocation.country} flag`}
-            title={currentLocation.country}
-            className="rounded-sm"
-          />
-        </div>
-        <div>
-          <p className="font-iawriterquattro text-base text-white">
-            {currentLocation.city}, {currentLocation.country}
+    <div className="flex flex-1 items-center">
+      <div className="relative z-10 flex w-full items-stretch justify-between">
+        {/* Left: location */}
+        <div className="flex flex-col justify-between">
+          <p className="font-iawriterquattro text-2xl text-white">
+            {currentLocation.city}
           </p>
-          <p className="font-iawriterquattro text-base text-white">
-            {hours && minutes && period ? (
-              <span className="inline-flex items-center font-mono">
-                {hours}
-                <span
-                  className="inline-flex w-4 items-center justify-center"
-                  style={{ animation: 'blink 1s step-start infinite' }}
-                  aria-hidden="true"
-                >
-                  :
-                </span>
-                {minutes}
-                <span className="ml-1">{period}</span>
-              </span>
-            ) : (
-              <span>...</span>
+          <div>
+            <p className="text-sm text-white/40">{currentLocation.country}</p>
+            {relTime && (
+              <p className="mt-0.5 text-xs text-white/25">{relTime}</p>
             )}
+          </div>
+        </div>
+
+        {/* Right: stacked digits */}
+        <div className="shrink-0 text-right font-mono">
+          <p className="text-[58px] font-bold leading-none text-white">
+            {hours ?? '--'}
           </p>
+          <p className="text-[58px] font-bold leading-none text-white/50">
+            {minutes ?? '--'}
+          </p>
+          <p className="mt-1 text-sm text-white/30">{period ?? ''}</p>
         </div>
       </div>
 
       {isAdmin && (
-        <div className="absolute inset-x-0 bottom-0 rounded-b-3xl border-t border-white/10 bg-white/5 px-7 py-3 backdrop-blur-md">
+
+        <div className="absolute inset-x-0 bottom-0 z-10 rounded-b-3xl border-t border-white/10 bg-white/5 px-7 py-3 backdrop-blur-md">
           {showDropdown && (
             <div className="absolute bottom-full left-0 right-0 mb-1 max-h-48 overflow-y-auto rounded-xl border border-white/10 bg-[oklch(24%_0.0105_268.16)] shadow-lg">
               {isSearching && results.length === 0 && (
@@ -115,13 +136,6 @@ const LocationClock = ({
                   onClick={() => selectResult(result)}
                   className="flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-white/10"
                 >
-                  <Image
-                    src={`https://flagcdn.com/w40/${result.country_code.toLowerCase()}.png`}
-                    width={20}
-                    height={15}
-                    alt={`${result.country} flag`}
-                    className="rounded-sm"
-                  />
                   <span className="flex-1 truncate text-sm text-white">
                     {result.name}, {result.country}
                   </span>
@@ -168,7 +182,7 @@ const LocationClock = ({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

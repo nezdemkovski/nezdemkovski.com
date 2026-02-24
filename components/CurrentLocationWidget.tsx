@@ -31,7 +31,7 @@ const CurrentLocationWidget = async () => {
   };
 
   return (
-    <WidgetCard className="relative overflow-hidden">
+    <WidgetCard className="relative flex flex-col overflow-hidden">
       <h2 className="font-unbounded pb-4 text-2xl font-bold text-white sm:text-3xl">
         My Location & Time
       </h2>
