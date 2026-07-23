@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import WidgetCard from '@/components/WidgetCard';
-import { getTravels, Travel } from '@/app/countries/utils';
 import CountriesQuiz from '@/components/CountriesQuiz';
+import { getTravels, type Travel } from '@/lib/data/travels';
 
 export interface QuizQuestion {
   question: string;

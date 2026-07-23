@@ -1,7 +1,7 @@
 import AddGame from '@/app/games/AddGame';
 import RemoveGame from '@/app/games/RemoveGame';
-import { type Game, getGames } from '@/app/games/utils';
 import { AdminOnly } from '@/components/AuthProvider';
+import { type Game, getGames } from '@/lib/data/games';
 import formatDate from '@/utils/formatDate';
 
 const GamesByYear = ({

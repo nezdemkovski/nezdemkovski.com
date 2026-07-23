@@ -1,7 +1,7 @@
 import { updateLocation } from '@/app/location/actions';
 import WidgetCard from '@/components/WidgetCard';
 import LocationClock from '@/components/LocationClock';
-import { getLocation } from '@/utils/location.server';
+import { getLocation } from '@/lib/data/settings';
 
 const CurrentLocationWidget = async () => {
   const location = await getLocation();

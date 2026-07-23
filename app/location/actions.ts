@@ -3,8 +3,8 @@
 import { revalidatePath, updateTag } from 'next/cache';
 
 import { requireAdmin } from '@/lib/auth/server';
+import { updateLocationInDB } from '@/lib/data/settings';
 import { parseCountryCode, parseTimezone } from '@/lib/validation';
-import { updateLocationInDB } from '@/utils/location.server';
 import type { Location } from '@/utils/location';
 
 export const updateLocation = async (location: Location) => {

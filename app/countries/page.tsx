@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-import { getTravels, type Travel } from '@/app/countries/utils';
 import AddTravel from '@/app/countries/AddTravel';
 import RemoveTravel from '@/app/countries/RemoveTravel';
 import { AdminOnly } from '@/components/AuthProvider';
+import { getTravels, type Travel } from '@/lib/data/travels';
 
 const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
