@@ -1,22 +1,23 @@
 import { ImageResponse } from 'next/og';
+import { PostgrestClient } from '@supabase/postgrest-js';
 
-import { getLatestGames } from '@/app/games/utils';
+import type { Database } from '@/database.types';
 
 export const runtime = 'edge';
 export const revalidate = 60;
 
-export default async function CountriesOG() {
+export default async function GamesOG() {
   const games = await getLatestGames();
 
   const unbounded400 = fetch(
     new URL(
-      `../../node_modules/@fontsource/unbounded/files/unbounded-latin-ext-400-normal.woff`,
+      `../../node_modules/@fontsource/unbounded/files/unbounded-latin-400-normal.woff`,
       import.meta.url,
     ),
   ).then((res) => res.arrayBuffer());
   const unbounded700 = fetch(
     new URL(
-      `../../node_modules/@fontsource/unbounded/files/unbounded-latin-ext-700-normal.woff`,
+      `../../node_modules/@fontsource/unbounded/files/unbounded-latin-700-normal.woff`,
       import.meta.url,
     ),
   ).then((res) => res.arrayBuffer());
@@ -41,7 +42,7 @@ export default async function CountriesOG() {
                 Last 3 games I beat
               </div>
 
-              {games?.data?.map((game, index) => (
+              {games.map((game, index) => (
                 <div
                   key={index}
                   tw="flex flex-col mb-5 text-white mb-6 text-3xl"
@@ -77,4 +78,36 @@ export default async function CountriesOG() {
 
 function font(fontFamily: string) {
   return { fontFamily };
+}
+
+async function getLatestGames() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase environment variables are not configured');
+  }
+
+  const postgrest = new PostgrestClient<Database>(
+    `${supabaseUrl}/rest/v1`,
+    {
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+      },
+      schema: 'public',
+    },
+  );
+
+  const { data, error } = await postgrest
+    .from('games')
+    .select('name, release_year, developer, platform')
+    .order('finished_date', { ascending: false })
+    .limit(3);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 }
