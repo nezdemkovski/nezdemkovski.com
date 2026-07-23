@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
+import { PostgrestClient } from '@supabase/postgrest-js';
 
-import { getLatestTravels } from '@/app/countries/utils';
+import type { Database } from '@/database.types';
 
 export const runtime = 'edge';
 export const revalidate = 60;
@@ -43,13 +44,12 @@ export default async function CountriesOG() {
                 Last 3 countries I visited
               </div>
 
-              {travels.data?.map((trip, index) => (
+              {travels.map((trip, index) => (
                 <div
                   key={index}
                   tw="flex items-center mb-6 text-3xl text-white"
                   style={font('Unbounded 400')}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`https://flagcdn.com/w40/${trip.country_code.toLowerCase()}.png`}
                     width={36}
@@ -86,4 +86,36 @@ export default async function CountriesOG() {
 
 function font(fontFamily: string) {
   return { fontFamily };
+}
+
+async function getLatestTravels() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase environment variables are not configured');
+  }
+
+  const postgrest = new PostgrestClient<Database>(
+    `${supabaseUrl}/rest/v1`,
+    {
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+      },
+      schema: 'public',
+    },
+  );
+
+  const { data, error } = await postgrest
+    .from('travels')
+    .select('city, country_code, range_text')
+    .order('start_date', { ascending: false })
+    .limit(3);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 }
