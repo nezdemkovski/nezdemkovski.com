@@ -52,10 +52,25 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
       hour12: true,
     });
 
-    const id = setInterval(() => {
+    const updateTime = () => {
       setTime(timeFmt.format(new Date()));
-    }, 1000);
-    return () => clearInterval(id);
+    };
+
+    const frameId = window.requestAnimationFrame(updateTime);
+    let intervalId: number | undefined;
+    const timeoutId = window.setTimeout(
+      () => {
+        updateTime();
+        intervalId = window.setInterval(updateTime, 60_000);
+      },
+      60_000 - (Date.now() % 60_000),
+    );
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(timeoutId);
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+    };
   }, [currentLocation.timezone]);
 
   const selectResult = (result: GeoResult) => {
@@ -93,7 +108,7 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
     <div className="flex flex-1 items-center">
       <div className="relative z-10 flex w-full items-stretch justify-between">
         {/* Left: location */}
-        <div className="flex flex-col justify-between">
+        <div className="flex min-w-0 flex-1 flex-col justify-between pr-3">
           <p className="font-iawriterquattro text-2xl text-white">
             {currentLocation.city}
           </p>
@@ -106,14 +121,23 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
         </div>
 
         {/* Right: stacked digits */}
-        <div className="shrink-0 text-right font-mono">
-          <p className="text-[58px] leading-none font-bold text-white">
+        <div
+          className="grid w-[4.5rem] shrink-0 grid-rows-[58px_58px_24px] justify-items-end text-right font-mono"
+          role="timer"
+          aria-label={time ? `Local time ${time}` : 'Loading local time'}
+          aria-live="off"
+        >
+          <p className="w-[2ch] text-[58px] leading-none font-bold text-white tabular-nums">
             {hours ?? '--'}
           </p>
-          <p className="text-[58px] leading-none font-bold text-white/50">
+          <p className="w-[2ch] text-[58px] leading-none font-bold text-white/50 tabular-nums">
             {minutes ?? '--'}
           </p>
-          <p className="mt-1 text-sm text-white/30">{period ?? ''}</p>
+          <p className="mt-1 h-5 text-sm leading-5 text-white/30">
+            <span className={period ? undefined : 'invisible'}>
+              {period ?? 'AM'}
+            </span>
+          </p>
         </div>
       </div>
 
