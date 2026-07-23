@@ -1,24 +1,13 @@
 import Image from 'next/image';
 
-import { getUserRights, UserRights } from '@/app/games/utils';
 import { getTravels, type Travel } from '@/app/countries/utils';
 import AddTravel from '@/app/countries/AddTravel';
 import RemoveTravel from '@/app/countries/RemoveTravel';
-
-export const revalidate = 10;
-export const dynamic = 'force-dynamic';
+import { AdminOnly } from '@/components/AuthProvider';
 
 const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
-const TripsByYear = ({
-  title,
-  trips,
-  isAdmin,
-}: {
-  title: string;
-  trips: Travel[];
-  isAdmin: boolean;
-}) => (
+const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
   <div key={title} className="mb-10">
     <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
     <ul>
@@ -33,12 +22,15 @@ const TripsByYear = ({
               className="rounded-sm"
             />
             <h3>
-              {trip.city}, {countryNames.of(trip.country_code) ?? trip.country_code}
+              {trip.city},{' '}
+              {countryNames.of(trip.country_code) ?? trip.country_code}
             </h3>
             <div className="text-xs leading-relaxed text-gray-400">
               {trip.range_text}
             </div>
-            {isAdmin && <RemoveTravel id={trip.id} />}
+            <AdminOnly>
+              <RemoveTravel id={trip.id} />
+            </AdminOnly>
           </div>
         </li>
       ))}
@@ -47,22 +39,7 @@ const TripsByYear = ({
 );
 
 const CountriesPage = async () => {
-  const [{ data, totalCountries }, userRights] = await Promise.all([
-    getTravels(),
-    getUserRights(),
-  ]);
-
-  if (!data) {
-    return (
-      <main className="m-6 mx-auto max-w-3xl">
-        <h1 className="font-unbounded mb-10 text-3xl font-bold">
-          Something bad happened. Refresh the page.
-        </h1>
-      </main>
-    );
-  }
-
-  const isAdmin = userRights === UserRights.ADMIN;
+  const { data, totalCountries } = await getTravels();
 
   const entries = Object.entries(data).sort(
     ([year1], [year2]) => Number(year2) - Number(year1),
@@ -75,21 +52,16 @@ const CountriesPage = async () => {
         <span className="text-gray-400">{totalCountries}</span>
       </h1>
 
-      {isAdmin && <AddTravel />}
+      <AdminOnly>
+        <AddTravel />
+      </AdminOnly>
 
       <div className="grid gap-2 md:grid-cols-2">
         <div>
           {entries.map(([year, trips]) => {
             if (year === 'inProgress') return;
 
-            return (
-              <TripsByYear
-                key={year}
-                title={year}
-                trips={trips}
-                isAdmin={isAdmin}
-              />
-            );
+            return <TripsByYear key={year} title={year} trips={trips} />;
           })}
         </div>
       </div>

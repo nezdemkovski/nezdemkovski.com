@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
 import clsx from 'clsx';
 
+import { AuthProvider } from '@/components/AuthProvider';
 import NavBar from '@/components/NavBar';
 
 import './globals.css';
@@ -157,19 +158,21 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       )}
     >
       <body className="font-iawriterquattro text-black dark:text-white">
-        <div className="bg-whisper dark:bg-woodsmoke min-h-screen px-4">
-          <NavBar />
-          {children}
+        <AuthProvider>
+          <div className="bg-whisper dark:bg-woodsmoke min-h-screen px-4">
+            <NavBar />
+            {children}
 
-          <Analytics />
-          <SpeedInsights />
+            <Analytics />
+            <SpeedInsights />
 
-          <Script
-            src="/stats/script.js"
-            data-website-id="b2ce31ba-8f10-4955-b7b3-d1bf8d7f448d"
-            strategy="afterInteractive"
-          />
-        </div>
+            <Script
+              src="/stats/script.js"
+              data-website-id="b2ce31ba-8f10-4955-b7b3-d1bf8d7f448d"
+              strategy="afterInteractive"
+            />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

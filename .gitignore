@@ -41,4 +41,5 @@ next-env.d.ts
 .vscode
 
 # supabase
-supabase/.temp
+/supabase/.temp/
+/supabase/.branches/

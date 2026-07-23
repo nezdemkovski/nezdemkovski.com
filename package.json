@@ -14,7 +14,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "supabase:generate_types": "supabase gen types typescript --local > database.types.ts"
+    "supabase:generate_types": "supabase gen types --linked --lang typescript --schema public > database.types.ts"
   },
   "dependencies": {
     "@fontsource/unbounded": "^5.3.0",

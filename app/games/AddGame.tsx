@@ -1,6 +1,5 @@
-import { revalidatePath } from 'next/cache';
-import { createGameItem, getUserInfo } from '@/app/games/utils';
-
+import { addGame } from '@/app/games/actions';
+import { PLATFORM_TYPES } from '@/app/games/constants';
 import DatePickerInput from '@/components/DatePickerInput';
 import SubmitButton from '@/components/SubmitButton';
 import { Input } from '@/components/ui/input';
@@ -12,51 +11,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-const platformTypes = [
-  'PC',
-  'Macbook',
-  'PlayStation 4',
-  'PlayStation 5',
-  'Steam Deck',
-  'Yuzu Nintendo Switch Emulator',
-];
-
-const AddGame = async () => {
-  const user = await getUserInfo();
-
-  const addGame = async (formData: FormData) => {
-    'use server';
-    const user = await getUserInfo();
-    if (!user) return;
-
-    const name = formData.get('name');
-    const developer = formData.get('developer');
-    const releaseYear = formData.get('release-year');
-    const finishedDate = formData.get('finished_date');
-    const platform = formData.get('platform') as any;
-
-    if (name && developer && releaseYear && finishedDate) {
-      await createGameItem({
-        name: name.toString(),
-        developer: developer.toString(),
-        releaseYear: Number(releaseYear),
-        platform,
-        finishedDate: finishedDate.toString(),
-      });
-      revalidatePath('/games');
-    }
-  };
-
+const AddGame = () => {
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentDate = date.toISOString().slice(0, 10);
 
   return (
     <form action={addGame}>
-      <fieldset
-        disabled={!user}
-        className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6"
-      >
+      <fieldset className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6">
         <legend className="font-unbounded text-xl font-bold text-white">
           Add new game
         </legend>
@@ -74,6 +36,7 @@ const AddGame = async () => {
               name="name"
               placeholder="Game's name"
               defaultValue=""
+              maxLength={200}
               required
             />
           </div>
@@ -90,6 +53,7 @@ const AddGame = async () => {
               name="developer"
               placeholder="Developer's name"
               defaultValue=""
+              maxLength={200}
               required
             />
           </div>
@@ -107,6 +71,9 @@ const AddGame = async () => {
               type="number"
               placeholder="Year of the release"
               defaultValue={currentYear}
+              min={1950}
+              max={2100}
+              required
             />
           </div>
 
@@ -117,12 +84,12 @@ const AddGame = async () => {
             >
               Platform
             </label>
-            <Select name="platform" defaultValue={platformTypes[0]}>
+            <Select name="platform" defaultValue={PLATFORM_TYPES[0]}>
               <SelectTrigger id="platform" className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {platformTypes.map((type) => (
+                {PLATFORM_TYPES.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type}
                   </SelectItem>

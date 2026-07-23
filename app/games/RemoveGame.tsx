@@ -1,22 +1,10 @@
-import { revalidatePath } from 'next/cache';
+import { removeGame } from '@/app/games/actions';
 
-import {
-  getUserRights,
-  removeGameItem,
-  UserRights,
-} from '@/app/games/utils';
-
-const RemoveGame = async ({ id }: { id: string }) => {
-  const removeGame = async () => {
-    'use server';
-    const rights = await getUserRights();
-    if (rights !== UserRights.ADMIN) return;
-    await removeGameItem(id);
-    revalidatePath('/games');
-  };
+const RemoveGame = ({ id }: { id: string }) => {
+  const removeGameWithId = removeGame.bind(null, id);
 
   return (
-    <form action={removeGame}>
+    <form action={removeGameWithId}>
       <button
         type="submit"
         className="text-xs text-white underline decoration-dotted"

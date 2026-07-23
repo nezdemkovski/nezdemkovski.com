@@ -3,16 +3,15 @@
 import { useState, useEffect, useTransition } from 'react';
 import { PencilIcon, XIcon } from 'lucide-react';
 
+import { useAuth } from '@/components/AuthProvider';
 import { Input } from '@/components/ui/input';
 import { useLocationSearch, type GeoResult } from '@/hooks/use-location-search';
 import { type Location } from '@/utils/location';
 
 interface LocationClockProps {
   location: Location;
-  isAdmin: boolean;
   updateLocation: (location: Location) => Promise<void>;
 }
-
 
 function relativeTimeLabel(locationTz: string): string | null {
   try {
@@ -36,13 +35,9 @@ function relativeTimeLabel(locationTz: string): string | null {
   }
 }
 
-const LocationClock = ({
-  location,
-  isAdmin,
-  updateLocation,
-}: LocationClockProps) => {
+const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
+  const { isAdmin } = useAuth();
   const [time, setTime] = useState<string | null>(null);
-  const [relTime, setRelTime] = useState<string | null>(null);
   const [currentLocation, setCurrentLocation] = useState(location);
   const [isPending, startTransition] = useTransition();
   const [isEditing, setIsEditing] = useState(false);
@@ -57,19 +52,14 @@ const LocationClock = ({
       hour12: true,
     });
 
-    const tick = () => {
+    const id = setInterval(() => {
       setTime(timeFmt.format(new Date()));
-    };
-    tick();
-    const id = setInterval(tick, 1000);
+    }, 1000);
     return () => clearInterval(id);
   }, [currentLocation.timezone]);
 
-  useEffect(() => {
-    setRelTime(relativeTimeLabel(currentLocation.timezone));
-  }, [currentLocation.timezone]);
-
   const selectResult = (result: GeoResult) => {
+    const previous = currentLocation;
     const next: Location = {
       city: result.name,
       country: result.country,
@@ -80,7 +70,11 @@ const LocationClock = ({
     setIsEditing(false);
     clearSearch();
     startTransition(async () => {
-      await updateLocation(next);
+      try {
+        await updateLocation(next);
+      } catch {
+        setCurrentLocation(previous);
+      }
     });
   };
 
@@ -91,6 +85,7 @@ const LocationClock = ({
 
   const [hoursMinutes, period] = time?.split(' ') ?? [];
   const [hours, minutes] = hoursMinutes?.split(':') ?? [];
+  const relTime = relativeTimeLabel(currentLocation.timezone);
 
   const showDropdown = isEditing && (results.length > 0 || isSearching);
 
@@ -112,10 +107,10 @@ const LocationClock = ({
 
         {/* Right: stacked digits */}
         <div className="shrink-0 text-right font-mono">
-          <p className="text-[58px] font-bold leading-none text-white">
+          <p className="text-[58px] leading-none font-bold text-white">
             {hours ?? '--'}
           </p>
-          <p className="text-[58px] font-bold leading-none text-white/50">
+          <p className="text-[58px] leading-none font-bold text-white/50">
             {minutes ?? '--'}
           </p>
           <p className="mt-1 text-sm text-white/30">{period ?? ''}</p>
@@ -123,10 +118,9 @@ const LocationClock = ({
       </div>
 
       {isAdmin && (
-
         <div className="absolute inset-x-0 bottom-0 z-10 rounded-b-3xl border-t border-white/10 bg-white/5 px-7 py-3 backdrop-blur-md">
           {showDropdown && (
-            <div className="absolute bottom-full left-0 right-0 mb-1 max-h-48 overflow-y-auto rounded-xl border border-white/10 bg-[oklch(24%_0.0105_268.16)] shadow-lg">
+            <div className="absolute right-0 bottom-full left-0 mb-1 max-h-48 overflow-y-auto rounded-xl border border-white/10 bg-[oklch(24%_0.0105_268.16)] shadow-lg">
               {isSearching && results.length === 0 && (
                 <p className="px-3 py-2 text-xs text-white/40">Searching…</p>
               )}

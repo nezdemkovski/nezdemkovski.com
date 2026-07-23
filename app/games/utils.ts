@@ -1,45 +1,10 @@
-import { createClient } from '@/utils/supabase/server';
-import { Database } from '@/database.types';
+import 'server-only';
+
+import { unstable_cache } from 'next/cache';
+
+import type { Database } from '@/database.types';
 import { handleError } from '@/utils/handleError';
-
-export enum UserRights {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-}
-
-
-export const getSupabaseServerClient = async () => {
-  return await createClient();
-};
-
-export const getUserInfo = async () => {
-  const supabase = await getSupabaseServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  return user;
-};
-
-export const getUserRights = async () => {
-  const supabase = await getSupabaseServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  try {
-    const { data: userRights } = await supabase
-      .from('users')
-      .select('user_rights')
-      .eq('id', user?.id ?? '')
-      .limit(1)
-      .maybeSingle();
-
-    return (userRights?.user_rights as UserRights) ?? UserRights.USER;
-  } catch (error) {
-    handleError(error, 'Error from getUserRights');
-  }
-};
+import { createPublicClient } from '@/utils/supabase/public';
 
 export type Game = Database['public']['Tables']['games']['Row'];
 
@@ -47,8 +12,8 @@ interface GamesByYear {
   [year: number]: Game[];
 }
 
-export const getGames = async () => {
-  const supabase = await getSupabaseServerClient();
+const getGamesFromDatabase = async () => {
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from('games')
     .select()
@@ -58,9 +23,10 @@ export const getGames = async () => {
     handleError(error, 'Error from getGames');
   }
 
+  const rows = data ?? [];
   const games: GamesByYear = {};
 
-  data?.forEach((game) => {
+  rows.forEach((game) => {
     const finishedYear = new Date(game.finished_date).getFullYear();
 
     if (!games[finishedYear]) {
@@ -70,51 +36,10 @@ export const getGames = async () => {
     games[finishedYear].push(game);
   });
 
-  return { data: games, total: data?.length };
+  return { data: games, total: rows.length };
 };
 
-export const getLatestGames = async () => {
-  const supabase = await getSupabaseServerClient();
-
-  try {
-    const { data } = await supabase
-      .from('games')
-      .select()
-      .order('finished_date', { ascending: false })
-      .limit(3);
-
-    return { data };
-  } catch (error) {
-    handleError(error, 'Error from getUserRights');
-  }
-};
-
-export const createGameItem = async ({
-  name,
-  developer,
-  releaseYear,
-  platform,
-  finishedDate,
-}: {
-  name: string;
-  developer: string;
-  releaseYear: number;
-  platform: Database['public']['Enums']['platform_type'];
-  finishedDate: string;
-}) => {
-  const supabase = await getSupabaseServerClient();
-  const { error } = await supabase.from('games').insert({
-    name: name.toString(),
-    developer: developer.toString(),
-    release_year: Number(releaseYear),
-    platform,
-    finished_date: finishedDate.toString(),
-  });
-  if (error) handleError(error, 'Error from createGameItem');
-};
-
-export const removeGameItem = async (id: string) => {
-  const supabase = await getSupabaseServerClient();
-  const { error } = await supabase.from('games').delete().eq('id', id);
-  if (error) handleError(error, 'Error from removeGameItem');
-};
+export const getGames = unstable_cache(getGamesFromDatabase, ['public-games'], {
+  revalidate: 3600,
+  tags: ['games'],
+});

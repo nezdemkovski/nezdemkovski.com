@@ -1,70 +1,15 @@
 import AddGame from '@/app/games/AddGame';
 import RemoveGame from '@/app/games/RemoveGame';
-import { type Game, getGames, getUserRights, UserRights } from '@/app/games/utils';
+import { type Game, getGames } from '@/app/games/utils';
+import { AdminOnly } from '@/components/AuthProvider';
 import formatDate from '@/utils/formatDate';
-
-export const revalidate = 10;
-export const dynamic = 'force-dynamic';
-
-const PCBuildData = {
-  cpu: 'AMD Ryzen 9 7900X',
-  gpu: 'AMD Radeon RX 6800 XT',
-  motherBoard: 'ASUS ROG STRIX B650E-I GAMING WIFI',
-  ram: 'Kingston 32GB KIT DDR5 5600MHz CL36 FURY Beast Black EXPO',
-  ssd: 'Samsung 980 PRO 1TB',
-  powerSupply: 'Corsair SF750 750W',
-  waterCooling: 'ASUS ROG STRIX LC II 240',
-  case: 'LIAN-LI DAN A4-H2O X4, black',
-};
-
-const PCInfo = ({ data }: { data: typeof PCBuildData }) => (
-  <div className="mb-6">
-    <h2 className="font-unbounded mb-3 text-2xl font-bold">My PC Build</h2>
-    <ul>
-      <li className="mb-3">
-        <h3>{data.cpu}</h3>
-        <div className="text-xs text-gray-400">CPU</div>
-      </li>
-      <li className="mb-3">
-        <h3>{data.gpu}</h3>
-        <div className="text-xs text-gray-400">Graphic Card</div>
-      </li>
-      <li className="mb-3">
-        <h3>{data.motherBoard}</h3>
-        <div className="text-xs text-gray-400">Motherboard</div>
-      </li>
-      <li className="mb-3">
-        <h3>{data.powerSupply}</h3>
-        <div className="text-xs text-gray-400">Power Supply</div>
-      </li>
-      <li className="mb-3">
-        <h3>{data.waterCooling}</h3>
-        <div className="text-xs text-gray-400">Water Cooling System</div>
-      </li>
-      <li className="mb-3">
-        <h3>{data.ram}</h3>
-        <div className="text-xs text-gray-400">RAM</div>
-      </li>
-      <li className="mb-3">
-        <h3>{data.ssd}</h3>
-        <div className="text-xs text-gray-400">SSD</div>
-      </li>
-      <li className="mb-3">
-        <h3>{data.case}</h3>
-        <div className="text-xs text-gray-400">Case</div>
-      </li>
-    </ul>
-  </div>
-);
 
 const GamesByYear = ({
   title,
   gamesList,
-  isAdmin,
 }: {
   title: string;
   gamesList: Game[];
-  isAdmin: boolean;
 }) => (
   <div key={title} className="mb-10">
     <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
@@ -80,7 +25,9 @@ const GamesByYear = ({
           <span className="text-xs text-gray-400">
             {formatDate(new Date(game.finished_date))}
           </span>
-          {isAdmin && <RemoveGame id={game.id} />}
+          <AdminOnly>
+            <RemoveGame id={game.id} />
+          </AdminOnly>
         </li>
       ))}
     </ul>
@@ -88,22 +35,7 @@ const GamesByYear = ({
 );
 
 const GamesPage = async () => {
-  const [{ data, total }, userRights] = await Promise.all([
-    getGames(),
-    getUserRights(),
-  ]);
-
-  if (!data) {
-    return (
-      <main className="m-6 mx-auto max-w-3xl">
-        <h1 className="font-unbounded mb-10 text-3xl font-bold">
-          Something bad happened. Refresh the page.
-        </h1>
-      </main>
-    );
-  }
-
-  const isAdmin = userRights === UserRights.ADMIN;
+  const { data, total } = await getGames();
 
   const entries = Object.entries(data).sort(
     ([year1], [year2]) => Number(year2) - Number(year1),
@@ -115,23 +47,16 @@ const GamesPage = async () => {
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 
-      {isAdmin && <AddGame />}
+      <AdminOnly>
+        <AddGame />
+      </AdminOnly>
 
       <div className="grid gap-2 md:grid-cols-2">
         <div className="">
           {entries.map(([year, gamesList]) => (
-            <GamesByYear
-              key={year}
-              title={year}
-              gamesList={gamesList}
-              isAdmin={isAdmin}
-            />
+            <GamesByYear key={year} title={year} gamesList={gamesList} />
           ))}
         </div>
-
-        {/* <div>
-          <PCInfo data={PCBuildData} />
-        </div> */}
       </div>
     </main>
   );

@@ -1,17 +1,9 @@
 import Link from 'next/link';
 
+import AuthControls from '@/components/AuthControls';
 import Logo from '@/components/Logo';
-import SignOutButton from '@/components/SignOutButton';
-import { createClient } from '@/utils/supabase/server';
-import { Button } from '@/components/ui/button';
 
-const NavBar = async () => {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+const NavBar = () => {
   return (
     <nav className="flex items-center justify-between px-7 py-5">
       <div className="flex items-center gap-4">
@@ -27,22 +19,7 @@ const NavBar = async () => {
         </h1>
       </div>
 
-      <div>
-        {user ? (
-          <SignOutButton />
-        ) : (
-          <form action="/api/auth/sign-in-github" method="post">
-            <Button
-              type="submit"
-              variant="ghost"
-              size="sm"
-              className="border border-dotted border-white/10 text-xs text-gray-400 hover:text-gray-300"
-            >
-              Sign in
-            </Button>
-          </form>
-        )}
-      </div>
+      <AuthControls />
     </nav>
   );
 };

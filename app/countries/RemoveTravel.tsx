@@ -1,19 +1,10 @@
-import { revalidatePath } from 'next/cache';
+import { removeTravel } from '@/app/countries/actions';
 
-import { getUserRights, UserRights } from '@/app/games/utils';
-import { removeTravelItem } from '@/app/countries/utils';
-
-const RemoveTravel = async ({ id }: { id: string }) => {
-  const removeTravel = async () => {
-    'use server';
-    const rights = await getUserRights();
-    if (rights !== UserRights.ADMIN) return;
-    await removeTravelItem(id);
-    revalidatePath('/countries');
-  };
+const RemoveTravel = ({ id }: { id: string }) => {
+  const removeTravelWithId = removeTravel.bind(null, id);
 
   return (
-    <form action={removeTravel}>
+    <form action={removeTravelWithId}>
       <button
         type="submit"
         className="text-xs text-white underline decoration-dotted"
