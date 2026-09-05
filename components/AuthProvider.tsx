@@ -1,12 +1,6 @@
-'use client';
+"use client";
 
-import {
-  createContext,
-  type PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, type PropsWithChildren, useContext, useEffect, useState } from "react";
 
 interface AuthStatus {
   authenticated: boolean;
@@ -30,18 +24,17 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const controller = new AbortController();
 
-    void fetch('/api/auth/status', {
-      cache: 'no-store',
+    void fetch("/api/auth/status", {
+      cache: "no-store",
       signal: controller.signal,
     })
       .then(async (response) => {
-        if (!response.ok) throw new Error('Unable to load auth status');
-        return (await response.json()) as Omit<AuthStatus, 'loading'>;
+        if (!response.ok) throw new Error("Unable to load auth status");
+        return (await response.json()) as Omit<AuthStatus, "loading">;
       })
       .then((status) => setAuth({ ...status, loading: false }))
       .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === 'AbortError')
-          return;
+        if (error instanceof DOMException && error.name === "AbortError") return;
         setAuth({ authenticated: false, isAdmin: false, loading: false });
       });
 

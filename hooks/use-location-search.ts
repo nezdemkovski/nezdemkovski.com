@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export interface GeoResult {
   id: number;
@@ -9,7 +9,7 @@ export interface GeoResult {
 }
 
 export const useLocationSearch = () => {
-  const [query, setQueryState] = useState('');
+  const [query, setQueryState] = useState("");
   const [results, setResults] = useState<GeoResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -27,8 +27,7 @@ export const useLocationSearch = () => {
         const data = (await res.json()) as { results?: GeoResult[] };
         setResults(data.results ?? []);
       } catch (error) {
-        if (error instanceof DOMException && error.name === 'AbortError')
-          return;
+        if (error instanceof DOMException && error.name === "AbortError") return;
         setResults([]);
       } finally {
         if (!controller.signal.aborted) setIsSearching(false);
@@ -50,7 +49,7 @@ export const useLocationSearch = () => {
   };
 
   const clearSearch = () => {
-    setQueryState('');
+    setQueryState("");
     setResults([]);
     setIsSearching(false);
   };

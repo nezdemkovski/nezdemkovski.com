@@ -1,11 +1,11 @@
-'use server';
+"use server";
 
-import { revalidatePath, updateTag } from 'next/cache';
+import { revalidatePath, updateTag } from "next/cache";
 
-import { requireAdmin } from '@/lib/auth/server';
-import { updateLocationInDB } from '@/lib/data/settings';
-import { parseCountryCode, parseTimezone } from '@/lib/validation';
-import type { Location } from '@/utils/location';
+import { requireAdmin } from "@/lib/auth/server";
+import { updateLocationInDB } from "@/lib/data/settings";
+import { parseCountryCode, parseTimezone } from "@/lib/validation";
+import type { Location } from "@/utils/location";
 
 export const updateLocation = async (location: Location) => {
   await requireAdmin();
@@ -13,8 +13,8 @@ export const updateLocation = async (location: Location) => {
   const nextLocation: Location = {
     city: location.city?.trim(),
     country: location.country?.trim(),
-    countryCode: parseCountryCode(location.countryCode ?? ''),
-    timezone: parseTimezone(location.timezone ?? ''),
+    countryCode: parseCountryCode(location.countryCode ?? ""),
+    timezone: parseTimezone(location.timezone ?? ""),
   };
 
   if (
@@ -23,11 +23,11 @@ export const updateLocation = async (location: Location) => {
     !nextLocation.country ||
     nextLocation.country.length > 200
   ) {
-    throw new Error('Invalid location');
+    throw new Error("Invalid location");
   }
 
   await updateLocationInDB(nextLocation);
 
-  updateTag('location');
-  revalidatePath('/');
+  updateTag("location");
+  revalidatePath("/");
 };

@@ -6,8 +6,8 @@ export interface Location {
 }
 
 export const DEFAULT_LOCATION: Location = {
-  city: 'Prague',
-  country: 'Czechia',
-  countryCode: 'CZ',
-  timezone: 'Europe/Prague',
+  city: "Prague",
+  country: "Czechia",
+  countryCode: "CZ",
+  timezone: "Europe/Prague",
 };

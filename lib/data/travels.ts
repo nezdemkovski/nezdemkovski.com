@@ -1,12 +1,12 @@
-import 'server-only';
+import "server-only";
 
-import { unstable_cache } from 'next/cache';
+import { unstable_cache } from "next/cache";
 
-import type { Database } from '@/database.types';
-import { handleError } from '@/utils/handleError';
-import { createPublicClient } from '@/utils/supabase/public';
+import type { Database } from "@/database.types";
+import { handleError } from "@/utils/handleError";
+import { createPublicClient } from "@/utils/supabase/public";
 
-export type Travel = Database['public']['Tables']['travels']['Row'];
+export type Travel = Database["public"]["Tables"]["travels"]["Row"];
 
 interface TripsByYear {
   [year: number]: Travel[];
@@ -27,12 +27,12 @@ const getUniqueCountries = (trips: TripsByYear) => {
 const getTravelsFromDatabase = async () => {
   const supabase = createPublicClient();
   const { data, error } = await supabase
-    .from('travels')
+    .from("travels")
     .select()
-    .order('start_date', { ascending: false });
+    .order("start_date", { ascending: false });
 
   if (error) {
-    handleError(error, 'Error from getTravels');
+    handleError(error, "Error from getTravels");
   }
 
   const rows = data ?? [];
@@ -55,11 +55,7 @@ const getTravelsFromDatabase = async () => {
   };
 };
 
-export const getTravels = unstable_cache(
-  getTravelsFromDatabase,
-  ['public-travels'],
-  {
-    revalidate: 3600,
-    tags: ['travels'],
-  },
-);
+export const getTravels = unstable_cache(getTravelsFromDatabase, ["public-travels"], {
+  revalidate: 3600,
+  tags: ["travels"],
+});

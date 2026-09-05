@@ -1,7 +1,7 @@
 export const getSafeRedirectPath = (
   value: string | null | undefined,
   origin: string,
-  fallback = '/',
+  fallback = "/",
 ) => {
   if (!value) return fallback;
 

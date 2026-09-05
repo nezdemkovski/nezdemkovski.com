@@ -1,11 +1,11 @@
-import 'server-only';
+import "server-only";
 
-import { cache } from 'react';
+import { cache } from "react";
 
-import type { Database } from '@/database.types';
-import { createClient } from '@/utils/supabase/server';
+import type { Database } from "@/database.types";
+import { createClient } from "@/utils/supabase/server";
 
-type UserRights = Database['public']['Enums']['user_rights'];
+type UserRights = Database["public"]["Enums"]["user_rights"];
 
 export interface AuthState {
   authenticated: boolean;
@@ -29,20 +29,20 @@ export const getAuthState = cache(async (): Promise<AuthState> => {
   if (error || !userId) return ANONYMOUS_AUTH_STATE;
 
   const { data: user, error: userError } = await supabase
-    .from('users')
-    .select('user_rights')
-    .eq('id', userId)
+    .from("users")
+    .select("user_rights")
+    .eq("id", userId)
     .maybeSingle();
 
   if (userError) {
     throw new Error(`Unable to load user rights: ${userError.message}`);
   }
 
-  const rights = user?.user_rights ?? 'USER';
+  const rights = user?.user_rights ?? "USER";
 
   return {
     authenticated: true,
-    isAdmin: rights === 'ADMIN',
+    isAdmin: rights === "ADMIN",
     userId,
     rights,
   };
@@ -52,7 +52,7 @@ export const requireAdmin = async () => {
   const auth = await getAuthState();
 
   if (!auth.isAdmin || !auth.userId) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
 
   return auth;

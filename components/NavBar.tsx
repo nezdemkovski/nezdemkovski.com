@@ -1,7 +1,7 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import AuthControls from '@/components/AuthControls';
-import Logo from '@/components/Logo';
+import AuthControls from "@/components/AuthControls";
+import Logo from "@/components/Logo";
 
 const NavBar = () => {
   return (
@@ -13,7 +13,7 @@ const NavBar = () => {
           </Link>
         </div>
 
-        <h1 className="font-iawriterquattro flex flex-col text-xl leading-tight font-bold text-gray-900 dark:text-white">
+        <h1 className="flex flex-col font-iawriterquattro text-xl leading-tight font-bold text-gray-900 dark:text-white">
           <span>Yuri</span>
           <span>Nezdemkovski</span>
         </h1>

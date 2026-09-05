@@ -1,8 +1,8 @@
-import AboutMeWidget from '@/components/AboutMeWidget';
-import BusinessInfoWidget from '@/components/BusinessInfoWidget';
-import CountriesWidget from '@/components/CountriesWidget';
-import CurrentLocationWidget from '@/components/CurrentLocationWidget';
-import GamesWidget from '@/components/GamesWidget';
+import AboutMeWidget from "@/components/AboutMeWidget";
+import BusinessInfoWidget from "@/components/BusinessInfoWidget";
+import CountriesWidget from "@/components/CountriesWidget";
+import CurrentLocationWidget from "@/components/CurrentLocationWidget";
+import GamesWidget from "@/components/GamesWidget";
 
 const RootPage = () => {
   return (

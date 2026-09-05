@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useTransition } from 'react';
-import { PencilIcon, XIcon } from 'lucide-react';
+import { useState, useEffect, useTransition } from "react";
+import { PencilIcon, XIcon } from "lucide-react";
 
-import { useAuth } from '@/components/AuthProvider';
-import { Input } from '@/components/ui/input';
-import { useLocationSearch, type GeoResult } from '@/hooks/use-location-search';
-import { type Location } from '@/utils/location';
+import { useAuth } from "@/components/AuthProvider";
+import { Input } from "@/components/ui/input";
+import { useLocationSearch, type GeoResult } from "@/hooks/use-location-search";
+import { type Location } from "@/utils/location";
 
 interface LocationClockProps {
   location: Location;
@@ -18,16 +18,15 @@ function relativeTimeLabel(locationTz: string): string | null {
     const visitorTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const now = new Date();
     const offsetOf = (tz: string) => {
-      const a = new Date(now.toLocaleString('en-US', { timeZone: tz }));
-      const b = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
+      const a = new Date(now.toLocaleString("en-US", { timeZone: tz }));
+      const b = new Date(now.toLocaleString("en-US", { timeZone: "UTC" }));
       return (a.getTime() - b.getTime()) / 3_600_000;
     };
-    const diff =
-      Math.round((offsetOf(locationTz) - offsetOf(visitorTz)) * 2) / 2;
-    if (Math.abs(diff) < 0.25) return 'same timezone as you';
+    const diff = Math.round((offsetOf(locationTz) - offsetOf(visitorTz)) * 2) / 2;
+    if (Math.abs(diff) < 0.25) return "same timezone as you";
     const abs = Math.abs(diff);
     const h = Math.floor(abs);
-    const m = abs % 1 !== 0 ? ' 30m' : '';
+    const m = abs % 1 !== 0 ? " 30m" : "";
     const label = `${h}h${m}`;
     return diff > 0 ? `${label} ahead of you` : `${label} behind you`;
   } catch {
@@ -41,14 +40,13 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
   const [currentLocation, setCurrentLocation] = useState(location);
   const [isPending, startTransition] = useTransition();
   const [isEditing, setIsEditing] = useState(false);
-  const { query, setQuery, results, isSearching, clearSearch } =
-    useLocationSearch();
+  const { query, setQuery, results, isSearching, clearSearch } = useLocationSearch();
 
   useEffect(() => {
-    const timeFmt = new Intl.DateTimeFormat('en-US', {
+    const timeFmt = new Intl.DateTimeFormat("en-US", {
       timeZone: currentLocation.timezone,
-      hour: '2-digit',
-      minute: '2-digit',
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: true,
     });
 
@@ -98,8 +96,8 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
     clearSearch();
   };
 
-  const [hoursMinutes, period] = time?.split(' ') ?? [];
-  const [hours, minutes] = hoursMinutes?.split(':') ?? [];
+  const [hoursMinutes, period] = time?.split(" ") ?? [];
+  const [hours, minutes] = hoursMinutes?.split(":") ?? [];
   const relTime = relativeTimeLabel(currentLocation.timezone);
 
   const showDropdown = isEditing && (results.length > 0 || isSearching);
@@ -109,14 +107,10 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
       <div className="relative z-10 flex w-full items-stretch justify-between">
         {/* Left: location */}
         <div className="flex min-w-0 flex-1 flex-col justify-between pr-3">
-          <p className="font-iawriterquattro text-2xl text-white">
-            {currentLocation.city}
-          </p>
+          <p className="font-iawriterquattro text-2xl text-white">{currentLocation.city}</p>
           <div>
             <p className="text-sm text-white/40">{currentLocation.country}</p>
-            {relTime && (
-              <p className="mt-0.5 text-xs text-white/25">{relTime}</p>
-            )}
+            {relTime && <p className="mt-0.5 text-xs text-white/25">{relTime}</p>}
           </div>
         </div>
 
@@ -124,19 +118,17 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
         <div
           className="grid w-[4.5rem] shrink-0 grid-rows-[58px_58px_24px] justify-items-end text-right font-mono"
           role="timer"
-          aria-label={time ? `Local time ${time}` : 'Loading local time'}
+          aria-label={time ? `Local time ${time}` : "Loading local time"}
           aria-live="off"
         >
           <p className="w-[2ch] text-[58px] leading-none font-bold text-white tabular-nums">
-            {hours ?? '--'}
+            {hours ?? "--"}
           </p>
           <p className="w-[2ch] text-[58px] leading-none font-bold text-white/50 tabular-nums">
-            {minutes ?? '--'}
+            {minutes ?? "--"}
           </p>
           <p className="mt-1 h-5 text-sm leading-5 text-white/30">
-            <span className={period ? undefined : 'invisible'}>
-              {period ?? 'AM'}
-            </span>
+            <span className={period ? undefined : "invisible"}>{period ?? "AM"}</span>
           </p>
         </div>
       </div>
@@ -157,9 +149,7 @@ const LocationClock = ({ location, updateLocation }: LocationClockProps) => {
                   <span className="flex-1 truncate text-sm text-white">
                     {result.name}, {result.country}
                   </span>
-                  <span className="shrink-0 text-xs text-white/40">
-                    {result.timezone}
-                  </span>
+                  <span className="shrink-0 text-xs text-white/40">{result.timezone}</span>
                 </button>
               ))}
             </div>

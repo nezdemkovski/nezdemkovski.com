@@ -1,15 +1,15 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-import AddTravel from '@/app/countries/AddTravel';
-import RemoveTravel from '@/app/countries/RemoveTravel';
-import { AdminOnly } from '@/components/AuthProvider';
-import { getTravels, type Travel } from '@/lib/data/travels';
+import AddTravel from "@/app/countries/AddTravel";
+import RemoveTravel from "@/app/countries/RemoveTravel";
+import { AdminOnly } from "@/components/AuthProvider";
+import { getTravels, type Travel } from "@/lib/data/travels";
 
-const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
+const countryNames = new Intl.DisplayNames(["en"], { type: "region" });
 
 const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
   <div key={title} className="mb-10">
-    <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
+    <h2 className="mb-3 font-unbounded text-2xl font-bold">{title}</h2>
     <ul>
       {trips.map((trip) => (
         <li key={trip.id} className="mb-3">
@@ -22,12 +22,9 @@ const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
               className="rounded-sm"
             />
             <h3>
-              {trip.city},{' '}
-              {countryNames.of(trip.country_code) ?? trip.country_code}
+              {trip.city}, {countryNames.of(trip.country_code) ?? trip.country_code}
             </h3>
-            <div className="text-xs leading-relaxed text-gray-400">
-              {trip.range_text}
-            </div>
+            <div className="text-xs leading-relaxed text-gray-400">{trip.range_text}</div>
             <AdminOnly>
               <RemoveTravel id={trip.id} />
             </AdminOnly>
@@ -41,15 +38,12 @@ const TripsByYear = ({ title, trips }: { title: string; trips: Travel[] }) => (
 const CountriesPage = async () => {
   const { data, totalCountries } = await getTravels();
 
-  const entries = Object.entries(data).sort(
-    ([year1], [year2]) => Number(year2) - Number(year1),
-  );
+  const entries = Object.entries(data).sort(([year1], [year2]) => Number(year2) - Number(year1));
 
   return (
     <main className="m-6 mx-auto max-w-3xl">
-      <h1 className="font-unbounded mb-10 text-3xl font-bold">
-        Countries I visited:{' '}
-        <span className="text-gray-400">{totalCountries}</span>
+      <h1 className="mb-10 font-unbounded text-3xl font-bold">
+        Countries I visited: <span className="text-gray-400">{totalCountries}</span>
       </h1>
 
       <AdminOnly>
@@ -59,7 +53,7 @@ const CountriesPage = async () => {
       <div className="grid gap-2 md:grid-cols-2">
         <div>
           {entries.map(([year, trips]) => {
-            if (year === 'inProgress') return;
+            if (year === "inProgress") return;
 
             return <TripsByYear key={year} title={year} trips={trips} />;
           })}

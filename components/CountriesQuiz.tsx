@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
-import type { QuizQuestion } from '@/components/CountriesWidget';
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import type { QuizQuestion } from "@/components/CountriesWidget";
 
 interface CountriesQuizProps {
   questions: QuizQuestion[];
@@ -12,10 +12,10 @@ interface CountriesQuizProps {
 
 function resultMessage(correct: number, total: number): string {
   const ratio = correct / total;
-  if (ratio === 1) return 'Perfect score. You know me well.';
+  if (ratio === 1) return "Perfect score. You know me well.";
   if (ratio >= 0.7) return "Pretty good — you've been paying attention.";
   if (ratio >= 0.4) return "Not bad. There's more to discover.";
-  return 'Time to explore the travels page.';
+  return "Time to explore the travels page.";
 }
 
 const CountriesQuiz = ({ questions }: CountriesQuizProps) => {
@@ -88,23 +88,21 @@ const CountriesQuiz = ({ questions }: CountriesQuizProps) => {
               disabled={hasAnswered}
               onClick={() => handleSelect(option)}
               className={cn(
-                'h-9 truncate rounded-xl border px-3 text-sm transition-all duration-200',
+                "h-9 truncate rounded-xl border px-3 text-sm transition-all duration-200",
                 !hasAnswered &&
-                  'border-white/20 text-white/70 hover:border-white/40 hover:text-white',
-                hasAnswered &&
-                  isCorrect &&
-                  'border-green-500/50 bg-green-500/20 text-green-400',
+                  "border-white/20 text-white/70 hover:border-white/40 hover:text-white",
+                hasAnswered && isCorrect && "border-green-500/50 bg-green-500/20 text-green-400",
                 hasAnswered &&
                   isSelected &&
                   !isCorrect &&
-                  'border-red-500/50 bg-red-500/20 text-red-400',
+                  "border-red-500/50 bg-red-500/20 text-red-400",
                 hasAnswered &&
                   !isSelected &&
                   !isCorrect &&
-                  'border-white/10 text-white/20 opacity-40',
+                  "border-white/10 text-white/20 opacity-40",
               )}
             >
-              {hasAnswered && isCorrect && '✓ '}
+              {hasAnswered && isCorrect && "✓ "}
               {option}
             </button>
           );
@@ -115,7 +113,7 @@ const CountriesQuiz = ({ questions }: CountriesQuizProps) => {
           onClick={next}
           className="mt-auto text-xs text-white/30 transition-colors hover:text-white/60"
         >
-          {isLast ? 'see results' : 'next question'}
+          {isLast ? "see results" : "next question"}
         </button>
       )}
     </div>

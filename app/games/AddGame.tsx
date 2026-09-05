@@ -1,15 +1,15 @@
-import { addGame } from '@/app/games/actions';
-import { PLATFORM_TYPES } from '@/app/games/constants';
-import DatePickerInput from '@/components/DatePickerInput';
-import SubmitButton from '@/components/SubmitButton';
-import { Input } from '@/components/ui/input';
+import { addGame } from "@/app/games/actions";
+import { PLATFORM_TYPES } from "@/app/games/constants";
+import DatePickerInput from "@/components/DatePickerInput";
+import SubmitButton from "@/components/SubmitButton";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 const AddGame = () => {
   const date = new Date();
@@ -19,9 +19,7 @@ const AddGame = () => {
   return (
     <form action={addGame}>
       <fieldset className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-        <legend className="font-unbounded text-xl font-bold text-white">
-          Add new game
-        </legend>
+        <legend className="font-unbounded text-xl font-bold text-white">Add new game</legend>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-1">

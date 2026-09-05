@@ -1,4 +1,4 @@
-import React, { SVGProps } from 'react';
+import React, { SVGProps } from "react";
 
 const Logo = (props: SVGProps<SVGSVGElement>) => {
   return (
@@ -16,12 +16,7 @@ const Logo = (props: SVGProps<SVGSVGElement>) => {
         stroke="#fff"
         strokeWidth={10}
       />
-      <path
-        fill="#000"
-        stroke="#fff"
-        strokeWidth={10}
-        d="M48.209 44.86h372.529v381.329H48.209z"
-      />
+      <path fill="#000" stroke="#fff" strokeWidth={10} d="M48.209 44.86h372.529v381.329H48.209z" />
       <path
         d="M10 235C10 111.315 110.736 10 235 10s225 101.315 225 225-100.736 225-225 225S10 358.685 10 235z"
         fill="#000"

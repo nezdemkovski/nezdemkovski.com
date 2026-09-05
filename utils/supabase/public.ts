@@ -1,9 +1,9 @@
-import 'server-only';
+import "server-only";
 
-import { PostgrestClient } from '@supabase/postgrest-js';
+import { PostgrestClient } from "@supabase/postgrest-js";
 
-import type { Database } from '@/database.types';
-import { getSupabaseConfig } from '@/utils/supabase/env';
+import type { Database } from "@/database.types";
+import { getSupabaseConfig } from "@/utils/supabase/env";
 
 let publicClient: PostgrestClient<Database> | undefined;
 
@@ -12,7 +12,7 @@ export const createPublicClient = () => {
 
   const { url, key } = getSupabaseConfig();
   publicClient = new PostgrestClient<Database>(`${url}/rest/v1`, {
-    schema: 'public',
+    schema: "public",
     headers: {
       apikey: key,
       Authorization: `Bearer ${key}`,

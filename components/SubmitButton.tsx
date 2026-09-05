@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useFormStatus } from 'react-dom';
-import { Loader2 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { useFormStatus } from "react-dom";
+import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface SubmitButtonProps {
   label: string;
@@ -18,7 +18,7 @@ const SubmitButton = ({ label, className }: SubmitButtonProps) => {
       type="submit"
       disabled={pending}
       size="lg"
-      className={cn('mt-4 font-unbounded font-bold', className)}
+      className={cn("mt-4 font-unbounded font-bold", className)}
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {label}

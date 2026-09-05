@@ -1,10 +1,8 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-
 @plugin '@tailwindcss/typography';
-
 
 @keyframes blink {
   0%,

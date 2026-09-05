@@ -1,77 +1,77 @@
-import { PropsWithChildren } from 'react';
-import type { Metadata } from 'next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Inter, Unbounded } from 'next/font/google';
-import localFont from 'next/font/local';
-import { Analytics } from '@vercel/analytics/react';
-import Script from 'next/script';
-import clsx from 'clsx';
+import { PropsWithChildren } from "react";
+import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter, Unbounded } from "next/font/google";
+import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
+import clsx from "clsx";
 
-import { AuthProvider } from '@/components/AuthProvider';
-import NavBar from '@/components/NavBar';
+import { AuthProvider } from "@/components/AuthProvider";
+import NavBar from "@/components/NavBar";
 
-import './globals.css';
+import "./globals.css";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 const iAWriterQuattro = localFont({
   src: [
     {
-      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-Regular.woff2',
-      weight: '400',
-      style: 'normal',
+      path: "../public/fonts/iAWriterQuattro/iAWriterQuattroS-Regular.woff2",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-Italic.woff2',
-      weight: '400',
-      style: 'italic',
+      path: "../public/fonts/iAWriterQuattro/iAWriterQuattroS-Italic.woff2",
+      weight: "400",
+      style: "italic",
     },
     {
-      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-Bold.woff2',
-      weight: '700',
-      style: 'normal',
+      path: "../public/fonts/iAWriterQuattro/iAWriterQuattroS-Bold.woff2",
+      weight: "700",
+      style: "normal",
     },
     {
-      path: '../public/fonts/iAWriterQuattro/iAWriterQuattroS-BoldItalic.woff2',
-      weight: '700',
-      style: 'italic',
+      path: "../public/fonts/iAWriterQuattro/iAWriterQuattroS-BoldItalic.woff2",
+      weight: "700",
+      style: "italic",
     },
   ],
-  variable: '--font-iawriterquattro',
+  variable: "--font-iawriterquattro",
 });
 const unbounded = Unbounded({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-  variable: '--font-unbounded',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-unbounded",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nezdemkovski.com'),
+  metadataBase: new URL("https://nezdemkovski.com"),
   title: {
-    default: 'Yuri Nezdemkovski',
-    template: '%s | Yuri Nezdemkovski',
+    default: "Yuri Nezdemkovski",
+    template: "%s | Yuri Nezdemkovski",
   },
   description:
-    'I am Yuri — a seasoned Web Developer with over 10 years of experience. I am passionate about delivering top-notch results and leading teams.',
+    "I am Yuri — a seasoned Web Developer with over 10 years of experience. I am passionate about delivering top-notch results and leading teams.",
   openGraph: {
-    title: 'Yuri Nezdemkovski',
+    title: "Yuri Nezdemkovski",
     description:
-      'I am Yuri — a seasoned Web Developer with over 10 years of experience. I am passionate about delivering top-notch results and leading teams.',
-    url: 'https://nezdemkovski.com',
-    siteName: 'Yuri Nezdemkovski',
+      "I am Yuri — a seasoned Web Developer with over 10 years of experience. I am passionate about delivering top-notch results and leading teams.",
+    url: "https://nezdemkovski.com",
+    siteName: "Yuri Nezdemkovski",
     images: [
       {
-        url: 'https://nezdemkovski.com/og.png',
+        url: "https://nezdemkovski.com/og.png",
         width: 1200,
         height: 628,
       },
     ],
-    locale: 'en-US',
-    type: 'website',
+    locale: "en-US",
+    type: "website",
   },
   robots: {
     index: true,
@@ -79,69 +79,69 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   twitter: {
-    title: 'Yuri Nezdemkovski',
-    card: 'summary_large_image',
+    title: "Yuri Nezdemkovski",
+    card: "summary_large_image",
   },
   icons: {
-    icon: '/favicons/favicon-96x96.ico',
-    shortcut: '/favicons/favicon.ico',
+    icon: "/favicons/favicon-96x96.ico",
+    shortcut: "/favicons/favicon.ico",
     apple: [
-      { url: '/favicons/apple-icon.png' },
+      { url: "/favicons/apple-icon.png" },
       {
-        url: '/favicons/apple-icon-57x57.png',
-        sizes: '57x57',
-        type: 'image/png',
+        url: "/favicons/apple-icon-57x57.png",
+        sizes: "57x57",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-60x60.png',
-        sizes: '60x60',
-        type: 'image/png',
+        url: "/favicons/apple-icon-60x60.png",
+        sizes: "60x60",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-72x72.png',
-        sizes: '72x72',
-        type: 'image/png',
+        url: "/favicons/apple-icon-72x72.png",
+        sizes: "72x72",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-76x76.png',
-        sizes: '72x72',
-        type: 'image/png',
+        url: "/favicons/apple-icon-76x76.png",
+        sizes: "72x72",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-114x114.png',
-        sizes: '114x114',
-        type: 'image/png',
+        url: "/favicons/apple-icon-114x114.png",
+        sizes: "114x114",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-120x120.png',
-        sizes: '120x120',
-        type: 'image/png',
+        url: "/favicons/apple-icon-120x120.png",
+        sizes: "120x120",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-144x144.png',
-        sizes: '144x144',
-        type: 'image/png',
+        url: "/favicons/apple-icon-144x144.png",
+        sizes: "144x144",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-152x152.png',
-        sizes: '152x152',
-        type: 'image/png',
+        url: "/favicons/apple-icon-152x152.png",
+        sizes: "152x152",
+        type: "image/png",
       },
       {
-        url: '/favicons/apple-icon-180x180.png',
-        sizes: '180x180',
-        type: 'image/png',
+        url: "/favicons/apple-icon-180x180.png",
+        sizes: "180x180",
+        type: "image/png",
       },
     ],
     other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/favicons/apple-touch-icon-precomposed.png',
+      rel: "apple-touch-icon-precomposed",
+      url: "/favicons/apple-touch-icon-precomposed.png",
     },
   },
 };
@@ -151,7 +151,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <html
       lang="en"
       className={clsx(
-        'bg-whisper dark:bg-woodsmoke',
+        "bg-whisper dark:bg-woodsmoke",
         inter.variable,
         iAWriterQuattro.variable,
         unbounded.variable,
@@ -159,7 +159,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     >
       <body className="font-iawriterquattro text-black dark:text-white">
         <AuthProvider>
-          <div className="bg-whisper dark:bg-woodsmoke min-h-screen px-4">
+          <div className="min-h-screen bg-whisper px-4 dark:bg-woodsmoke">
             <NavBar />
             {children}
 

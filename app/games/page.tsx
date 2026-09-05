@@ -1,18 +1,12 @@
-import AddGame from '@/app/games/AddGame';
-import RemoveGame from '@/app/games/RemoveGame';
-import { AdminOnly } from '@/components/AuthProvider';
-import { type Game, getGames } from '@/lib/data/games';
-import formatDate from '@/utils/formatDate';
+import AddGame from "@/app/games/AddGame";
+import RemoveGame from "@/app/games/RemoveGame";
+import { AdminOnly } from "@/components/AuthProvider";
+import { type Game, getGames } from "@/lib/data/games";
+import formatDate from "@/utils/formatDate";
 
-const GamesByYear = ({
-  title,
-  gamesList,
-}: {
-  title: string;
-  gamesList: Game[];
-}) => (
+const GamesByYear = ({ title, gamesList }: { title: string; gamesList: Game[] }) => (
   <div key={title} className="mb-10">
-    <h2 className="font-unbounded mb-3 text-2xl font-bold">{title}</h2>
+    <h2 className="mb-3 font-unbounded text-2xl font-bold">{title}</h2>
     <ul>
       {gamesList.map((game) => (
         <li key={game.id} className="mb-3 flex flex-col gap-1">
@@ -22,9 +16,7 @@ const GamesByYear = ({
             {game.release_year} · {game.developer} · {game.platform}
           </div>
 
-          <span className="text-xs text-gray-400">
-            {formatDate(new Date(game.finished_date))}
-          </span>
+          <span className="text-xs text-gray-400">{formatDate(new Date(game.finished_date))}</span>
           <AdminOnly>
             <RemoveGame id={game.id} />
           </AdminOnly>
@@ -37,13 +29,11 @@ const GamesByYear = ({
 const GamesPage = async () => {
   const { data, total } = await getGames();
 
-  const entries = Object.entries(data).sort(
-    ([year1], [year2]) => Number(year2) - Number(year1),
-  );
+  const entries = Object.entries(data).sort(([year1], [year2]) => Number(year2) - Number(year1));
 
   return (
     <main className="m-6 mx-auto max-w-3xl">
-      <h1 className="font-unbounded mb-10 text-3xl font-bold">
+      <h1 className="mb-10 font-unbounded text-3xl font-bold">
         Games I beat: <span className="text-gray-400">{total}</span>
       </h1>
 

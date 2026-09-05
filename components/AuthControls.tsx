@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import SignOutButton from '@/components/SignOutButton';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/components/AuthProvider';
+import SignOutButton from "@/components/SignOutButton";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/components/AuthProvider";
 
 const AuthControls = () => {
   const { authenticated, loading } = useAuth();

@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-import { getAuthState } from '@/lib/auth/server';
+import { getAuthState } from "@/lib/auth/server";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
@@ -12,7 +12,7 @@ export async function GET() {
       { authenticated, isAdmin },
       {
         headers: {
-          'Cache-Control': 'private, no-store',
+          "Cache-Control": "private, no-store",
         },
       },
     );
@@ -22,7 +22,7 @@ export async function GET() {
       {
         status: 503,
         headers: {
-          'Cache-Control': 'private, no-store',
+          "Cache-Control": "private, no-store",
         },
       },
     );

@@ -8,10 +8,10 @@ questions!
 ## Features
 
 - Seamless operation across the entire [Next.js](https://nextjs.org) stack, including:
-    - App Router
-    - Middleware
-    - Client
-    - Server
+  - App Router
+  - Middleware
+  - Client
+  - Server
 - `supabase-ssr` package integration for configuring Supabase Auth to use cookies.
 - Styling facilitated by [Tailwind CSS](https://tailwindcss.com).
 - Optional deployment setup using [Supabase Vercel Integration](#deploy-your-own)
@@ -27,7 +27,7 @@ Create a new project on Supabase - you can do this [via the Supabase dashboard](
 
 ```bash
 git clone git@github.com:nezdemkovski/nezdemkovski.com.git
-````
+```
 
 ### 3. Navigate to Project Directory
 

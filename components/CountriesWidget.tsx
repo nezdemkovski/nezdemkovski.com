@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import WidgetCard from '@/components/WidgetCard';
-import CountriesQuiz from '@/components/CountriesQuiz';
-import { getTravels, type Travel } from '@/lib/data/travels';
+import Link from "next/link";
+import WidgetCard from "@/components/WidgetCard";
+import CountriesQuiz from "@/components/CountriesQuiz";
+import { getTravels, type Travel } from "@/lib/data/travels";
 
 export interface QuizQuestion {
   question: string;
@@ -35,7 +35,7 @@ function nearbyNumbers(n: number): string[] {
   return result;
 }
 
-const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
+const countryNames = new Intl.DisplayNames(["en"], { type: "region" });
 
 // Q1: Where was I in [Month Year]?
 function genWhereWasI(trips: Travel[]): QuizQuestion | null {
@@ -44,9 +44,9 @@ function genWhereWasI(trips: Travel[]): QuizQuestion | null {
 
   const trip = pick(trips);
   const city = trip.city;
-  const monthYear = new Date(trip.start_date).toLocaleString('en', {
-    month: 'long',
-    year: 'numeric',
+  const monthYear = new Date(trip.start_date).toLocaleString("en", {
+    month: "long",
+    year: "numeric",
   });
 
   const others = shuffle(allCities.filter((c) => c !== city)).slice(0, 3);
@@ -60,16 +60,12 @@ function genWhereWasI(trips: Travel[]): QuizQuestion | null {
 
 // Q2: How many countries did I visit in [Year]?
 function genCountriesInYear(trips: Travel[]): QuizQuestion | null {
-  const years = Array.from(
-    new Set(trips.map((t) => new Date(t.start_date).getFullYear())),
-  );
+  const years = Array.from(new Set(trips.map((t) => new Date(t.start_date).getFullYear())));
   if (years.length === 0) return null;
 
   const year = pick(years);
   const count = new Set(
-    trips
-      .filter((t) => new Date(t.start_date).getFullYear() === year)
-      .map((t) => t.country_code),
+    trips.filter((t) => new Date(t.start_date).getFullYear() === year).map((t) => t.country_code),
   ).size;
 
   const wrong = nearbyNumbers(count);
@@ -98,7 +94,7 @@ function genMostVisitedCity(trips: Travel[]): QuizQuestion | null {
   const others = sorted.slice(1, 4).map(([city]) => city);
 
   return {
-    question: 'My most visited city?',
+    question: "My most visited city?",
     answer,
     options: shuffle([answer, ...others]),
   };
@@ -106,15 +102,11 @@ function genMostVisitedCity(trips: Travel[]): QuizQuestion | null {
 
 // Q4: How many trips did I take in [Year]?
 function genTripsInYear(trips: Travel[]): QuizQuestion | null {
-  const years = Array.from(
-    new Set(trips.map((t) => new Date(t.start_date).getFullYear())),
-  );
+  const years = Array.from(new Set(trips.map((t) => new Date(t.start_date).getFullYear())));
   if (years.length === 0) return null;
 
   const year = pick(years);
-  const count = trips.filter(
-    (t) => new Date(t.start_date).getFullYear() === year,
-  ).length;
+  const count = trips.filter((t) => new Date(t.start_date).getFullYear() === year).length;
 
   const wrong = nearbyNumbers(count);
   if (wrong.length < 3) return null;
@@ -129,23 +121,20 @@ function genTripsInYear(trips: Travel[]): QuizQuestion | null {
 // Q5: Which country did I visit most recently?
 function genMostRecent(trips: Travel[]): QuizQuestion | null {
   const sorted = [...trips].sort(
-    (a, b) =>
-      new Date(b.start_date).getTime() - new Date(a.start_date).getTime(),
+    (a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime(),
   );
   const latestCode = sorted[0].country_code;
   const latest = countryNames.of(latestCode) ?? latestCode;
 
   const allCountries = Array.from(
-    new Set(
-      trips.map((t) => countryNames.of(t.country_code) ?? t.country_code),
-    ),
+    new Set(trips.map((t) => countryNames.of(t.country_code) ?? t.country_code)),
   );
   if (allCountries.length < 4) return null;
 
   const others = shuffle(allCountries.filter((c) => c !== latest)).slice(0, 3);
 
   return {
-    question: 'My most recent country?',
+    question: "My most recent country?",
     answer: latest,
     options: shuffle([latest, ...others]),
   };
@@ -159,19 +148,11 @@ function genFirstVisitYear(trips: Travel[]): QuizQuestion | null {
   const country = pick(countries);
   const firstTrip = trips
     .filter((t) => t.country_code === country)
-    .sort(
-      (a, b) =>
-        new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
-    )[0];
+    .sort((a, b) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime())[0];
   const firstYear = new Date(firstTrip.start_date).getFullYear();
 
-  const allYears = Array.from(
-    new Set(trips.map((t) => new Date(t.start_date).getFullYear())),
-  );
-  const otherYears = shuffle(allYears.filter((y) => y !== firstYear)).slice(
-    0,
-    3,
-  );
+  const allYears = Array.from(new Set(trips.map((t) => new Date(t.start_date).getFullYear())));
+  const otherYears = shuffle(allYears.filter((y) => y !== firstYear)).slice(0, 3);
   if (otherYears.length < 3) return null;
 
   const name = countryNames.of(country) ?? country;
@@ -184,30 +165,30 @@ function genFirstVisitYear(trips: Travel[]): QuizQuestion | null {
 
 // Q7: Which of these cities have I never been to?
 const WORLD_CITIES = [
-  'Tokyo',
-  'Seoul',
-  'Beijing',
-  'Mumbai',
-  'Bangkok',
-  'Singapore',
-  'Dubai',
-  'Cairo',
-  'Lagos',
-  'São Paulo',
-  'Mexico City',
-  'Los Angeles',
-  'Chicago',
-  'Toronto',
-  'Sydney',
-  'Auckland',
-  'Nairobi',
-  'Jakarta',
-  'Kuala Lumpur',
-  'Riyadh',
-  'Casablanca',
-  'Accra',
-  'Bogotá',
-  'Lima',
+  "Tokyo",
+  "Seoul",
+  "Beijing",
+  "Mumbai",
+  "Bangkok",
+  "Singapore",
+  "Dubai",
+  "Cairo",
+  "Lagos",
+  "São Paulo",
+  "Mexico City",
+  "Los Angeles",
+  "Chicago",
+  "Toronto",
+  "Sydney",
+  "Auckland",
+  "Nairobi",
+  "Jakarta",
+  "Kuala Lumpur",
+  "Riyadh",
+  "Casablanca",
+  "Accra",
+  "Bogotá",
+  "Lima",
 ];
 
 function genNeverBeen(trips: Travel[]): QuizQuestion | null {
@@ -240,7 +221,7 @@ const Fallback = ({
   <WidgetCard>
     <Link
       href="/countries"
-      className="font-unbounded flex items-center justify-between pb-3 text-2xl font-bold text-white hover:opacity-80 sm:text-3xl"
+      className="flex items-center justify-between pb-3 font-unbounded text-2xl font-bold text-white hover:opacity-80 sm:text-3xl"
     >
       <span>Countries I visited</span>
     </Link>
@@ -257,10 +238,7 @@ const CountriesWidget = async () => {
   const { data, total, totalCountries } = await getTravels();
   const trips = Object.values(data)
     .flat()
-    .sort(
-      (a, b) =>
-        new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
-    );
+    .sort((a, b) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime());
   const totalTrips = total ?? 0;
 
   if (trips.length === 0) {
@@ -291,18 +269,14 @@ const CountriesWidget = async () => {
     <WidgetCard className="flex flex-col">
       <Link
         href="/countries"
-        className="font-unbounded flex items-center justify-between pb-3 text-2xl font-bold text-white hover:opacity-80 sm:text-3xl"
+        className="flex items-center justify-between pb-3 font-unbounded text-2xl font-bold text-white hover:opacity-80 sm:text-3xl"
       >
         <span>Countries I visited</span>
       </Link>
       <p className="text-sm text-white/40">
         {totalCountries} countries · {totalTrips} trips
       </p>
-      <CountriesQuiz
-        questions={pool}
-        totalCountries={totalCountries}
-        totalTrips={totalTrips}
-      />
+      <CountriesQuiz questions={pool} totalCountries={totalCountries} totalTrips={totalTrips} />
     </WidgetCard>
   );
 };

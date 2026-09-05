@@ -2,10 +2,10 @@ export default function robots() {
   return {
     rules: [
       {
-        userAgent: '*',
+        userAgent: "*",
       },
     ],
-    sitemap: 'https://nezdemkovski.com/sitemap.xml',
-    host: 'https://nezdemkovski.com',
+    sitemap: "https://nezdemkovski.com/sitemap.xml",
+    host: "https://nezdemkovski.com",
   };
 }
